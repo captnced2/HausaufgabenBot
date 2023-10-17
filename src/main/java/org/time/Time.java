@@ -21,7 +21,6 @@ public class Time {
     private static int buffer;
     private static Calendar nextExecution;
 
-    //TODO quartz timer
     public static void initDayLoop() {
         buffer = 0;
         Timer timer = new Timer();

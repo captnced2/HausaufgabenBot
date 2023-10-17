@@ -200,7 +200,6 @@ public class JdaMain {
         channel.sendMessage(text).queueAfter(delay, TimeUnit.SECONDS);
     }
 
-    //TODO Icon änderung bei newDay
     public static void setProfilePicture(File iconPath) {
         try {
             Jda.getSelfUser().getManager().setAvatar(Icon.from(iconPath)).queue();
