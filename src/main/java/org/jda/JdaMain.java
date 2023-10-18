@@ -161,7 +161,7 @@ public class JdaMain {
     }
 
     public static void setDefaultActivity() {
-        Jda.getPresence().setActivity(Activity.customStatus(defaultActivity));
+        setCustomActivity(defaultActivity);
     }
 
     public static TextChannel getTextChannelFromId(String guildId, String channelId) {
@@ -221,21 +221,7 @@ public class JdaMain {
     }
 
     public static boolean hasRequiredPermissions(User user, JdaPermission requiredPermission) {
-        JdaPermission userPermission = getUserPermissions(user);
-        switch (requiredPermission) {
-            case USER -> {
-                return true;
-            }
-            case ADMIN -> {
-                return userPermission == JdaPermission.ADMIN || userPermission == JdaPermission.OWNER;
-            }
-            case OWNER -> {
-                return userPermission == JdaPermission.OWNER;
-            }
-            default -> {
-                return false;
-            }
-        }
+        return getUserPermissions(user).getAsInt() >= requiredPermission.getAsInt();
     }
 
     public static void awaitInit() {
