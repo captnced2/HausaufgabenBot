@@ -20,7 +20,6 @@ public class Varibles {
     public static File[] pfps;
     public static String token;
     public static String[] subjs;
-    public static String[] admins;
     public static String pingRole;
     public static String classServerId;
     public static String homeworkChannelId;

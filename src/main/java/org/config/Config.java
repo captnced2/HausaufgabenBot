@@ -92,16 +92,23 @@ public class Config {
     }
 
     public static int getPermissionLevelFromId(String id) {
-        String[] permissionsFile = getFile(permissionsConf);
-        for (String permission : permissionsFile) {
-            if (permission.split(subjsRegex)[1].equals(id)) {
-                try {
-                    return Integer.parseInt(permission.split(subjsRegex)[2]);
-                } catch (IllegalArgumentException ignored) {
-                }
+        String[] allPermissions = getAllPermissions();
+        for (String permission : allPermissions) {
+            if (permission.split(commaRegex)[0].equals(id)) {
+                return Integer.parseInt(permission.split(commaRegex)[1]);
             }
         }
         return 0;
+    }
+
+    public static String[] getAllPermissions() {
+        String[] permissionsFile = getFile(permissionsConf);
+        ArrayList<String> allPermissions = new ArrayList<>();
+        for (String permission : permissionsFile) {
+            allPermissions.add(permission.split(subjsRegex)[1] + commaRegex + permission.split(subjsRegex)[2]);
+        }
+        String[] out = new String[allPermissions.size()];
+        return allPermissions.toArray(out);
     }
 
     public static boolean setHomework(String subjCode, String ha) {
