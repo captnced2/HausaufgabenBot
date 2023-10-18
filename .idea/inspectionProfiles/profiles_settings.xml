@@ -1,5 +1,8 @@
 <component name="InspectionProjectProfileManager">
   <settings>
+    <option name="PROJECT_PROFILE" value="captnced Inspections" />
+    <option name="USE_PROJECT_PROFILE" value="false" />
+    <version value="1.0" />
     <info color="837f83">
       <option name="FOREGROUND" value="565755" />
       <option name="ERROR_STRIPE_COLOR" value="837f83" />
