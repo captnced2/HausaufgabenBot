@@ -24,6 +24,7 @@ public class Varibles {
     public static String pingRole;
     public static String classServerId;
     public static String homeworkChannelId;
+    public static String lukasID;
     public static String alreadyPosted;
     public static OptionData subjOption;
     public static int commandsCount;

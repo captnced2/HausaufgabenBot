@@ -68,6 +68,7 @@ public class Config {
         classServerId = idList[0].split(subjsRegex)[1];
         homeworkChannelId = idList[1].split(subjsRegex)[1];
         pingRole = "<@&" + idList[2].split(subjsRegex)[1] + ">";
+        lukasID = idList[3].split(subjsRegex)[1];
     }
 
     public static String[] getAllSubjCodes() {
