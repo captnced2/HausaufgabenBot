@@ -3,10 +3,11 @@ package org.jda.slashcommands.commands;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
-import org.time.Time;
+import org.time.NewDay;
 
 import static org.jda.JdaMain.replyEmbed;
 import static org.values.strings.Messages.triggeredDayLoopEmbed;
+
 
 public class TriggerDayLoopCommand implements JdaSlashCommand {
 
@@ -34,7 +35,7 @@ public class TriggerDayLoopCommand implements JdaSlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        Time.newDay();
+        new NewDay().newDay();
         replyEmbed(event, triggeredDayLoopEmbed(), true);
     }
 }
