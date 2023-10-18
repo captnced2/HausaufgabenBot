@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import org.config.Config;
 import org.jda.JdaMain;
-import org.jda.slashcommands.JdaSlashCommand;
+import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
 import static org.jda.JdaMain.replyEmbed;
@@ -27,10 +27,12 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
     }
 
     @Override
+    public JdaPermission getRequiredPermission() {
+        return JdaPermission.ADMIN;
+    }
+
+    @Override
     public void execute(SlashCommandInteractionEvent event) {
-        if (isNotAdmin(event)) {
-            return;
-        }
         String[] pendingDel = Config.getPendingDelSubj();
         if (pendingDel == null) {
             replyEmbed(event, noHomeworkToDelete(), true);

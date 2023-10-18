@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.config.Config;
-import org.jda.slashcommands.JdaSlashCommand;
+import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
 import static org.jda.JdaMain.replyEmbed;
@@ -32,10 +32,12 @@ public class SetHomeworkCommand implements JdaSlashCommand {
     }
 
     @Override
+    public JdaPermission getRequiredPermission() {
+        return JdaPermission.ADMIN;
+    }
+
+    @Override
     public void execute(SlashCommandInteractionEvent event) {
-        if (isNotAdmin(event)) {
-            return;
-        }
         OptionMapping subjCodeOption = event.getOption(OptionSubjName);
         OptionMapping haOption = event.getOption(OptionHomeworkName);
         if (subjCodeOption == null || haOption == null) {

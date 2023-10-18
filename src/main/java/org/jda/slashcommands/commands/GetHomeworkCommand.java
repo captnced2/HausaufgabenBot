@@ -41,7 +41,7 @@ public class GetHomeworkCommand implements JdaSlashCommand {
         }
         String subjCode = subjCodeOption.getAsString();
         String hw = Config.getHomework(subjCode);
-        if (hw == null || hw.equals("")) {
+        if (hw == null || hw.isEmpty()) {
             replyEmbed(event, noHomeworkFound(subjCode));
             return;
         }

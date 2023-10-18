@@ -2,7 +2,7 @@ package org.jda.slashcommands.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.config.Config;
-import org.jda.slashcommands.JdaSlashCommand;
+import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
 import static org.jda.JdaMain.replyEmbed;
@@ -32,10 +32,12 @@ public class PostHomeworkCommand implements JdaSlashCommand {
     }
 
     @Override
+    public JdaPermission getRequiredPermission() {
+        return JdaPermission.ADMIN;
+    }
+
+    @Override
     public void execute(SlashCommandInteractionEvent event) {
-        if (isNotAdmin(event)) {
-            return;
-        }
         if (!checkGuild(event)) {
             replyEmbed(event, wrongServer(), true);
             return;

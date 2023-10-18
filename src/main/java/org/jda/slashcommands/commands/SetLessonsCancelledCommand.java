@@ -3,7 +3,7 @@ package org.jda.slashcommands.commands;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.jda.slashcommands.JdaSlashCommand;
+import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
 import static org.config.Config.addCancelledHw;
@@ -32,10 +32,12 @@ public class SetLessonsCancelledCommand implements JdaSlashCommand {
     }
 
     @Override
+    public JdaPermission getRequiredPermission() {
+        return JdaPermission.ADMIN;
+    }
+
+    @Override
     public void execute(SlashCommandInteractionEvent event) {
-        if (isNotAdmin(event)) {
-            return;
-        }
         OptionMapping subjCodeOption = event.getOption(OptionSubjName);
         OptionMapping dateOption = event.getOption(OptionDateName);
         if (subjCodeOption == null || dateOption == null) {
