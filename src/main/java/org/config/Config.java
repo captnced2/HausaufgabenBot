@@ -159,7 +159,7 @@ public class Config {
         String[] split;
         for (String s : stp) {
             split = s.split(subjsRegex);
-            if (split[0].equals(day.getString())) {
+            if (split[0].equals(day.getAsString())) {
                 return split[1].split(commaRegex);
             }
         }

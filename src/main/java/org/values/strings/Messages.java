@@ -47,7 +47,7 @@ public class Messages {
         builder.setColor(color);
         builder.setTitle(title);
         builder.setDescription(text);
-        builder.setFooter(getWeekday().getString() + embedFooterSeperator + getDate() + embedFooterSeperator + getCurrentTime());
+        builder.setFooter(getWeekday().getAsString() + embedFooterSeperator + getDate() + embedFooterSeperator + getCurrentTime());
         return builder.build();
     }
 
@@ -88,11 +88,11 @@ public class Messages {
     }
 
     public static MessageEmbed homeworkFromDay(String homework) {
-        return homeworkEmbed(homeworkFromDayTitle + getWeekday().getString() + " " + getDate(), homework);
+        return homeworkEmbed(homeworkFromDayTitle + getWeekday().getAsString() + " " + getDate(), homework);
     }
 
     public static MessageEmbed homeworkToDate(Weekday day, String date, String homework) {
-        return homeworkEmbed(homeworkToDateTitle + day.getString() + " " + date, homework);
+        return homeworkEmbed(homeworkToDateTitle + day.getAsString() + " " + date, homework);
     }
 
     public static MessageEmbed addedHomework(String subjCode, String homework) {

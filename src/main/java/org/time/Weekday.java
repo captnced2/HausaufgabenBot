@@ -15,7 +15,7 @@ public enum Weekday {
         weekday = day;
     }
 
-    public String getString() {
+    public String getAsString() {
         return weekday;
     }
 }
