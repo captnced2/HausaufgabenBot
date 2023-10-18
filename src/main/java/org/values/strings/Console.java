@@ -11,7 +11,7 @@ import static org.time.Time.*;
 import static org.values.Global.*;
 
 public class Console {
-    private static final String startingMessage = "Starting up...";
+    private static final String startingMessage = "Starting Version %v...";
     private static final String shutdownMessage = "Shutting down...";
     private static final String jdaForceShutdownMessage = "Jda not shutting down. Forcing shutdown";
     private static final String jdaStartupMessage = "Starting Jda...";
@@ -43,7 +43,7 @@ public class Console {
     private static final String deletedCommandsMessage = "Deleted %i unused commands";
 
     public static void sendStartingMessage() {
-        outLog(startingMessage);
+        outLog(replaceIn(startingMessage, "%v", version));
     }
 
     public static void sendShutdownMessage() {
