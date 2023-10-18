@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.interactions.commands.build.*;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.jda.listeners.UserOnlineListener;
+import org.jda.listeners.*;
 import org.jda.slashcommands.*;
 import org.reflections.Reflections;
 import org.reflections.scanners.Scanners;
@@ -43,7 +43,7 @@ public class JdaMain {
     private static void createJda() {
         Jda = JDABuilder.createDefault(token)
                 .setStatus(OnlineStatus.ONLINE)
-                .addEventListeners(slashCommandListener)
+                .addEventListeners(new SlashCommandListener())
                 .addEventListeners(new UserOnlineListener())
                 .enableIntents(GatewayIntent.GUILD_PRESENCES)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
@@ -165,11 +165,11 @@ public class JdaMain {
     }
 
     public static TextChannel getTextChannelFromId(String guildId, String channelId) {
-        Guild g = Jda.getGuildById(guildId);
-        if (g == null) {
+        Guild guild = Jda.getGuildById(guildId);
+        if (guild == null) {
             return null;
         }
-        return g.getTextChannelById(channelId);
+        return guild.getTextChannelById(channelId);
     }
 
     public static void replyMessage(SlashCommandInteractionEvent event, String message, boolean ephemeral) {

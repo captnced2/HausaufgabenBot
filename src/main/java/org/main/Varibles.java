@@ -1,14 +1,12 @@
 package org.main;
 
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.jda.listeners.SlashCommandListener;
 import org.values.Global;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class Varibles {
-    public static SlashCommandListener slashCommandListener;
     public static String mainConfPath;
     public static String tokenConf;
     public static String subjsConf;
@@ -29,7 +27,6 @@ public class Varibles {
     public static ArrayList<String> logCache;
 
     public static void initVariables() {
-        slashCommandListener = new SlashCommandListener();
         mainConfPath = Global.mainConfigPath;
         tokenConf = mainConfPath + Global.tokenConfigFileName;
         subjsConf = mainConfPath + Global.subjsConfigFileName;
