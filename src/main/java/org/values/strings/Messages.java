@@ -18,8 +18,6 @@ public class Messages {
     public static final String noPermissionTitle = "Keine Rechte";
     public static final String noPermissionText = "Du hast nicht die benötigten Rechte, um diesen Command auszuführen";
     public static final String somethingWentWrongText = "Etwas ist schiefgelaufen";
-    public static final String notAdminText = "Du bist kein Admin User!";
-    public static final String notOwnerText = "Du bist nicht Cedric! >:|";
     public static final String shutdownTitle = "Shutting down...";
     public static final String shutdownText = "Good night :D ...";
     public static final String triggeredDayLoopTitle = "Day loop ausgeführt";
@@ -68,10 +66,6 @@ public class Messages {
         return makeEmbed(homeworkEmbedColor, title, text);
     }
 
-    public static MessageEmbed notAdminEmbed() {
-        return errorEmbed(noPermissionTitle, notAdminText);
-    }
-
     public static MessageEmbed noPermissionsEmbed() {
         return errorEmbed(noPermissionTitle, noPermissionText);
     }
@@ -86,10 +80,6 @@ public class Messages {
 
     public static MessageEmbed triggeredDayLoopEmbed() {
         return successEmbed(triggeredDayLoopTitle, triggeredDayLoopText);
-    }
-
-    public static MessageEmbed notOwnerEmbed() {
-        return errorEmbed(noPermissionTitle, notOwnerText);
     }
 
     public static MessageEmbed notSchoolday() {
