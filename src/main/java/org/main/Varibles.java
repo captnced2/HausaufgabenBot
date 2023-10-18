@@ -14,13 +14,16 @@ public class Varibles {
     public static String homeworkConf;
     public static String timetableConf;
     public static String cancelledConf;
+    public static String idsConf;
     public static String logFile;
     public static String pfpsFolder;
     public static File[] pfps;
     public static String token;
     public static String[] subjs;
     public static String[] admins;
-    public static String pingRoleID;
+    public static String pingRole;
+    public static String classServerId;
+    public static String homeworkChannelId;
     public static String alreadyPosted;
     public static OptionData subjOption;
     public static int commandsCount;
@@ -34,9 +37,9 @@ public class Varibles {
         homeworkConf = mainConfPath + Global.homeworkConfigFileName;
         timetableConf = mainConfPath + Global.timetableConfigFileName;
         cancelledConf = mainConfPath + Global.cancelledSubjectsConfigFileName;
+        idsConf = mainConfPath + Global.idsConfigFileName;
         logFile = Global.logFileName;
         pfpsFolder = mainConfPath + Global.pfpsPath;
-        pingRoleID = "<@&" + Global.classDiscordHomeworkPingRoleId + ">";
         alreadyPosted = "";
     }
 }
