@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.jda.listeners.UserOnlineListener;
-import org.jda.slashcommands.JdaSlashCommand;
+import org.jda.slashcommands.*;
 import org.reflections.Reflections;
 import org.reflections.scanners.Scanners;
 
@@ -102,7 +102,7 @@ public class JdaMain {
             registeredCommands++;
         }
         sendRegisteredCommands(registeredCommands, commandsCount);
-        if (activeCommands.size() > 0) {
+        if (!activeCommands.isEmpty()) {
             int removedCommands = 0;
             for (Command c : activeCommands) {
                 c.delete().queue();
@@ -204,6 +204,37 @@ public class JdaMain {
         try {
             Jda.getSelfUser().getManager().setAvatar(Icon.from(iconPath)).queue();
         } catch (IOException ignored) {
+        }
+    }
+
+    public static JdaPermission getUserPermissions(User user) {
+        String userId = user.getId();
+        if (userId.equals(userIdCedric)) {
+            return JdaPermission.OWNER;
+        }
+        for (String id : admins) {
+            if (userId.equals(id)) {
+                return JdaPermission.ADMIN;
+            }
+        }
+        return JdaPermission.USER;
+    }
+
+    public static boolean hasRequiredPermissions(User user, JdaPermission requiredPermission) {
+        JdaPermission userPermission = getUserPermissions(user);
+        switch (requiredPermission) {
+            case USER -> {
+                return true;
+            }
+            case ADMIN -> {
+                return userPermission == JdaPermission.ADMIN || userPermission == JdaPermission.OWNER;
+            }
+            case OWNER -> {
+                return userPermission == JdaPermission.OWNER;
+            }
+            default -> {
+                return false;
+            }
         }
     }
 

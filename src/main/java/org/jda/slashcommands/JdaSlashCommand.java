@@ -17,6 +17,10 @@ public interface JdaSlashCommand {
     @Nonnull
     String getDescription();
 
+    default JdaPermission getRequiredPermission() {
+        return JdaPermission.USER;
+    }
+
     default OptionData[] getOptions() {
         return null;
     }

@@ -3,7 +3,10 @@ package org.jda.listeners;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jda.JdaMain;
-import org.jda.slashcommands.JdaSlashCommand;
+import org.jda.slashcommands.*;
+
+import static org.jda.JdaMain.*;
+import static org.values.strings.Messages.noPermissionsEmbed;
 
 public class SlashCommandListener extends ListenerAdapter {
 
@@ -11,7 +14,12 @@ public class SlashCommandListener extends ListenerAdapter {
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
         JdaSlashCommand command = JdaMain.getCommandFromName(event.getName());
         if (command != null) {
-            command.execute(event);
+            JdaPermission requiredPermission = command.getRequiredPermission();
+            if (hasRequiredPermissions(event.getUser(), requiredPermission)) {
+                command.execute(event);
+            } else {
+                replyEmbed(event, noPermissionsEmbed());
+            }
         }
     }
 }

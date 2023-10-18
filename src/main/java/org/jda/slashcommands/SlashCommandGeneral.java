@@ -8,7 +8,7 @@ import org.jda.JdaMain;
 import org.jetbrains.annotations.Nullable;
 
 import static org.jda.JdaMain.*;
-import static org.main.Varibles.*;
+import static org.main.Varibles.pingRoleID;
 import static org.time.Time.*;
 import static org.values.Global.*;
 import static org.values.strings.Messages.*;
@@ -23,27 +23,6 @@ public class SlashCommandGeneral {
     public static final String OptionDateDescription = "Datum";
     public static final String ChoiceAllName = "Alle";
     public static final String ChoiceAllValue = "all";
-
-    public static boolean isNotOwner(SlashCommandInteractionEvent event) {
-        if (!event.getUser().getId().equals(userIdCedric)) {
-            replyEmbed(event, notOwnerEmbed(), true);
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean isNotAdmin(SlashCommandInteractionEvent event) {
-        boolean admin = false;
-        for (String id : admins) {
-            if (event.getUser().getId().equals(id)) {
-                admin = true;
-            }
-        }
-        if (!admin) {
-            replyEmbed(event, notAdminEmbed(), true);
-        }
-        return !admin;
-    }
 
     public static String getHomeworkToDay(String day) {
         return getHomeworkFromCodes(Config.getDaySubj(day), null);
@@ -72,7 +51,7 @@ public class SlashCommandGeneral {
             return;
         }
         String homework = getHomeworkFromDay(getDate());
-        if (homework.equals("")) {
+        if (homework.isEmpty()) {
             homework = noHomeworkString;
         }
         if (event == null) {
@@ -95,7 +74,7 @@ public class SlashCommandGeneral {
         for (String subjCode : subjCodes) {
             String hw = Config.getHomework(subjCode);
             String date = Config.getHomeworkDate(subjCode);
-            if (hw != null && !hw.equals("") && date != null) {
+            if (hw != null && !hw.isEmpty() && date != null) {
                 if (onDate == null) {
                     txt.append(Config.getSubjFromCode(subjCode)).append(subjsRegex).append(hw).append(newLine);
                 } else {
