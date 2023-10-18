@@ -10,10 +10,6 @@ import static org.values.strings.Console.*;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println();
-        if (true) {
-            return;
-        }
         init();
         Thread shutdown = new Thread(Main::shutdown);
         Runtime.getRuntime().addShutdownHook(shutdown);
