@@ -16,6 +16,7 @@ public class Messages {
     public static final String noHomeworkString = "*Keine Hausaufgaben*";
     public static final String errorTitle = "Error";
     public static final String noPermissionTitle = "Keine Rechte";
+    public static final String noPermissionText = "Du hast nicht die benötigten Rechte, um diesen Command auszuführen";
     public static final String somethingWentWrongText = "Etwas ist schiefgelaufen";
     public static final String notAdminText = "Du bist kein Admin User!";
     public static final String notOwnerText = "Du bist nicht Cedric! >:|";
@@ -25,6 +26,7 @@ public class Messages {
     public static final String triggeredDayLoopText = "Geht mal wieder nicht...";
     public static final String notSchooldayText = "Heute ist kein Schultag!";
     public static final String notSchooldayTomorrow = "Morgen ist keine Schule... Aber hier sind die Hausaufgaben für Montag :D.";
+    public static final String notSchooldayToday = "Heute ist keine Schule...";
     public static final String homeworkFromDayTitle = "Hausaufgaben vom ";
     public static final String homeworkFromDateTitle = " Hausaufgabe vom ";
     public static final String homeworkToDateTitle = "Hausaufgaben auf ";
@@ -68,6 +70,10 @@ public class Messages {
 
     public static MessageEmbed notAdminEmbed() {
         return errorEmbed(noPermissionTitle, notAdminText);
+    }
+
+    public static MessageEmbed noPermissionsEmbed() {
+        return errorEmbed(noPermissionTitle, noPermissionText);
     }
 
     public static MessageEmbed somethingWentWrongEmbed() {

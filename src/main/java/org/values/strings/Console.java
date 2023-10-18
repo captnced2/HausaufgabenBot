@@ -31,6 +31,7 @@ public class Console {
     private static final String setHomeworkMessage = "%u set %s homework to: %h";
     private static final String requestHomeworkMessage = "%u requested homework for %s";
     private static final String requestHomeworkTomorrowMessage = "%u requested homework for tomorrow";
+    private static final String requestHomeworkTodayMessage = "%u requested homework for today";
     private static final String postSuccess = "%u used the post command successfully";
     private static final String delAllMessage = "%u deleted all unchanged homework from today";
     private static final String delSubjMessage = "%u deleted unchanged homework in %s";
@@ -119,6 +120,10 @@ public class Console {
 
     public static void sendRequestedTomorrowHomework(User user) {
         outLog(replaceUser(requestHomeworkTomorrowMessage, user));
+    }
+
+    public static void sendRequestedTodayHomework(User user) {
+        outLog(replaceUser(requestHomeworkTodayMessage, user));
     }
 
     public static void sendPostSuccess(User user) {
