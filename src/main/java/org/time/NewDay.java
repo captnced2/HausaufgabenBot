@@ -8,8 +8,9 @@ import org.jda.JdaMain;
 import org.jda.slashcommands.*;
 import org.quartz.*;
 
+import static org.jda.JdaMain.getAllAdminUserIDs;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
-import static org.main.Varibles.*;
+import static org.main.Varibles.alreadyPosted;
 import static org.time.Time.*;
 import static org.values.Global.newLine;
 import static org.values.strings.Console.*;
@@ -49,7 +50,7 @@ public class NewDay implements Job {
                 }
                 JdaMain.setCommand(acceptDelCommand, faecher);
                 MessageEmbed embed = acceptDelHomework(txt.toString());
-                for (String a : admins) {
+                for (String a : getAllAdminUserIDs()) {
                     JdaMain.sendPrivateMessage(a, embed);
                 }
                 sendDelMessageSuccess();

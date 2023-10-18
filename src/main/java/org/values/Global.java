@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Global {
 
-    public static final String version = "4.1.0";
+    public static final String version = "4.1.1";
     public static final String mainConfigPath = ".\\config\\";
     public static final String pfpsPath = "pfp";
     public static final String tokenConfigFileName = "Token.conf";
