@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import org.config.Config;
 import org.jda.JdaMain;
 import org.jetbrains.annotations.Nullable;
+import org.time.Weekday;
 
 import static org.jda.JdaMain.*;
 import static org.main.Varibles.pingRoleID;
@@ -24,7 +25,7 @@ public class SlashCommandGeneral {
     public static final String ChoiceAllName = "Alle";
     public static final String ChoiceAllValue = "all";
 
-    public static String getHomeworkToDay(String day) {
+    public static String getHomeworkToDay(Weekday day) {
         return getHomeworkFromCodes(Config.getDaySubj(day), null);
     }
 
@@ -45,8 +46,8 @@ public class SlashCommandGeneral {
     }
 
     public static void postMessage(SlashCommandInteractionEvent event) {
-        String day = getWeekday();
-        if (day.equals(saturday) || day.equals(sunday)) {
+        Weekday day = getWeekday();
+        if (day == Weekday.SATURDAY || day == Weekday.SUNDAY) {
             replyEmbed(event, notSchoolday(), true);
             return;
         }

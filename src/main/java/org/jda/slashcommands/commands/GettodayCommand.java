@@ -3,11 +3,11 @@ package org.jda.slashcommands.commands;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.jda.slashcommands.JdaSlashCommand;
 import org.jetbrains.annotations.NotNull;
+import org.time.Weekday;
 
 import static org.jda.JdaMain.*;
 import static org.jda.slashcommands.SlashCommandGeneral.getHomeworkToDay;
 import static org.time.Time.*;
-import static org.values.Global.*;
 import static org.values.strings.Console.sendRequestedTodayHomework;
 import static org.values.strings.Messages.*;
 
@@ -26,9 +26,9 @@ public class GettodayCommand implements JdaSlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        String day = getWeekday();
+        Weekday day = getWeekday();
         String date = getDate();
-        if (day.equals(saturday) || day.equals(sunday)) {
+        if (day == Weekday.SATURDAY || day == Weekday.SUNDAY) {
             replyMessage(event, notSchooldayToday, true);
         } else {
             replyEmbed(event, homeworkToDate(day, date, getHomeworkToDay(day)));

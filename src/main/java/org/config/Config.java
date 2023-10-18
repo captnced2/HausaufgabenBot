@@ -1,5 +1,7 @@
 package org.config;
 
+import org.time.Weekday;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -152,12 +154,12 @@ public class Config {
         return null;
     }
 
-    public static String[] getDaySubj(String day) {
+    public static String[] getDaySubj(Weekday day) {
         String[] stp = getFile(timetableConf);
         String[] split;
         for (String s : stp) {
             split = s.split(subjsRegex);
-            if (split[0].equals(day)) {
+            if (split[0].equals(day.getString())) {
                 return split[1].split(commaRegex);
             }
         }
@@ -175,7 +177,7 @@ public class Config {
             String hw = getHomework(subj);
             String[] cncldHw = getCancelledHw(getDate());
             if (hwDate != null && hw != null) {
-                if (!hwDate.equals(getDate()) && !hwDate.equals("") && !hw.equals("")) {
+                if (!hwDate.equals(getDate()) && !hwDate.isEmpty() && !hw.isEmpty()) {
                     if (cncldHw == null) {
                         pendingDel.add(subj);
                     } else {
@@ -256,7 +258,7 @@ public class Config {
     }
 
     private static void writeLogCache() {
-        if (logCache.size() == 0) {
+        if (logCache.isEmpty()) {
             logCache = null;
             return;
         }

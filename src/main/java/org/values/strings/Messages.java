@@ -2,6 +2,7 @@ package org.values.strings;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
+import org.time.Weekday;
 
 import java.awt.*;
 
@@ -90,8 +91,8 @@ public class Messages {
         return homeworkEmbed(homeworkFromDayTitle + getWeekday() + " " + getDate(), homework);
     }
 
-    public static MessageEmbed homeworkToDate(String day, String date, String homework) {
-        return homeworkEmbed(homeworkToDateTitle + day + " " + date, homework);
+    public static MessageEmbed homeworkToDate(Weekday day, String date, String homework) {
+        return homeworkEmbed(homeworkToDateTitle + day.getString() + " " + date, homework);
     }
 
     public static MessageEmbed addedHomework(String subjCode, String homework) {

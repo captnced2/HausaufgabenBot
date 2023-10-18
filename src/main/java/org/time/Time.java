@@ -52,8 +52,8 @@ public class Time {
             return;
         }
         sendCalledDayLoopMessage();
-        String day = getWeekday();
-        if (!(day.equals(saturday) || day.equals(sunday))) {
+        Weekday day = getWeekday();
+        if (!(day == Weekday.SATURDAY || day == Weekday.SUNDAY)) {
             if (!alreadyPosted.equals(getDate())) {
                 SlashCommandGeneral.postMessage(null);
                 sendPostSuccess();
@@ -109,25 +109,25 @@ public class Time {
         return sdf.format(dt);
     }
 
-    public static String getWeekday() {
+    public static Weekday getWeekday() {
         return getWeekday(0);
     }
 
-    public static String getWeekday(int shift) {
-        String returnDay = "2";
+    public static Weekday getWeekday(int shift) {
+        Weekday returnDay;
         Calendar cal = Calendar.getInstance();
         int day = cal.get(Calendar.DAY_OF_WEEK) + shift;
         if (day > 7) {
             day = 1;
         }
         switch (day) {
-            case 2 -> returnDay = monday;
-            case 3 -> returnDay = tuesday;
-            case 4 -> returnDay = wednesday;
-            case 5 -> returnDay = thursday;
-            case 6 -> returnDay = friday;
-            case 7 -> returnDay = saturday;
-            case 1 -> returnDay = sunday;
+            case 3 -> returnDay = Weekday.TUESDAY;
+            case 4 -> returnDay = Weekday.WEDNESDAY;
+            case 5 -> returnDay = Weekday.THURSDAY;
+            case 6 -> returnDay = Weekday.FRIDAY;
+            case 7 -> returnDay = Weekday.SATURDAY;
+            case 1 -> returnDay = Weekday.SUNDAY;
+            default -> returnDay = Weekday.MONDAY;
         }
         return returnDay;
     }
