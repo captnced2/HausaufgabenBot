@@ -33,7 +33,7 @@ public class SetHomeworkCommand implements JdaSlashCommand {
 
     @Override
     public JdaPermission getRequiredPermission() {
-        return JdaPermission.ADMIN;
+        return JdaPermission.MOD;
     }
 
     @Override

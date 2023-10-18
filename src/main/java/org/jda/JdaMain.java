@@ -20,6 +20,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static org.config.Config.getPermissionLevelFromId;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
 import static org.main.Varibles.*;
 import static org.values.Global.*;
@@ -209,15 +210,8 @@ public class JdaMain {
 
     public static JdaPermission getUserPermissions(User user) {
         String userId = user.getId();
-        if (userId.equals(userIdCedric)) {
-            return JdaPermission.OWNER;
-        }
-        for (String id : admins) {
-            if (userId.equals(id)) {
-                return JdaPermission.ADMIN;
-            }
-        }
-        return JdaPermission.USER;
+        int level = getPermissionLevelFromId(userId);
+        return JdaPermission.getFromInt(level);
     }
 
     public static boolean hasRequiredPermissions(User user, JdaPermission requiredPermission) {
@@ -238,7 +232,7 @@ public class JdaMain {
         try {
             TimeUnit.SECONDS.sleep(1);
             Jda.shutdown();
-            if (!Jda.awaitShutdown(10, TimeUnit.SECONDS)) {
+            if (!Jda.awaitShutdown(5, TimeUnit.SECONDS)) {
                 sendJdaForceShutdownMessage();
                 Jda.shutdownNow();
             }

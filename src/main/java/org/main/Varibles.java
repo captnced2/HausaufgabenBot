@@ -10,7 +10,7 @@ public class Varibles {
     public static String mainConfPath;
     public static String tokenConf;
     public static String subjsConf;
-    public static String adminConf;
+    public static String permissionsConf;
     public static String homeworkConf;
     public static String timetableConf;
     public static String cancelledConf;
@@ -30,7 +30,7 @@ public class Varibles {
         mainConfPath = Global.mainConfigPath;
         tokenConf = mainConfPath + Global.tokenConfigFileName;
         subjsConf = mainConfPath + Global.subjsConfigFileName;
-        adminConf = mainConfPath + Global.adminConfigFileName;
+        permissionsConf = mainConfPath + Global.permissionsConfigFileName;
         homeworkConf = mainConfPath + Global.homeworkConfigFileName;
         timetableConf = mainConfPath + Global.timetableConfigFileName;
         cancelledConf = mainConfPath + Global.cancelledSubjectsConfigFileName;

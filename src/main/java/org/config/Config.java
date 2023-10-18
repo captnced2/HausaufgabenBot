@@ -17,7 +17,6 @@ public class Config {
         checkFiles();
         getToken();
         getSubjs();
-        getAdmins();
         getPfps();
     }
 
@@ -27,7 +26,7 @@ public class Config {
 
     public static void checkFiles() {
         File pfp = new File(pfpsFolder);
-        File[] confgs = {new File(tokenConf), new File(subjsConf), new File(adminConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(logFile)};
+        File[] confgs = {new File(tokenConf), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(logFile)};
         for (File c : confgs) {
             if (!c.exists()) {
                 sendCreatingNewFile(c.getName());
@@ -83,12 +82,17 @@ public class Config {
         return subjName;
     }
 
-    private static void getAdmins() {
-        String[] admns = getFile(adminConf);
-        for (int i = 0; admns.length > i; i++) {
-            admns[i] = admns[i].split(subjsRegex)[1];
+    public static int getPermissionLevelFromId(String id) {
+        String[] permissionsFile = getFile(permissionsConf);
+        for (String permission : permissionsFile) {
+            if (permission.split(subjsRegex)[1].equals(id)) {
+                try {
+                    return Integer.parseInt(permission.split(subjsRegex)[2]);
+                } catch (IllegalArgumentException ignored) {
+                }
+            }
         }
-        admins = admns;
+        return 0;
     }
 
     public static boolean setHomework(String subjCode, String ha) {
