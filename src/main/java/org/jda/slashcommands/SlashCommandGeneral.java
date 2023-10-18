@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import org.time.Weekday;
 
 import static org.jda.JdaMain.*;
-import static org.main.Varibles.pingRoleID;
+import static org.main.Varibles.*;
 import static org.time.Time.*;
 import static org.values.Global.*;
 import static org.values.strings.Messages.*;
@@ -38,11 +38,11 @@ public class SlashCommandGeneral {
         if (g == null) {
             return false;
         }
-        return event.isFromGuild() && classDiscordServerId.equals(event.getGuild().getId());
+        return event.isFromGuild() && classServerId.equals(event.getGuild().getId());
     }
 
     public static boolean checkChannel(SlashCommandInteractionEvent event) {
-        return classDiscordHomeworkChannelId.equals(event.getChannel().getId());
+        return homeworkChannelId.equals(event.getChannel().getId());
     }
 
     public static void postMessage(SlashCommandInteractionEvent event) {
@@ -56,14 +56,14 @@ public class SlashCommandGeneral {
             homework = noHomeworkString;
         }
         if (event == null) {
-            TextChannel channel = JdaMain.getTextChannelFromId(classDiscordServerId, classDiscordHomeworkChannelId);
+            TextChannel channel = JdaMain.getTextChannelFromId(classServerId, homeworkChannelId);
             if (channel != null) {
                 sendEmbed(channel, homeworkFromDay(homework));
-                sendWithDelay(channel, pingRoleID, 1);
+                sendWithDelay(channel, pingRole, 1);
             }
         } else {
             replyEmbed(event, homeworkFromDay(homework));
-            sendWithDelay(event.getChannel(), pingRoleID, 1);
+            sendWithDelay(event.getChannel(), pingRole, 1);
         }
     }
 

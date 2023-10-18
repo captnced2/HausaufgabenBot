@@ -18,6 +18,7 @@ public class Config {
         getToken();
         getSubjs();
         getPfps();
+        getIds();
     }
 
     public static void initCache() {
@@ -26,7 +27,7 @@ public class Config {
 
     public static void checkFiles() {
         File pfp = new File(pfpsFolder);
-        File[] confgs = {new File(tokenConf), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(logFile)};
+        File[] confgs = {new File(tokenConf), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(idsConf), new File(logFile)};
         for (File c : confgs) {
             if (!c.exists()) {
                 sendCreatingNewFile(c.getName());
@@ -60,6 +61,13 @@ public class Config {
 
     private static void getSubjs() {
         subjs = getFile(subjsConf);
+    }
+
+    private static void getIds() {
+        String[] idList = getFile(idsConf);
+        classServerId = idList[0].split(subjsRegex)[1];
+        homeworkChannelId = idList[1].split(subjsRegex)[1];
+        pingRole = "<@&" + idList[2].split(subjsRegex)[1] + ">";
     }
 
     public static String[] getAllSubjCodes() {
