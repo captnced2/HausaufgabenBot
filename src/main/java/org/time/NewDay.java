@@ -10,7 +10,7 @@ import org.quartz.*;
 
 import static org.jda.JdaMain.getAllAdminUserIDs;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
-import static org.main.Varibles.alreadyPosted;
+import static org.main.Variables.alreadyPosted;
 import static org.time.Time.*;
 import static org.values.Global.newLine;
 import static org.values.strings.Console.*;

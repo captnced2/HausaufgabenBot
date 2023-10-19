@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import org.time.Weekday;
 
 import static org.jda.JdaMain.*;
-import static org.main.Varibles.*;
+import static org.main.Variables.*;
 import static org.time.Time.*;
 import static org.values.Global.*;
 import static org.values.strings.Messages.*;

@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.events.user.update.UserUpdateOnlineStatusEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import static org.jda.JdaMain.*;
-import static org.main.Varibles.lukasID;
+import static org.main.Variables.lukasID;
 import static org.values.strings.Messages.LukasIsHere;
 
 public class UserOnlineListener extends ListenerAdapter {

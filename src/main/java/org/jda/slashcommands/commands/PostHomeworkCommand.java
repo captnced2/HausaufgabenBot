@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static org.jda.JdaMain.replyEmbed;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
-import static org.main.Varibles.alreadyPosted;
+import static org.main.Variables.alreadyPosted;
 import static org.time.Time.*;
 import static org.values.strings.Console.sendPostSuccess;
 import static org.values.strings.Messages.*;

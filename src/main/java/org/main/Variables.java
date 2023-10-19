@@ -6,7 +6,7 @@ import org.values.Global;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Varibles {
+public class Variables {
     public static String mainConfPath;
     public static String tokenConf;
     public static String subjsConf;

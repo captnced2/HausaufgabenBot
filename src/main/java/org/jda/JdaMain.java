@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.config.Config.*;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
-import static org.main.Varibles.*;
+import static org.main.Variables.*;
 import static org.values.Global.*;
 import static org.values.strings.Console.*;
 import static org.values.strings.Messages.defaultActivity;

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static org.jda.JdaMain.replyEmbed;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
-import static org.main.Varibles.subjOption;
+import static org.main.Variables.subjOption;
 import static org.values.strings.Console.*;
 import static org.values.strings.Messages.*;
 

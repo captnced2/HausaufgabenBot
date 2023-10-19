@@ -4,7 +4,7 @@ import org.jda.JdaMain;
 
 import static org.config.Config.*;
 import static org.jda.JdaMain.initJda;
-import static org.main.Varibles.initVariables;
+import static org.main.Variables.initVariables;
 import static org.time.Time.initDayLoop;
 import static org.values.strings.Console.*;
 
