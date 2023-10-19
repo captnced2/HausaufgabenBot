@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="HausaufgabenBot:jar">
-    <output-path>$PROJECT_DIR$/..</output-path>
+    <output-path>$PROJECT_DIR$/../../../Admin/Desktop/Java/Hausi Bot</output-path>
     <root id="archive" name="HausaufgabenBot.jar">
       <element id="module-output" name="HausaufgabenBot" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/club/minnced/opus-java/1.1.1/opus-java-1.1.1.jar" path-in-jar="/" />
