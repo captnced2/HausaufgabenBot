@@ -43,13 +43,10 @@ public class Config {
         }
         if (!pfp.exists()) {
             sendFolderNotFound(pfp.getName());
-            try {
-                boolean success;
-                success = pfp.createNewFile();
-                if (!success) {
-                    sendCantCreateFolderError(pfp.getName());
-                }
-            } catch (IOException ignored) {
+            boolean success;
+            success = pfp.mkdir();
+            if (!success) {
+                sendCantCreateFolderError(pfp.getName());
             }
         }
         writeLogCache();
