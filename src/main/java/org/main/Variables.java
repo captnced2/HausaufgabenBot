@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Variables {
     public static String mainConfPath;
+    public static String configFolderPath;
     public static String tokenConf;
     public static String subjsConf;
     public static String permissionsConf;
@@ -31,6 +32,7 @@ public class Variables {
 
     public static void initVariables() {
         mainConfPath = Global.mainConfigPath;
+        configFolderPath = mainConfPath + Global.configPath;
         tokenConf = mainConfPath + Global.tokenConfigFileName;
         subjsConf = mainConfPath + Global.subjsConfigFileName;
         permissionsConf = mainConfPath + Global.permissionsConfigFileName;

@@ -26,30 +26,39 @@ public class Config {
     }
 
     public static void checkFiles() {
-        File pfp = new File(pfpsFolder);
+        File configFolder = new File(configFolderPath);
+        File pfpFolder = new File(pfpsFolder);
         File[] confgs = {new File(tokenConf), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(idsConf), new File(logFile)};
+        createFolder(configFolder);
         for (File c : confgs) {
-            if (!c.exists()) {
-                sendCreatingNewFile(c.getName());
-                try {
-                    boolean success;
-                    success = c.createNewFile();
-                    if (!success) {
-                        sendCantCreateConfError(c.getName());
-                    }
-                } catch (IOException ignored) {
-                }
-            }
+            createFile(c);
         }
-        if (!pfp.exists()) {
-            sendFolderNotFound(pfp.getName());
-            boolean success;
-            success = pfp.mkdir();
-            if (!success) {
-                sendCantCreateFolderError(pfp.getName());
-            }
-        }
+        createFolder(pfpFolder);
         writeLogCache();
+    }
+
+    public static void createFolder(File folder) {
+        if (!folder.exists()) {
+            sendCreatingNewFolder(folder.getName());
+            boolean success = folder.mkdir();
+            if (!success) {
+                sendCantCreateFolderError(folder.getName());
+            }
+        }
+    }
+
+    public static void createFile(File file) {
+        if (!file.exists()) {
+            sendCreatingNewFile(file.getName());
+            try {
+                boolean success = file.createNewFile();
+                if (!success) {
+                    sendCantCreateConfError(file.getName());
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     private static void getToken() {

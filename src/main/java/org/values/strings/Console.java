@@ -19,7 +19,7 @@ public class Console {
     private static final String cantCreateConfigFileErrorMessage = "Error! Couldn't create config file ";
     private static final String cantCreateFolderErrorMessage = "Error! Couldn't create config folder ";
     private static final String creatingNewFileMessage = "Creating new file ";
-    private static final String folderNotFoundMessage = "Creating new folder ";
+    private static final String creatingNewFolderMessage = "Creating new folder ";
     private static final String initCompleteMessage = "Initialization Complete";
     private static final String calledDayLoopMessage = "Called Day Loop Function";
     private static final String doneDayLoopMessage = "Finished Day Loop";
@@ -58,8 +58,8 @@ public class Console {
         outLog(creatingNewFileMessage + config);
     }
 
-    public static void sendFolderNotFound(String folder) {
-        outLog(folderNotFoundMessage + folder);
+    public static void sendCreatingNewFolder(String folder) {
+        outLog(creatingNewFolderMessage + folder);
     }
 
     public static void sendCantCreateConfError(String config) {
