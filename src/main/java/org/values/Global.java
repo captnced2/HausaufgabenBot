@@ -20,6 +20,7 @@ public class Global {
     public static final String subjsRegex = ": ";
     public static final String commaRegex = ", ";
     public static final String commentSymbol = "#";
+    public static final String keySeperator = "=";
     public static final Color homeworkEmbedColor = Color.YELLOW;
     public static final Color errorEmbedColor = Color.RED;
     public static final Color successEmbedColor = Color.GREEN;

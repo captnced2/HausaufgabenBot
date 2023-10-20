@@ -294,11 +294,24 @@ public class Config {
         logCache = null;
     }
 
-    private static String[] getFile(String conf) {
+    private static String getKey(String[] lines, String key) {
+        if (lines.length == 0 || key.isEmpty()) {
+            return null;
+        }
+        for (String line : lines) {
+            String lineKey = line.split(keySeperator)[0];
+            if (lineKey.equals(key)) {
+                return line.split(keySeperator)[1];
+            }
+        }
+        return null;
+    }
+
+    private static String[] getFile(String file) {
         ArrayList<String> lines = new ArrayList<>();
         String line;
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(conf), StandardCharsets.UTF_8));
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
             while ((line = br.readLine()) != null) {
                 if (!line.startsWith(commentSymbol)) {
                     lines.add(line);
