@@ -5,8 +5,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Global {
 
-    public static final String version = "4.1.1";
+    public static final String version = "4.1.2";
     public static final String mainConfigPath = ".\\config\\";
+    public static final String configPath = "config";
     public static final String pfpsPath = "pfp";
     public static final String tokenConfigFileName = "Token.conf";
     public static final String subjsConfigFileName = "Fach.conf";
@@ -19,6 +20,7 @@ public class Global {
     public static final String subjsRegex = ": ";
     public static final String commaRegex = ", ";
     public static final String commentSymbol = "#";
+    public static final String keySeperator = "=";
     public static final Color homeworkEmbedColor = Color.YELLOW;
     public static final Color errorEmbedColor = Color.RED;
     public static final Color successEmbedColor = Color.GREEN;

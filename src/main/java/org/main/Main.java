@@ -2,7 +2,7 @@ package org.main;
 
 import org.jda.JdaMain;
 
-import static org.config.Config.*;
+import static org.config.Config.initConfigs;
 import static org.jda.JdaMain.initJda;
 import static org.main.Variables.initVariables;
 import static org.time.Time.initDayLoop;
@@ -18,7 +18,6 @@ public class Main {
 
     private static void init() {
         initVariables();
-        initCache();
         sendStartingMessage();
         initConfigs();
         initJda();

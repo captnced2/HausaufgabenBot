@@ -4,10 +4,10 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.values.Global;
 
 import java.io.File;
-import java.util.ArrayList;
 
 public class Variables {
     public static String mainConfPath;
+    public static String configFolderPath;
     public static String tokenConf;
     public static String subjsConf;
     public static String permissionsConf;
@@ -27,10 +27,10 @@ public class Variables {
     public static String alreadyPosted;
     public static OptionData subjOption;
     public static int commandsCount;
-    public static ArrayList<String> logCache;
 
     public static void initVariables() {
         mainConfPath = Global.mainConfigPath;
+        configFolderPath = mainConfPath + Global.configPath;
         tokenConf = mainConfPath + Global.tokenConfigFileName;
         subjsConf = mainConfPath + Global.subjsConfigFileName;
         permissionsConf = mainConfPath + Global.permissionsConfigFileName;

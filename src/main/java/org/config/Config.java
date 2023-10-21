@@ -21,35 +21,39 @@ public class Config {
         getIds();
     }
 
-    public static void initCache() {
-        logCache = new ArrayList<>();
+    public static void checkFiles() {
+        File configFolder = new File(configFolderPath);
+        File pfpFolder = new File(pfpsFolder);
+        File[] confgs = {new File(tokenConf), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(idsConf)};
+        createFolder(configFolder);
+        for (File c : confgs) {
+            createFile(c);
+        }
+        createFolder(pfpFolder);
     }
 
-    public static void checkFiles() {
-        File pfp = new File(pfpsFolder);
-        File[] confgs = {new File(tokenConf), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(idsConf), new File(logFile)};
-        for (File c : confgs) {
-            if (!c.exists()) {
-                sendCreatingNewFile(c.getName());
-                try {
-                    boolean success;
-                    success = c.createNewFile();
-                    if (!success) {
-                        sendCantCreateConfError(c.getName());
-                    }
-                } catch (IOException ignored) {
-                }
-            }
-        }
-        if (!pfp.exists()) {
-            sendFolderNotFound(pfp.getName());
-            boolean success;
-            success = pfp.mkdir();
+    public static void createFolder(File folder) {
+        if (!folder.exists()) {
+            sendCreatingNewFolder(folder.getName());
+            boolean success = folder.mkdir();
             if (!success) {
-                sendCantCreateFolderError(pfp.getName());
+                sendCantCreateFolderError(folder.getName());
             }
         }
-        writeLogCache();
+    }
+
+    public static void createFile(File file) {
+        if (!file.exists()) {
+            sendCreatingNewFile(file.getName());
+            try {
+                boolean success = file.createNewFile();
+                if (!success) {
+                    sendCantCreateConfError(file.getName());
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     private static void getToken() {
@@ -261,10 +265,6 @@ public class Config {
     }
 
     public static void writeToLog(String line) {
-        if (!new File(logFile).exists()) {
-            logCache.add(line);
-            return;
-        }
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true));
             writer.write(line + newLine);
@@ -274,22 +274,24 @@ public class Config {
         }
     }
 
-    private static void writeLogCache() {
-        if (logCache.isEmpty()) {
-            logCache = null;
-            return;
+    private static String getKey(String[] lines, String key) {
+        if (lines.length == 0 || key.isEmpty()) {
+            return null;
         }
-        for (String line : logCache) {
-            writeToLog(line);
+        for (String line : lines) {
+            String lineKey = line.split(keySeperator)[0];
+            if (lineKey.equals(key)) {
+                return line.split(keySeperator)[1];
+            }
         }
-        logCache = null;
+        return null;
     }
 
-    private static String[] getFile(String conf) {
+    private static String[] getFile(String file) {
         ArrayList<String> lines = new ArrayList<>();
         String line;
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(conf), StandardCharsets.UTF_8));
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
             while ((line = br.readLine()) != null) {
                 if (!line.startsWith(commentSymbol)) {
                     lines.add(line);
