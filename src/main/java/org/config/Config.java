@@ -21,20 +21,15 @@ public class Config {
         getIds();
     }
 
-    public static void initCache() {
-        logCache = new ArrayList<>();
-    }
-
     public static void checkFiles() {
         File configFolder = new File(configFolderPath);
         File pfpFolder = new File(pfpsFolder);
-        File[] confgs = {new File(tokenConf), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(idsConf), new File(logFile)};
+        File[] confgs = {new File(tokenConf), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(idsConf)};
         createFolder(configFolder);
         for (File c : confgs) {
             createFile(c);
         }
         createFolder(pfpFolder);
-        writeLogCache();
     }
 
     public static void createFolder(File folder) {
@@ -270,10 +265,6 @@ public class Config {
     }
 
     public static void writeToLog(String line) {
-        if (!new File(logFile).exists()) {
-            logCache.add(line);
-            return;
-        }
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true));
             writer.write(line + newLine);
@@ -281,17 +272,6 @@ public class Config {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static void writeLogCache() {
-        if (logCache.isEmpty()) {
-            logCache = null;
-            return;
-        }
-        for (String line : logCache) {
-            writeToLog(line);
-        }
-        logCache = null;
     }
 
     private static String getKey(String[] lines, String key) {
