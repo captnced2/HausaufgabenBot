@@ -14,7 +14,7 @@ import static org.values.Global.*;
 import static org.values.strings.Console.sendNextDayLoopScheduled;
 
 public class Time {
-    private static Trigger loopTrigger;
+    private static CronTrigger loopTrigger;
 
     public static void initDayLoop() {
         try {
