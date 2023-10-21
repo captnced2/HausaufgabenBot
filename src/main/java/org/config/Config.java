@@ -24,7 +24,7 @@ public class Config {
     public static void checkFiles() {
         File configFolder = new File(Global.configFolder);
         File pfpFolder = new File(pfpsFolder);
-        File[] confgs = {new File(mainConfFile), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(idsConf)};
+        File[] confgs = {new File(mainConfFile), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(cancelledConf)};
         createFolder(configFolder);
         for (File c : confgs) {
             createFile(c);

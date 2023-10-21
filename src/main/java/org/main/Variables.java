@@ -13,9 +13,7 @@ public class Variables {
     public static String subjsConf;
     public static String permissionsConf;
     public static String homeworkConf;
-    public static String timetableConf;
     public static String cancelledConf;
-    public static String idsConf;
     public static String logFile;
     public static String pfpsFolder;
     public static File[] pfps;
@@ -30,9 +28,7 @@ public class Variables {
         subjsConf = mainConfPath + Global.subjsConfigFileName;
         permissionsConf = mainConfPath + Global.permissionsConfigFileName;
         homeworkConf = mainConfPath + Global.homeworkConfigFileName;
-        timetableConf = mainConfPath + Global.timetableConfigFileName;
         cancelledConf = mainConfPath + Global.cancelledSubjectsConfigFileName;
-        idsConf = mainConfPath + Global.idsConfigFileName;
         logFile = Global.logFileName;
         pfpsFolder = mainConfPath + Global.pfpsPath;
         alreadyPosted = "";
