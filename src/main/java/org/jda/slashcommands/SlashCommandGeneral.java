@@ -1,6 +1,5 @@
 package org.jda.slashcommands;
 
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.config.Config;
@@ -9,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import org.time.Weekday;
 
 import static org.jda.JdaMain.*;
-import static org.main.Variables.*;
+import static org.main.Variables.mainConfig;
 import static org.time.Time.*;
 import static org.values.Global.*;
 import static org.values.strings.Messages.*;
@@ -26,19 +25,11 @@ public class SlashCommandGeneral {
     public static final String ChoiceAllValue = "all";
 
     public static String getHomeworkToDay(Weekday day) {
-        return getHomeworkFromCodes(Config.getDaySubj(day), null);
+        return getHomeworkFromCodes(mainConfig.getSubjsOnDay(day), null);
     }
 
     public static String getHomeworkFromDay(String date) {
         return getHomeworkFromCodes(Config.getAllSubjCodes(), date);
-    }
-
-    public static boolean checkGuild(SlashCommandInteractionEvent event) {
-        Guild g = event.getGuild();
-        if (g == null) {
-            return false;
-        }
-        return event.isFromGuild() && classServerId.equals(event.getGuild().getId());
     }
 
     public static void postMessage(SlashCommandInteractionEvent event) {
@@ -52,14 +43,14 @@ public class SlashCommandGeneral {
             homework = noHomeworkString;
         }
         if (event == null) {
-            TextChannel channel = JdaMain.getTextChannelFromId(classServerId, homeworkChannelId);
+            TextChannel channel = JdaMain.getTextChannelFromId(mainConfig.getKey(classServerIdKey), mainConfig.getKey(homeworkChannelIdKey));
             if (channel != null) {
                 sendEmbed(channel, homeworkFromDay(homework));
-                sendWithDelay(channel, pingRole, 1);
+                sendWithDelay(channel, mainConfig.getKey(pingRoleIdKey), 1);
             }
         } else {
             replyEmbed(event, homeworkFromDay(homework));
-            sendWithDelay(event.getChannel(), pingRole, 1);
+            sendWithDelay(event.getChannel(), mainConfig.getKey(pingRoleIdKey), 1);
         }
     }
 

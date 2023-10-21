@@ -42,7 +42,7 @@ public class JdaMain {
     }
 
     private static void createJda() {
-        Jda = JDABuilder.createDefault(token)
+        Jda = JDABuilder.createDefault(mainConfig.getToken())
                 .setStatus(OnlineStatus.ONLINE)
                 .addEventListeners(new SlashCommandListener())
                 .addEventListeners(new UserOnlineListener())

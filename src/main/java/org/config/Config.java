@@ -1,6 +1,7 @@
 package org.config;
 
-import org.time.Weekday;
+import org.config.files.MainConfig;
+import org.values.Global;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -15,16 +16,15 @@ public class Config {
 
     public static void initConfigs() {
         checkFiles();
-        getToken();
+        mainConfig = new MainConfig(mainConfFile);
         getSubjs();
         getPfps();
-        getIds();
     }
 
     public static void checkFiles() {
-        File configFolder = new File(configFolderPath);
+        File configFolder = new File(Global.configFolder);
         File pfpFolder = new File(pfpsFolder);
-        File[] confgs = {new File(tokenConf), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(idsConf)};
+        File[] confgs = {new File(mainConfFile), new File(subjsConf), new File(permissionsConf), new File(homeworkConf), new File(timetableConf), new File(cancelledConf), new File(idsConf)};
         createFolder(configFolder);
         for (File c : confgs) {
             createFile(c);
@@ -56,20 +56,8 @@ public class Config {
         }
     }
 
-    private static void getToken() {
-        token = getFile(tokenConf)[0];
-    }
-
     private static void getSubjs() {
         subjs = getFile(subjsConf);
-    }
-
-    private static void getIds() {
-        String[] idList = getFile(idsConf);
-        classServerId = idList[0].split(subjsRegex)[1];
-        homeworkChannelId = idList[1].split(subjsRegex)[1];
-        pingRole = "<@&" + idList[2].split(subjsRegex)[1] + ">";
-        lukasID = idList[3].split(subjsRegex)[1];
     }
 
     public static String[] getAllSubjCodes() {
@@ -175,21 +163,9 @@ public class Config {
         return null;
     }
 
-    public static String[] getDaySubj(Weekday day) {
-        String[] stp = getFile(timetableConf);
-        String[] split;
-        for (String s : stp) {
-            split = s.split(subjsRegex);
-            if (split[0].equals(day.getAsString())) {
-                return split[1].split(commaRegex);
-            }
-        }
-        return null;
-    }
-
     public static String[] getPendingDelSubj() {
         ArrayList<String> pendingDel = new ArrayList<>();
-        String[] daySubjs = getDaySubj(getWeekday());
+        String[] daySubjs = mainConfig.getSubjsOnDay(getWeekday());
         if (daySubjs == null) {
             return null;
         }
@@ -272,19 +248,6 @@ public class Config {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static String getKey(String[] lines, String key) {
-        if (lines.length == 0 || key.isEmpty()) {
-            return null;
-        }
-        for (String line : lines) {
-            String lineKey = line.split(keySeperator)[0];
-            if (lineKey.equals(key)) {
-                return line.split(keySeperator)[1];
-            }
-        }
-        return null;
     }
 
     private static String[] getFile(String file) {

@@ -5,11 +5,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Global {
 
-    public static final String version = "4.1.3";
-    public static final String mainConfigPath = ".\\config\\";
-    public static final String configFolderPath = "config";
+    public static final String version = "5.0.1";
+    public static final String configFolder = "config";
+    public static final String configFileName = "config.conf";
     public static final String pfpsPath = "pfp";
-    public static final String tokenConfigFileName = "Token.conf";
     public static final String subjsConfigFileName = "Fach.conf";
     public static final String permissionsConfigFileName = "Rechte.conf";
     public static final String homeworkConfigFileName = "Hausaufgaben.conf";
@@ -34,4 +33,9 @@ public class Global {
     public static final String weekdayDayMonthYearHoursMinutesPattern = "EEEE dd.MM.yyyy HH:mm";
     public static final String jpgEnd = ".jpg";
     public static final String homeworkChannel = "hausaufgaben";
+    public static final String tokenKey = "token";
+    public static final String classServerIdKey = "KlassenDiscordID";
+    public static final String homeworkChannelIdKey = "HomeworkChannelID";
+    public static final String pingRoleIdKey = "HomeworkPingRoleID";
+    public static final String lukasIDKey = "LukasID";
 }

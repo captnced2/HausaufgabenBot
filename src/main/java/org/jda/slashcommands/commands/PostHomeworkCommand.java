@@ -1,13 +1,12 @@
 package org.jda.slashcommands.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import org.config.Config;
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
 import static org.jda.JdaMain.replyEmbed;
-import static org.jda.slashcommands.SlashCommandGeneral.*;
-import static org.main.Variables.alreadyPosted;
+import static org.jda.slashcommands.SlashCommandGeneral.postMessage;
+import static org.main.Variables.*;
 import static org.time.Time.*;
 import static org.values.Global.homeworkChannel;
 import static org.values.strings.Console.sendPostSuccess;
@@ -43,7 +42,7 @@ public class PostHomeworkCommand implements JdaSlashCommand {
             replyEmbed(event, wrongChannel(), true);
             return;
         }
-        String[] subj = Config.getDaySubj(getWeekday());
+        String[] subj = mainConfig.getSubjsOnDay(getWeekday());
         if (subj == null) {
             replyEmbed(event, onlyUsableOnWeekdays(), true);
             return;

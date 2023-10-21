@@ -1,13 +1,15 @@
 package org.main;
 
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import org.config.files.MainConfig;
 import org.values.Global;
 
 import java.io.File;
 
 public class Variables {
     public static String mainConfPath;
-    public static String tokenConf;
+    public static String mainConfFile;
+    public static MainConfig mainConfig;
     public static String subjsConf;
     public static String permissionsConf;
     public static String homeworkConf;
@@ -17,19 +19,14 @@ public class Variables {
     public static String logFile;
     public static String pfpsFolder;
     public static File[] pfps;
-    public static String token;
     public static String[] subjs;
-    public static String pingRole;
-    public static String classServerId;
-    public static String homeworkChannelId;
-    public static String lukasID;
     public static String alreadyPosted;
     public static OptionData subjOption;
     public static int commandsCount;
 
     public static void initVariables() {
-        mainConfPath = Global.mainConfigPath;
-        tokenConf = mainConfPath + Global.tokenConfigFileName;
+        mainConfPath = ".\\" + Global.configFolder + "\\";
+        mainConfFile = mainConfPath + Global.configFileName;
         subjsConf = mainConfPath + Global.subjsConfigFileName;
         permissionsConf = mainConfPath + Global.permissionsConfigFileName;
         homeworkConf = mainConfPath + Global.homeworkConfigFileName;

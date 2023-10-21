@@ -41,11 +41,11 @@ public class GetHomeworkCommand implements JdaSlashCommand {
         }
         String subjCode = subjCodeOption.getAsString();
         String hw = Config.getHomework(subjCode);
+        sendRequestedHomework(event.getUser(), subjCode);
         if (hw == null || hw.isEmpty()) {
             replyEmbed(event, noHomeworkFound(subjCode));
             return;
         }
         replyEmbed(event, homeworkFromDate(subjCode, Config.getHomeworkDate(subjCode), hw));
-        sendRequestedHomework(event.getUser(), subjCode);
     }
 }
