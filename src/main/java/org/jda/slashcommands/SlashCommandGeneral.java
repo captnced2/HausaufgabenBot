@@ -41,10 +41,6 @@ public class SlashCommandGeneral {
         return event.isFromGuild() && classServerId.equals(event.getGuild().getId());
     }
 
-    public static boolean checkChannel(SlashCommandInteractionEvent event) {
-        return homeworkChannelId.equals(event.getChannel().getId());
-    }
-
     public static void postMessage(SlashCommandInteractionEvent event) {
         Weekday day = getWeekday();
         if (day == Weekday.SATURDAY || day == Weekday.SUNDAY) {

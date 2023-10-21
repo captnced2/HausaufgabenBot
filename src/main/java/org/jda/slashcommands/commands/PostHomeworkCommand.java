@@ -9,6 +9,7 @@ import static org.jda.JdaMain.replyEmbed;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
 import static org.main.Variables.alreadyPosted;
 import static org.time.Time.*;
+import static org.values.Global.homeworkChannel;
 import static org.values.strings.Console.sendPostSuccess;
 import static org.values.strings.Messages.*;
 
@@ -16,7 +17,7 @@ public class PostHomeworkCommand implements JdaSlashCommand {
 
     @Override
     public boolean isInactive() {
-        return true;
+        return false;
     }
 
     @NotNull
@@ -38,11 +39,7 @@ public class PostHomeworkCommand implements JdaSlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        if (!checkGuild(event)) {
-            replyEmbed(event, wrongServer(), true);
-            return;
-        }
-        if (!checkChannel(event)) {
+        if (!homeworkChannel.equals(event.getChannel().getName())) {
             replyEmbed(event, wrongChannel(), true);
             return;
         }

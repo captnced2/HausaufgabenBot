@@ -31,4 +31,5 @@ public class Global {
     public static final String dayMonthYearPattern = "dd.MM.yyyy";
     public static final String weekdayDayMonthYearHoursMinutesPattern = "EEEE dd.MM.yyyy HH:mm";
     public static final String jpgEnd = ".jpg";
+    public static final String homeworkChannel = "hausaufgaben";
 }
