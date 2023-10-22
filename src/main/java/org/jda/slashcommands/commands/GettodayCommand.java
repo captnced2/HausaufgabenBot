@@ -28,7 +28,7 @@ public class GettodayCommand implements JdaSlashCommand {
     public void execute(SlashCommandInteractionEvent event) {
         Weekday day = getWeekday();
         String date = getDate();
-        if (day == Weekday.SATURDAY || day == Weekday.SUNDAY) {
+        if (!isWeekday()) {
             replyMessage(event, notSchooldayToday, true);
         } else {
             replyEmbed(event, homeworkToDate(day, date, getHomeworkToDay(day)));

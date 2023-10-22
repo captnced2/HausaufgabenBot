@@ -32,8 +32,7 @@ public class SlashCommandGeneral {
     }
 
     public static void postMessage(SlashCommandInteractionEvent event) {
-        Weekday day = getWeekday();
-        if (day == Weekday.SATURDAY || day == Weekday.SUNDAY) {
+        if (!isWeekday()) {
             replyEmbed(event, notSchoolday(), true);
             return;
         }

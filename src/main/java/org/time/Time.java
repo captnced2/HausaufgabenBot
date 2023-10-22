@@ -88,4 +88,9 @@ public class Time {
         }
         return returnDay;
     }
+
+    public static boolean isWeekday() {
+        Weekday weekday = getWeekday();
+        return weekday != Weekday.SATURDAY && weekday != Weekday.SUNDAY;
+    }
 }

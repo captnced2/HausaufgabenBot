@@ -23,8 +23,7 @@ public class NewDay implements Job {
             return;
         }
         sendCalledDayLoopMessage();
-        Weekday day = getWeekday();
-        if (!(day == Weekday.SATURDAY || day == Weekday.SUNDAY)) {
+        if (isWeekday()) {
             if (!alreadyPosted.equals(getDate())) {
                 SlashCommandGeneral.postMessage(null);
                 sendPostSuccess();

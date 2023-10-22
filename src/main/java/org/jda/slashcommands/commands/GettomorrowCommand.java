@@ -30,7 +30,7 @@ public class GettomorrowCommand implements JdaSlashCommand {
         Weekday day = getWeekday(1);
         String date = getDate(1);
         boolean reply = false;
-        if (day == Weekday.SATURDAY || day == Weekday.SUNDAY) {
+        if (!isWeekday()) {
             if (day == Weekday.SATURDAY) {
                 date = getDate(3);
             } else {
