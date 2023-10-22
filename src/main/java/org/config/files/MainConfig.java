@@ -9,7 +9,7 @@ import static org.main.Variables.pfpsFolder;
 import static org.values.Global.*;
 
 public class MainConfig extends ConfigFile {
-
+    
     public MainConfig(String file) {
         super(file);
     }

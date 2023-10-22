@@ -24,7 +24,7 @@ public abstract class ConfigFile {
         }
     }
 
-    protected String getConfigFileName() {
+    public String getConfigFileName() {
         return configFileName;
     }
 

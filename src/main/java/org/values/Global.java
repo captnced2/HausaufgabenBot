@@ -37,4 +37,27 @@ public class Global {
     public static final String homeworkChannelIdKey = "HomeworkChannelID";
     public static final String pingRoleIdKey = "HomeworkPingRoleID";
     public static final String lukasIDKey = "LukasID";
+    public static final String mainConfigTemplate = """
+            # Discord Bot Token
+            # token=
+
+            # Stundenplan
+            # {WOCHENTAG}={CODE}, {CODE}, {...}
+
+            # Rechte Datei
+            # permissions=
+
+            # Fächer Datei
+            # subjects=
+
+            # Hausaufgaben Datei
+            # homework=
+
+            # Entfallene Fächer Datei
+            # cancelledSubjects=
+
+            # Standart Profilbild Datei im pfp Ordner
+            # standardProfilePicture=
+
+            # Ids""";
 }

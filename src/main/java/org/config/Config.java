@@ -25,8 +25,14 @@ public class Config {
     public static void checkFiles() {
         File configFolder = new File(Global.configFolder);
         File pfpFolder = new File(pfpsFolder);
+        String mainConfigPath = mainConfPath + configFileName;
         createFolder(configFolder);
         createFolder(pfpFolder);
+        if (!new File(mainConfigPath).exists()) {
+            writeConfigTemplate(mainConfigPath, mainConfigTemplate);
+            sendMainConfigCreatedEnterValues();
+            System.exit(0);
+        }
     }
 
     public static void createFolder(File folder) {
@@ -50,6 +56,16 @@ public class Config {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    private static void writeConfigTemplate(String filePath, String template) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            writer.write(template);
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
