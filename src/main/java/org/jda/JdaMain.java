@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.interactions.commands.build.*;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
+import okhttp3.OkHttpClient;
 import org.jda.listeners.*;
 import org.jda.slashcommands.*;
 import org.reflections.Reflections;
@@ -20,7 +21,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static org.config.Config.*;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
 import static org.main.Variables.*;
 import static org.values.Global.*;
@@ -58,8 +58,8 @@ public class JdaMain {
     private static void setSubjsOption() {
         subjOption = new OptionData(OptionType.STRING, OptionSubjName, OptionSubjDescription, true);
         String[] sub;
-        for (String s : subjs) {
-            sub = s.split(subjsRegex);
+        for (String s : subjsConfig.getRaw()) {
+            sub = s.split(keySeperator);
             subjOption.addChoice(sub[0], sub[1]);
         }
     }
@@ -209,21 +209,7 @@ public class JdaMain {
     }
 
     public static JdaPermission getUserPermissions(User user) {
-        String userId = user.getId();
-        int level = getPermissionLevelFromId(userId);
-        return JdaPermission.getFromInt(level);
-    }
-
-    public static String[] getAllAdminUserIDs() {
-        String[] allPermissions = getAllPermissions();
-        ArrayList<String> adminUsers = new ArrayList<>();
-        for (String permission : allPermissions) {
-            if (Integer.parseInt(permission.split(commaRegex)[1]) >= JdaPermission.ADMIN.getAsInt()) {
-                adminUsers.add(permission.split(commaRegex)[0]);
-            }
-        }
-        String[] out = new String[adminUsers.size()];
-        return adminUsers.toArray(out);
+        return permissionsConfig.getPermissionsById(user.getId());
     }
 
     public static boolean hasRequiredPermissions(User user, JdaPermission requiredPermission) {
@@ -238,12 +224,19 @@ public class JdaMain {
         }
     }
 
-    public static void shutdown() {
+    public static void setOffline() {
         Jda.getPresence().setActivity(null);
         Jda.getPresence().setStatus(OnlineStatus.OFFLINE);
+    }
+
+    public static void shutdown() {
+        setOffline();
         try {
             TimeUnit.SECONDS.sleep(1);
             Jda.shutdown();
+            OkHttpClient client = Jda.getHttpClient();
+            client.connectionPool().evictAll();
+            client.dispatcher().executorService().shutdown();
             if (!Jda.awaitShutdown(5, TimeUnit.SECONDS)) {
                 sendJdaForceShutdownMessage();
                 Jda.shutdownNow();
