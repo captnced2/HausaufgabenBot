@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static org.quartz.CronScheduleBuilder.dailyAtHourAndMinute;
+import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 import static org.values.Global.*;
@@ -24,7 +24,7 @@ public class Time {
             scheduler = schedFact.getScheduler();
             scheduler.start();
             JobDetail job = newJob(NewDay.class).withIdentity("newDayLoopJob", "dayLoop").build();
-            loopTrigger = newTrigger().withIdentity("newDayLoopTrigger", "dayLoop").startNow().withSchedule(dailyAtHourAndMinute(14, 0)).build();
+            loopTrigger = newTrigger().withIdentity("newDayLoopTrigger", "dayLoop").startNow().withSchedule(cronSchedule("0 0 14 ? * *")).build();
             scheduler.scheduleJob(job, loopTrigger);
             sendNextDayLoopScheduled(loopTrigger.getNextFireTime());
             TimeUnit.SECONDS.sleep(1);
