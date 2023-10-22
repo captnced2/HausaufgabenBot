@@ -20,7 +20,6 @@ public class Config {
         subjsConfig = new SubjectsConfig(mainConfig.getSubjectsFile());
         homeworkConfig = new HomeworkConfig(mainConfig.getHomeworkFile());
         cancelledConfig = new CancelledSubjectsConfig(mainConfig.getCancelledSubjectsFile());
-        getPfps();
     }
 
     public static void checkFiles() {
@@ -87,15 +86,15 @@ public class Config {
         return pendingDel.toArray(out);
     }
 
-    private static void getPfps() {
+    private static File[] getAllPfps() {
         File path = new File(pfpsFolder);
         if (!path.exists()) {
-            return;
+            return null;
         }
         if (!path.isDirectory()) {
-            return;
+            return null;
         }
-        pfps = path.listFiles(file -> file.isFile() && file.getName().toLowerCase().endsWith(jpgEnd));
+        return path.listFiles(file -> file.isFile() && file.getName().toLowerCase().endsWith(jpgExtension));
     }
 
     public static void writeToLog(String line) {

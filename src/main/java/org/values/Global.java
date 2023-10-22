@@ -24,10 +24,11 @@ public class Global {
     public static final String hoursMinutesPattern = "HH:mm";
     public static final String dayMonthYearPattern = "dd.MM.yyyy";
     public static final String weekdayDayMonthYearHoursMinutesPattern = "EEEE dd.MM.yyyy HH:mm";
-    public static final String jpgEnd = ".jpg";
+    public static final String jpgExtension = ".jpg";
     public static final String configExtension = ".conf";
     public static final String homeworkChannel = "hausaufgaben";
     public static final String tokenKey = "token";
+    public static final String standardProfilePictureKey = "standardProfilePicture";
     public static final String permissonsConfigKey = "permissions";
     public static final String subjectsConfigKey = "subjects";
     public static final String homeworkConfigKey = "homework";

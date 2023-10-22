@@ -3,6 +3,9 @@ package org.config.files;
 import org.config.ConfigFile;
 import org.time.Weekday;
 
+import java.io.File;
+
+import static org.main.Variables.pfpsFolder;
 import static org.values.Global.*;
 
 public class MainConfig extends ConfigFile {
@@ -33,5 +36,9 @@ public class MainConfig extends ConfigFile {
 
     public String getCancelledSubjectsFile() {
         return getKey(cancelledConfigKey) + configExtension;
+    }
+
+    public File getStandardProfilePictureFile() {
+        return new File(pfpsFolder + "\\" + getKey(standardProfilePictureKey) + jpgExtension);
     }
 }

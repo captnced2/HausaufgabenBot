@@ -37,7 +37,9 @@ public class JdaMain {
         createJda();
         setSubjsOption();
         getAllCommands();
+        setPfp();
         addCommands();
+
         sendJdaStartupComplete();
     }
 
@@ -62,6 +64,10 @@ public class JdaMain {
             sub = s.split(keySeperator);
             subjOption.addChoice(sub[0], sub[1]);
         }
+    }
+
+    private static void setPfp() {
+        setProfilePicture(mainConfig.getStandardProfilePictureFile());
     }
 
     private static void getAllCommands() {
