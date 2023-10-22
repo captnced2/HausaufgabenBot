@@ -13,7 +13,6 @@ public class Variables {
     public static CancelledSubjectsConfig cancelledConfig;
     public static String logFile;
     public static String pfpsFolder;
-    public static String alreadyPosted;
     public static OptionData subjOption;
     public static int commandsCount;
 
@@ -21,6 +20,5 @@ public class Variables {
         mainConfPath = ".\\" + Global.configFolder + "\\";
         logFile = Global.logFileName;
         pfpsFolder = mainConfPath + Global.pfpsPath;
-        alreadyPosted = "";
     }
 }

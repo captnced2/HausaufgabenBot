@@ -33,9 +33,7 @@ public class Global {
     public static final String subjectsConfigKey = "subjects";
     public static final String homeworkConfigKey = "homework";
     public static final String cancelledConfigKey = "cancelledSubjects";
-    public static final String classServerIdKey = "KlassenDiscordID";
-    public static final String homeworkChannelIdKey = "HomeworkChannelID";
-    public static final String pingRoleIdKey = "HomeworkPingRoleID";
+    public static final String pingRoleName = "Hausaufgaben Ping";
     public static final String lukasIDKey = "LukasID";
     public static final String mainConfigTemplate = """
             # Discord Bot Token

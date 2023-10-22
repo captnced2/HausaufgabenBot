@@ -6,6 +6,7 @@ import org.time.Weekday;
 
 import java.awt.*;
 
+import static org.jda.slashcommands.SlashCommandGeneral.getHomeworkFromDay;
 import static org.main.Variables.subjsConfig;
 import static org.time.Time.*;
 import static org.values.Global.*;
@@ -34,7 +35,6 @@ public class Messages {
     public static final String noHomeworkFoundTitle = " Hausaufgabe";
     public static final String noHomeworkFoundText = "*Keine Hausaufgabe*";
     public static final String wrongChannelText = "Falscher Channel! Nur in dem hausaufgaben Channel verwendbar.";
-    public static final String onlyUsableOnWeekdaysText = "Dieser Command ist nur an Wochentagen verwendbar.";
     public static final String noHomeworkToDeleteText = "Es gibt keine Hausaufgaben zum Löschen.";
     public static final String deletedAllHomeworkTitle = "Hausaufgaben gelöscht";
     public static final String deletedHomeworkTitle = "Hausaufgabe gelöscht";
@@ -90,6 +90,14 @@ public class Messages {
         return homeworkEmbed(homeworkFromDayTitle + getWeekday().getAsString() + " " + getDate(), homework);
     }
 
+    public static MessageEmbed postMessageForToday() {
+        String homework = getHomeworkFromDay(getDate());
+        if (homework.isEmpty()) {
+            homework = noHomeworkString;
+        }
+        return homeworkFromDay(homework);
+    }
+
     public static MessageEmbed homeworkToDate(Weekday day, String date, String homework) {
         return homeworkEmbed(homeworkToDateTitle + day.getAsString() + " " + date, homework);
     }
@@ -116,10 +124,6 @@ public class Messages {
 
     public static MessageEmbed wrongChannel() {
         return errorTitleEmbed(wrongChannelText);
-    }
-
-    public static MessageEmbed onlyUsableOnWeekdays() {
-        return errorTitleEmbed(onlyUsableOnWeekdaysText);
     }
 
     public static MessageEmbed noHomeworkToDelete() {

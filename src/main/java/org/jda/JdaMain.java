@@ -179,6 +179,19 @@ public class JdaMain {
         return guild.getTextChannelById(channelId);
     }
 
+    public static List<Guild> getAllGuilds() {
+        return Jda.getGuilds();
+    }
+
+    public static String getPingRolePing(Guild guild) {
+        for (Role role : guild.getRoles()) {
+            if (role.getName().equals(pingRoleName)) {
+                return "<@&" + role.getId() + ">";
+            }
+        }
+        return null;
+    }
+
     public static void replyMessage(SlashCommandInteractionEvent event, String message, boolean ephemeral) {
         event.reply(message).setEphemeral(ephemeral).queue();
     }

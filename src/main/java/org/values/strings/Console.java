@@ -25,7 +25,6 @@ public class Console {
     private static final String calledDayLoopMessage = "Called Day Loop Function";
     private static final String doneDayLoopMessage = "Finished Day Loop";
     private static final String postSuccessMessage = "Posted Homework Successfully";
-    private static final String postSkipMessage = "Homework Already Posted. Skipping Message";
     private static final String delMessageSuccessMessage = "Sent Deletion Messages To Admins";
     private static final String delMessageSkipMessage = "No Homework To Delete. Skipping Message";
     private static final String addedHomeworkMessage = "%u added in %s the homework: %h";
@@ -97,10 +96,6 @@ public class Console {
 
     public static void sendPostSuccess() {
         outLog(postSuccessMessage);
-    }
-
-    public static void sendPostSkip() {
-        outLog(postSkipMessage);
     }
 
     public static void sendDelMessageSuccess() {

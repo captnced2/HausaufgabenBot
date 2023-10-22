@@ -1,13 +1,12 @@
 package org.jda.slashcommands.commands;
 
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
-import static org.jda.JdaMain.replyEmbed;
-import static org.jda.slashcommands.SlashCommandGeneral.postMessage;
-import static org.main.Variables.*;
-import static org.time.Time.*;
+import static org.jda.JdaMain.*;
+import static org.time.Time.isWeekend;
 import static org.values.Global.homeworkChannel;
 import static org.values.strings.Console.sendPostSuccess;
 import static org.values.strings.Messages.*;
@@ -38,17 +37,20 @@ public class PostHomeworkCommand implements JdaSlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        if (!homeworkChannel.equals(event.getChannel().getName())) {
+        Guild guild = event.getGuild();
+        if (!event.getChannel().getName().equals(homeworkChannel) || guild == null) {
             replyEmbed(event, wrongChannel(), true);
             return;
         }
-        String[] subj = mainConfig.getSubjsOnDay(getWeekday());
-        if (subj == null) {
-            replyEmbed(event, onlyUsableOnWeekdays(), true);
+        if (isWeekend()) {
+            replyEmbed(event, notSchoolday(), true);
             return;
         }
-        postMessage(event);
-        alreadyPosted = getDate();
+        replyEmbed(event, postMessageForToday());
+        String ping = getPingRolePing(guild);
+        if (ping != null) {
+            sendWithDelay(event.getChannel(), ping, 1);
+        }
         sendPostSuccess(event.getUser());
     }
 }
