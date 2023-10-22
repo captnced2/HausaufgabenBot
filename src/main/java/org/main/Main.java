@@ -1,6 +1,7 @@
 package org.main;
 
 import org.jda.JdaMain;
+import org.time.Time;
 
 import static org.config.Config.initConfigs;
 import static org.jda.JdaMain.initJda;
@@ -12,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         init();
-        Thread shutdown = new Thread(Main::shutdown);
+        Thread shutdown = new Thread(Main::shutdownHook);
         Runtime.getRuntime().addShutdownHook(shutdown);
     }
 
@@ -25,8 +26,13 @@ public class Main {
         sendInitComplete();
     }
 
+    public static void shutdownHook() {
+        JdaMain.setOffline();
+    }
+
     public static void shutdown() {
         sendShutdownMessage();
+        Time.shutdown();
         JdaMain.shutdown();
     }
 }

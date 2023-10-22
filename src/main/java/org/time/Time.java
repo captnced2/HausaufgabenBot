@@ -15,20 +15,29 @@ import static org.values.strings.Console.sendNextDayLoopScheduled;
 
 public class Time {
     private static CronTrigger loopTrigger;
+    private static Scheduler scheduler;
 
     public static void initDayLoop() {
         try {
             NewDay.buffer = 0;
             SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
-            Scheduler sched = schedFact.getScheduler();
-            sched.start();
+            scheduler = schedFact.getScheduler();
+            scheduler.start();
             JobDetail job = newJob(NewDay.class).withIdentity("newDayLoopJob", "dayLoop").build();
             loopTrigger = newTrigger().withIdentity("newDayLoopTrigger", "dayLoop").startNow().withSchedule(dailyAtHourAndMinute(14, 0)).build();
-            sched.scheduleJob(job, loopTrigger);
+            scheduler.scheduleJob(job, loopTrigger);
             sendNextDayLoopScheduled(loopTrigger.getNextFireTime());
             TimeUnit.SECONDS.sleep(1);
             NewDay.buffer = 1;
         } catch (SchedulerException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void shutdown() {
+        try {
+            scheduler.shutdown();
+        } catch (SchedulerException e) {
             throw new RuntimeException(e);
         }
     }
