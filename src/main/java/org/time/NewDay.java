@@ -23,36 +23,37 @@ public class NewDay implements Job {
             return;
         }
         sendCalledDayLoopMessage();
-        if (isWeekday()) {
-            if (!alreadyPosted.equals(getDate())) {
-                SlashCommandGeneral.postMessage(null);
-                sendPostSuccess();
-            } else {
-                sendPostSkip();
+        if (isWeekend()) {
+            return;
+        }
+        if (!alreadyPosted.equals(getDate())) {
+            SlashCommandGeneral.postMessage(null);
+            sendPostSuccess();
+        } else {
+            sendPostSkip();
+        }
+        String[] pendingDel = Config.getPendingDelSubj();
+        if (pendingDel == null) {
+            JdaMain.resetAcceptDelCommand();
+            sendDelMessageSkip();
+        } else {
+            StringBuilder txt = new StringBuilder();
+            OptionData faecher = new OptionData(OptionType.STRING, OptionSubjName, OptionSubjDescription, true);
+            faecher.addChoice(ChoiceAllName, ChoiceAllValue);
+            for (String s : pendingDel) {
+                faecher.addChoice(subjsConfig.getNameFromCode(s), s);
+                txt.append(subjsConfig.getNameFromCode(s)).append(newLine);
             }
-            String[] pendingDel = Config.getPendingDelSubj();
-            if (pendingDel == null) {
-                JdaMain.resetAcceptDelCommand();
-                sendDelMessageSkip();
-            } else {
-                StringBuilder txt = new StringBuilder();
-                OptionData faecher = new OptionData(OptionType.STRING, OptionSubjName, OptionSubjDescription, true);
-                faecher.addChoice(ChoiceAllName, ChoiceAllValue);
-                for (String s : pendingDel) {
-                    faecher.addChoice(subjsConfig.getNameFromCode(s), s);
-                    txt.append(subjsConfig.getNameFromCode(s)).append(newLine);
-                }
-                JdaSlashCommand acceptDelCommand = JdaMain.getCommandFromName(AcceptDelName);
-                if (acceptDelCommand == null) {
-                    return;
-                }
-                JdaMain.setCommand(acceptDelCommand, faecher);
-                MessageEmbed embed = acceptDelHomework(txt.toString());
-                for (String a : permissionsConfig.getAllIdsWithPermission(JdaPermission.ADMIN)) {
-                    JdaMain.sendPrivateMessage(a, embed);
-                }
-                sendDelMessageSuccess();
+            JdaSlashCommand acceptDelCommand = JdaMain.getCommandFromName(AcceptDelName);
+            if (acceptDelCommand == null) {
+                return;
             }
+            JdaMain.setCommand(acceptDelCommand, faecher);
+            MessageEmbed embed = acceptDelHomework(txt.toString());
+            for (String a : permissionsConfig.getAllIdsWithPermission(JdaPermission.ADMIN)) {
+                JdaMain.sendPrivateMessage(a, embed);
+            }
+            sendDelMessageSuccess();
         }
         sendDoneDayLoopMessage();
         sendNextDayLoopScheduled(Time.getNextExecution());

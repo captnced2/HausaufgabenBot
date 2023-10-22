@@ -32,7 +32,7 @@ public class SlashCommandGeneral {
     }
 
     public static void postMessage(SlashCommandInteractionEvent event) {
-        if (!isWeekday()) {
+        if (isWeekend()) {
             replyEmbed(event, notSchoolday(), true);
             return;
         }
