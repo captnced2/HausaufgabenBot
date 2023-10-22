@@ -241,8 +241,7 @@ public class JdaMain {
                 sendJdaForceShutdownMessage();
                 Jda.shutdownNow();
             }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        } catch (InterruptedException ignored) {
         }
     }
 }
