@@ -2,13 +2,12 @@ package org.jda.slashcommands;
 
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import org.config.Config;
 import org.jda.JdaMain;
 import org.jetbrains.annotations.Nullable;
 import org.time.Weekday;
 
 import static org.jda.JdaMain.*;
-import static org.main.Variables.mainConfig;
+import static org.main.Variables.*;
 import static org.time.Time.*;
 import static org.values.Global.*;
 import static org.values.strings.Messages.*;
@@ -29,7 +28,7 @@ public class SlashCommandGeneral {
     }
 
     public static String getHomeworkFromDay(String date) {
-        return getHomeworkFromCodes(Config.getAllSubjCodes(), date);
+        return getHomeworkFromCodes(subjsConfig.getAllCodes(), date);
     }
 
     public static void postMessage(SlashCommandInteractionEvent event) {
@@ -60,14 +59,14 @@ public class SlashCommandGeneral {
         }
         StringBuilder txt = new StringBuilder();
         for (String subjCode : subjCodes) {
-            String hw = Config.getHomework(subjCode);
-            String date = Config.getHomeworkDate(subjCode);
+            String hw = homeworkConfig.getHomework(subjCode);
+            String date = homeworkConfig.getHomeworkDate(subjCode);
             if (hw != null && !hw.isEmpty() && date != null) {
                 if (onDate == null) {
-                    txt.append(Config.getSubjFromCode(subjCode)).append(subjsRegex).append(hw).append(newLine);
+                    txt.append(subjsConfig.getNameFromCode(subjCode)).append(subjsRegex).append(hw).append(newLine);
                 } else {
                     if (date.equals(onDate)) {
-                        txt.append(Config.getSubjFromCode(subjCode)).append(subjsRegex).append(hw).append(newLine);
+                        txt.append(subjsConfig.getNameFromCode(subjCode)).append(subjsRegex).append(hw).append(newLine);
                     }
                 }
             }

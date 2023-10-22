@@ -1,12 +1,12 @@
 package org.values.strings;
 
 import net.dv8tion.jda.api.entities.User;
-import org.config.Config;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.config.Config.writeToLog;
+import static org.main.Variables.subjsConfig;
 import static org.time.Time.*;
 import static org.values.Global.*;
 
@@ -176,7 +176,7 @@ public class Console {
     }
 
     private static String replaceSubjCode(String string, String subjCode) {
-        return replaceIn(string, "%s", surroundQuotes(Config.getSubjFromCode(subjCode)));
+        return replaceIn(string, "%s", surroundQuotes(subjsConfig.getNameFromCode(subjCode)));
     }
 
     private static String replaceDate(String string, String date) {

@@ -3,8 +3,9 @@ package org.values.strings;
 import static org.values.Global.doubleQuotesString;
 
 public class Errors {
-    public static String noKeyValueFound = "No value found in config %c for key %k";
+    public static String noKeyValueFound = "Could not find value in config %c for key %k";
     public static String configFileEmpty = "%c config is empty";
+    public static String noSubjectNameFound = "Could not find subject name for code %k";
 
     public static String noKeyValueError(String keyName, String configFileName) {
         return replaceConfigAndKey(noKeyValueFound, keyName, configFileName);
@@ -12,6 +13,10 @@ public class Errors {
 
     public static String configFileEmptyError(String configFileName) {
         return replaceConfig(configFileEmpty, configFileName);
+    }
+
+    public static String noSubjectNameError(String codeName) {
+        return replaceKey(noSubjectNameFound, codeName);
     }
 
     private static String replaceConfigAndKey(String in, String key, String config) {

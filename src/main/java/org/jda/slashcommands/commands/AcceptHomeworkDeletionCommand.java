@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static org.jda.JdaMain.replyEmbed;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
+import static org.main.Variables.*;
 import static org.values.Global.newLine;
 import static org.values.strings.Console.*;
 import static org.values.strings.Messages.*;
@@ -47,14 +48,14 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
         if (subjCode.equals(ChoiceAllValue)) {
             StringBuilder txt = new StringBuilder();
             for (String del : pendingDel) {
-                Config.resetHomework(del);
-                txt.append(Config.getSubjFromCode(del)).append(newLine);
+                homeworkConfig.resetHomework(del);
+                txt.append(subjsConfig.getNameFromCode(del)).append(newLine);
             }
             JdaMain.resetAcceptDelCommand();
             replyEmbed(event, deletedAllHomework(txt.toString()));
             sendDelAll(event.getUser());
         } else {
-            Config.resetHomework(subjCode);
+            homeworkConfig.resetHomework(subjCode);
             String[] pendingDelSubj = Config.getPendingDelSubj();
             if (pendingDelSubj == null || pendingDelSubj.length == 0) {
                 JdaMain.resetAcceptDelCommand();

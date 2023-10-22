@@ -3,13 +3,12 @@ package org.jda.slashcommands.commands;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.config.Config;
 import org.jda.slashcommands.JdaSlashCommand;
 import org.jetbrains.annotations.NotNull;
 
 import static org.jda.JdaMain.replyEmbed;
 import static org.jda.slashcommands.SlashCommandGeneral.OptionSubjName;
-import static org.main.Variables.subjOption;
+import static org.main.Variables.*;
 import static org.values.strings.Console.*;
 import static org.values.strings.Messages.*;
 
@@ -40,12 +39,12 @@ public class GetHomeworkCommand implements JdaSlashCommand {
             return;
         }
         String subjCode = subjCodeOption.getAsString();
-        String hw = Config.getHomework(subjCode);
+        String hw = homeworkConfig.getHomework(subjCode);
         sendRequestedHomework(event.getUser(), subjCode);
         if (hw == null || hw.isEmpty()) {
             replyEmbed(event, noHomeworkFound(subjCode));
             return;
         }
-        replyEmbed(event, homeworkFromDate(subjCode, Config.getHomeworkDate(subjCode), hw));
+        replyEmbed(event, homeworkFromDate(subjCode, homeworkConfig.getHomeworkDate(subjCode), hw));
     }
 }

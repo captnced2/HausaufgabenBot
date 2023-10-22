@@ -6,7 +6,7 @@ import org.time.Weekday;
 
 import java.awt.*;
 
-import static org.config.Config.getSubjFromCode;
+import static org.main.Variables.subjsConfig;
 import static org.time.Time.*;
 import static org.values.Global.*;
 
@@ -33,7 +33,6 @@ public class Messages {
     public static final String changedHomeworkTitle = "Hausaufgabe geändert";
     public static final String noHomeworkFoundTitle = " Hausaufgabe";
     public static final String noHomeworkFoundText = "*Keine Hausaufgabe*";
-    public static final String wrongServerText = "Falscher Server! Nur auf dem 11a Discord Server verwendbar.";
     public static final String wrongChannelText = "Falscher Channel! Nur in dem hausaufgaben Channel verwendbar.";
     public static final String onlyUsableOnWeekdaysText = "Dieser Command ist nur an Wochentagen verwendbar.";
     public static final String noHomeworkToDeleteText = "Es gibt keine Hausaufgaben zum Löschen.";
@@ -96,27 +95,23 @@ public class Messages {
     }
 
     public static MessageEmbed addedHomework(String subjCode, String homework) {
-        return successEmbed(addedHomeworkTitle, getSubjFromCode(subjCode) + subjsRegex + homework);
+        return successEmbed(addedHomeworkTitle, subjsConfig.getNameFromCode(subjCode) + subjsRegex + homework);
     }
 
     public static MessageEmbed changedHomework(String subjCode, String homework) {
-        return successEmbed(changedHomeworkTitle, getSubjFromCode(subjCode) + subjsRegex + homework);
+        return successEmbed(changedHomeworkTitle, subjsConfig.getNameFromCode(subjCode) + subjsRegex + homework);
     }
 
     public static MessageEmbed noHomeworkFound(String subjCode) {
-        return homeworkEmbed(getSubjFromCode(subjCode) + noHomeworkFoundTitle, noHomeworkFoundText);
+        return homeworkEmbed(subjsConfig.getNameFromCode(subjCode) + noHomeworkFoundTitle, noHomeworkFoundText);
     }
 
     public static MessageEmbed homeworkFromDate(String subjCode, String date, String homework) {
-        return homeworkEmbed(getSubjFromCode(subjCode) + homeworkFromDateTitle + date, homework);
+        return homeworkEmbed(subjsConfig.getNameFromCode(subjCode) + homeworkFromDateTitle + date, homework);
     }
 
     public static MessageEmbed addedCancelledSubj(String subjCode, String date) {
-        return successEmbed(addedCancelledSubjTitle, date + subjsRegex + getSubjFromCode(subjCode));
-    }
-
-    public static MessageEmbed wrongServer() {
-        return errorTitleEmbed(wrongServerText);
+        return successEmbed(addedCancelledSubjTitle, date + subjsRegex + subjsConfig.getNameFromCode(subjCode));
     }
 
     public static MessageEmbed wrongChannel() {
@@ -136,7 +131,7 @@ public class Messages {
     }
 
     public static MessageEmbed deletedHomework(String subjCode) {
-        return successEmbed(deletedHomeworkTitle, getSubjFromCode(subjCode));
+        return successEmbed(deletedHomeworkTitle, subjsConfig.getNameFromCode(subjCode));
     }
 
     public static MessageEmbed acceptDelHomework(String homework) {

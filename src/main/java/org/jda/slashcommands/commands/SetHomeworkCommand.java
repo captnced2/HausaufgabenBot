@@ -3,13 +3,12 @@ package org.jda.slashcommands.commands;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.config.Config;
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
 import static org.jda.JdaMain.replyEmbed;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
-import static org.main.Variables.subjOption;
+import static org.main.Variables.*;
 import static org.values.strings.Console.*;
 import static org.values.strings.Messages.*;
 
@@ -50,7 +49,7 @@ public class SetHomeworkCommand implements JdaSlashCommand {
         if (ha.equals("null")) {
             ha = "";
         }
-        boolean New = Config.setHomework(subjCode, ha);
+        boolean New = homeworkConfig.setHomework(subjCode, ha);
         if (New) {
             replyEmbed(event, addedHomework(subjCode, ha));
             sendAddedHomework(event.getUser(), subjCode, ha);

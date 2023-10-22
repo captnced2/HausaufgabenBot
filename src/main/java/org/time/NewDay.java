@@ -8,9 +8,8 @@ import org.jda.JdaMain;
 import org.jda.slashcommands.*;
 import org.quartz.*;
 
-import static org.jda.JdaMain.getAllAdminUserIDs;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
-import static org.main.Variables.alreadyPosted;
+import static org.main.Variables.*;
 import static org.time.Time.*;
 import static org.values.Global.newLine;
 import static org.values.strings.Console.*;
@@ -41,8 +40,8 @@ public class NewDay implements Job {
                 OptionData faecher = new OptionData(OptionType.STRING, OptionSubjName, OptionSubjDescription, true);
                 faecher.addChoice(ChoiceAllName, ChoiceAllValue);
                 for (String s : pendingDel) {
-                    faecher.addChoice(Config.getSubjFromCode(s), s);
-                    txt.append(Config.getSubjFromCode(s)).append(newLine);
+                    faecher.addChoice(subjsConfig.getNameFromCode(s), s);
+                    txt.append(subjsConfig.getNameFromCode(s)).append(newLine);
                 }
                 JdaSlashCommand acceptDelCommand = JdaMain.getCommandFromName(AcceptDelName);
                 if (acceptDelCommand == null) {
@@ -50,7 +49,7 @@ public class NewDay implements Job {
                 }
                 JdaMain.setCommand(acceptDelCommand, faecher);
                 MessageEmbed embed = acceptDelHomework(txt.toString());
-                for (String a : getAllAdminUserIDs()) {
+                for (String a : permissionsConfig.getAllIdsWithPermission(JdaPermission.ADMIN)) {
                     JdaMain.sendPrivateMessage(a, embed);
                 }
                 sendDelMessageSuccess();
