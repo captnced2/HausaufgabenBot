@@ -6,7 +6,7 @@ import org.jda.JdaMain;
 import org.jda.slashcommands.*;
 
 import static org.jda.JdaMain.*;
-import static org.values.strings.Messages.noPermissionsEmbed;
+import static org.values.strings.Messages.*;
 
 public class SlashCommandListener extends ListenerAdapter {
 
@@ -16,7 +16,11 @@ public class SlashCommandListener extends ListenerAdapter {
         if (command != null) {
             JdaPermission requiredPermission = command.getRequiredPermission();
             if (hasRequiredPermissions(event.getUser(), requiredPermission)) {
-                command.execute(event);
+                try {
+                    command.execute(event);
+                } catch (RuntimeException e) {
+                    replyEmbed(event, somethingWentWrongEmbed(), true);
+                }
             } else {
                 replyEmbed(event, noPermissionsEmbed());
             }
