@@ -41,6 +41,7 @@ public class Console {
     private static final String registeredCommandsMessage = "Successfully registered %i1/%i2 commands";
     private static final String addedCancelledSubjMessage = "%u added cancelled subject %s on %d";
     private static final String deletedCommandsMessage = "Deleted %i unused commands";
+    private static final String anErrorOccurredMessage = "An Error occurred: ";
 
     public static void sendStartingMessage() {
         outLog(replaceIn(startingMessage, "%v", version));
@@ -161,6 +162,10 @@ public class Console {
 
     public static void sendDeletedCommands(int count) {
         outLog(replaceIn(deletedCommandsMessage, "%i", String.valueOf(count)));
+    }
+
+    public static void sendError(String message) {
+        out(anErrorOccurredMessage + message);
     }
 
     private static String replaceIn(String string, String regex, String with) {
