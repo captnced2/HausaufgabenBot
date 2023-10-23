@@ -6,6 +6,7 @@ import org.jda.JdaMain;
 import org.jda.slashcommands.*;
 
 import static org.jda.JdaMain.*;
+import static org.values.strings.Console.sendError;
 import static org.values.strings.Messages.*;
 
 public class SlashCommandListener extends ListenerAdapter {
@@ -20,6 +21,7 @@ public class SlashCommandListener extends ListenerAdapter {
                     command.execute(event);
                 } catch (RuntimeException e) {
                     replyEmbed(event, somethingWentWrongEmbed(), true);
+                    sendError(e.getMessage());
                 }
             } else {
                 replyEmbed(event, noPermissionsEmbed());

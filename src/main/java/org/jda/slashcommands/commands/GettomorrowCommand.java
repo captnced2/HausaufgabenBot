@@ -1,5 +1,6 @@
 package org.jda.slashcommands.commands;
 
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.jda.slashcommands.JdaSlashCommand;
 import org.jetbrains.annotations.NotNull;
@@ -40,10 +41,11 @@ public class GettomorrowCommand implements JdaSlashCommand {
             replyMessage(event, Messages.notSchooldayTomorrow, true);
             reply = true;
         }
+        MessageEmbed embed = homeworkToDate(day, date, getHomeworkToDay(day, date));
         if (reply) {
-            replyEmbedHook(event, homeworkToDate(day, date, getHomeworkToDay(day)));
+            replyEmbedHook(event, embed);
         } else {
-            replyEmbed(event, homeworkToDate(day, date, getHomeworkToDay(day)));
+            replyEmbed(event, embed);
         }
         sendRequestedTomorrowHomework(event.getUser());
     }

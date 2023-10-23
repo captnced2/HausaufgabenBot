@@ -31,7 +31,7 @@ public class GettodayCommand implements JdaSlashCommand {
         if (isWeekend()) {
             replyMessage(event, notSchooldayToday, true);
         } else {
-            replyEmbed(event, homeworkToDate(day, date, getHomeworkToDay(day)));
+            replyEmbed(event, homeworkToDate(day, date, getHomeworkToDay(day, date)));
         }
         sendRequestedTodayHomework(event.getUser());
     }
