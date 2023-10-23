@@ -98,6 +98,9 @@ public class Config {
                 }
             }
         }
+        if (pendingDel.isEmpty()) {
+            return null;
+        }
         String[] out = new String[pendingDel.size()];
         return pendingDel.toArray(out);
     }
