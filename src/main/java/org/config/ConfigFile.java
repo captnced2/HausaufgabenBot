@@ -50,7 +50,7 @@ public abstract class ConfigFile {
         return lines.toArray(arr);
     }
 
-    public String getKey(String key) {
+    public String getKey(String key, boolean returnNull) {
         String[] lines = getLines();
         if (lines.length == 0 || key.isEmpty()) {
             throw new RuntimeException(configFileEmptyError(getConfigFileName()));
@@ -62,6 +62,14 @@ public abstract class ConfigFile {
                 return split[1];
             }
         }
-        throw new RuntimeException(noKeyValueError(key, getConfigFileName()));
+        if (returnNull) {
+            return null;
+        } else {
+            throw new RuntimeException(noKeyValueError(key, getConfigFileName()));
+        }
+    }
+
+    public String getKey(String key) {
+        return getKey(key, false);
     }
 }
