@@ -1,9 +1,10 @@
 package org.jda.slashcommands;
 
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.jetbrains.annotations.Nullable;
 import org.time.Weekday;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import static org.main.Variables.*;
 import static org.values.Global.*;
@@ -43,6 +44,19 @@ public class SlashCommandGeneral {
 
     public static String getHomeworkFromDay(String date) {
         return getHomeworkFromCodes(subjsConfig.getAllCodes(), date);
+    }
+
+    public static List<OptionData> buildOptionData(OptionData firstOption) {
+        ArrayList<OptionData> optionData = new ArrayList<>();
+        optionData.add(firstOption);
+        return optionData;
+    }
+
+    public static List<OptionData> buildOptionData(OptionData firstOption, OptionData secondOption) {
+        ArrayList<OptionData> optionData = new ArrayList<>();
+        optionData.add(firstOption);
+        optionData.add(secondOption);
+        return optionData;
     }
 
     private static String getHomeworkFromCodes(String[] subjCodes, @Nullable String onDate) {

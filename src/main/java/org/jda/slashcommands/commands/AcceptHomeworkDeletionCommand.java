@@ -1,7 +1,6 @@
 package org.jda.slashcommands.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import org.config.Config;
 import org.jda.JdaMain;
 import org.jda.slashcommands.*;
@@ -39,12 +38,7 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
             replyEmbed(event, noHomeworkToDelete(), true);
             return;
         }
-        OptionMapping subjCodeOption = event.getOption(OptionSubjName);
-        if (subjCodeOption == null) {
-            replyEmbed(event, noHomeworkToDelete(), true);
-            return;
-        }
-        String subjCode = subjCodeOption.getAsString();
+        String subjCode = getOptionByName(event, OptionSubjName);
         if (subjCode.equals(ChoiceAllValue)) {
             StringBuilder txt = new StringBuilder();
             for (String del : pendingDel) {
