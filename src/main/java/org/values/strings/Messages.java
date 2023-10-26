@@ -54,6 +54,10 @@ public class Messages {
         return makeEmbed(successEmbedColor, title, text);
     }
 
+    private static MessageEmbed logEmbed(String title, String text) {
+        return makeEmbed(logEmbedColor, title, text);
+    }
+
     private static MessageEmbed errorEmbed(String title, String text) {
         return makeEmbed(errorEmbedColor, title, text);
     }
@@ -104,6 +108,14 @@ public class Messages {
 
     public static MessageEmbed addedHomework(String subjCode, String homework) {
         return successEmbed(addedHomeworkTitle, subjsConfig.getNameFromCode(subjCode) + subjsRegex + homework);
+    }
+
+    public static MessageEmbed addedAllDelHomeworkForLog(String text, String name) {
+        return logEmbed(logEmbedDelAll + name, text);
+    }
+
+    public static MessageEmbed addedPartDelHomeworkForLog(String text, String name) {
+        return logEmbed(logEmbedPartDel + name, text);
     }
 
     public static MessageEmbed changedHomework(String subjCode, String homework) {

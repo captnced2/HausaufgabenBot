@@ -4,14 +4,20 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import org.config.Config;
 import org.jda.JdaMain;
-import org.jda.slashcommands.*;
+import org.jda.slashcommands.JdaPermission;
+import org.jda.slashcommands.JdaSlashCommand;
 import org.jetbrains.annotations.NotNull;
 
 import static org.jda.JdaMain.replyEmbed;
-import static org.jda.slashcommands.SlashCommandGeneral.*;
-import static org.main.Variables.*;
+import static org.jda.JdaMain.sendEmbedToChannelsByName;
+import static org.jda.slashcommands.SlashCommandGeneral.ChoiceAllValue;
+import static org.jda.slashcommands.SlashCommandGeneral.OptionSubjName;
+import static org.main.Variables.homeworkConfig;
+import static org.main.Variables.subjsConfig;
+import static org.values.Global.homeworkLogChannel;
 import static org.values.Global.newLine;
-import static org.values.strings.Console.*;
+import static org.values.strings.Console.sendDelAll;
+import static org.values.strings.Console.sendDelSubj;
 import static org.values.strings.Messages.*;
 
 public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
@@ -54,6 +60,8 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
             JdaMain.resetAcceptDelCommand();
             replyEmbed(event, deletedAllHomework(txt.toString()));
             sendDelAll(event.getUser());
+            sendEmbedToChannelsByName(homeworkLogChannel, addedAllDelHomeworkForLog(txt.toString(), event.getUser().getEffectiveName()));
+
         } else {
             homeworkConfig.resetHomework(subjCode);
             String[] pendingDelSubj = Config.getPendingDelSubj();
@@ -62,6 +70,7 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
             }
             replyEmbed(event, deletedHomework(subjCode));
             sendDelSubj(event.getUser(), subjCode);
+            sendEmbedToChannelsByName(homeworkLogChannel, addedPartDelHomeworkForLog(subjsConfig.getNameFromCode(subjCode), event.getUser().getEffectiveName()));
         }
     }
 }

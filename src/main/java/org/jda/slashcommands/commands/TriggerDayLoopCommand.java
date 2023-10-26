@@ -1,7 +1,8 @@
 package org.jda.slashcommands.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import org.jda.slashcommands.*;
+import org.jda.slashcommands.JdaPermission;
+import org.jda.slashcommands.JdaSlashCommand;
 import org.jetbrains.annotations.NotNull;
 import org.time.NewDay;
 
@@ -13,7 +14,7 @@ public class TriggerDayLoopCommand implements JdaSlashCommand {
 
     @Override
     public boolean isInactive() {
-        return true;
+        return false;
     }
 
     @NotNull
