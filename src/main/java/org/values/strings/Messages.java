@@ -92,11 +92,7 @@ public class Messages {
     }
 
     public static MessageEmbed postMessageForToday() {
-        String homework = getHomeworkFromDay(getDate());
-        if (homework.isEmpty()) {
-            homework = noHomeworkString;
-        }
-        return homeworkFromDay(homework);
+        return homeworkFromDay(getHomeworkFromDay(getDate()));
     }
 
     public static MessageEmbed homeworkToDate(Weekday day, String date, String homework) {

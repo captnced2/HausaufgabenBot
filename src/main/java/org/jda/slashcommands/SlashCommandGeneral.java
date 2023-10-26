@@ -8,6 +8,7 @@ import java.util.*;
 
 import static org.main.Variables.*;
 import static org.values.Global.*;
+import static org.values.strings.Messages.noHomeworkString;
 
 public class SlashCommandGeneral {
     public static final String AcceptDelName = "accept";
@@ -60,8 +61,8 @@ public class SlashCommandGeneral {
     }
 
     private static String getHomeworkFromCodes(String[] subjCodes, @Nullable String onDate) {
-        if (subjCodes == null) {
-            return null;
+        if (subjCodes == null || subjCodes.length == 0) {
+            return noHomeworkString;
         }
         StringBuilder txt = new StringBuilder();
         for (String subjCode : subjCodes) {
@@ -77,6 +78,11 @@ public class SlashCommandGeneral {
                 }
             }
         }
-        return txt.toString();
+        String out = txt.toString();
+        if (out.isEmpty()) {
+            return noHomeworkString;
+        } else {
+            return txt.toString();
+        }
     }
 }
