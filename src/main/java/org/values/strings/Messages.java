@@ -31,6 +31,7 @@ public class Messages {
     public static final String homeworkFromDateTitle = " Hausaufgabe vom ";
     public static final String homeworkToDateTitle = "Hausaufgaben auf ";
     public static final String addedHomeworkTitle = "Hausaufgabe hinzugefügt";
+    public static final String resetHomeworkTitle = "Hausaufgabe zurückgesetzt";
     public static final String changedHomeworkTitle = "Hausaufgabe geändert";
     public static final String noHomeworkFoundTitle = " Hausaufgabe";
     public static final String noHomeworkFoundText = "*Keine Hausaufgabe*";
@@ -97,11 +98,7 @@ public class Messages {
     }
 
     public static MessageEmbed postMessageForToday() {
-        String homework = getHomeworkFromDay(getDate());
-        if (homework.isEmpty()) {
-            homework = noHomeworkString;
-        }
-        return homeworkFromDay(homework);
+        return homeworkFromDay(getHomeworkFromDay(getDate()));
     }
 
     public static MessageEmbed homeworkToDate(Weekday day, String date, String homework) {
@@ -118,6 +115,9 @@ public class Messages {
 
     public static MessageEmbed deletedHomeworkLog(String subjCode, User user) {
         return logEmbed(user.getEffectiveName() + deletedHomeworkLogTitle, subjsConfig.getNameFromCode(subjCode));
+      
+    public static MessageEmbed resetHomework(String subjCode) {
+        return successEmbed(resetHomeworkTitle, subjsConfig.getNameFromCode(subjCode));
     }
 
     public static MessageEmbed changedHomework(String subjCode, String homework) {

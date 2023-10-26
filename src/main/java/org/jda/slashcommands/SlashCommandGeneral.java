@@ -1,10 +1,14 @@
 package org.jda.slashcommands;
 
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.jetbrains.annotations.Nullable;
 import org.time.Weekday;
 
+import java.util.*;
+
 import static org.main.Variables.*;
 import static org.values.Global.*;
+import static org.values.strings.Messages.noHomeworkString;
 
 public class SlashCommandGeneral {
     public static final String AcceptDelName = "accept";
@@ -17,17 +21,48 @@ public class SlashCommandGeneral {
     public static final String ChoiceAllName = "Alle";
     public static final String ChoiceAllValue = "all";
 
-    public static String getHomeworkToDay(Weekday day) {
-        return getHomeworkFromCodes(mainConfig.getSubjsOnDay(day), null);
+    public static String getHomeworkToDay(Weekday day, String dateForCancelledSubjs) {
+        String[] subjsOnDay = mainConfig.getSubjsOnDay(day);
+        String[] subjsCancelledOnDate = cancelledConfig.getCancelledSubjs(dateForCancelledSubjs);
+        if (subjsCancelledOnDate == null) {
+            return getHomeworkFromCodes(subjsOnDay, null);
+        }
+        ArrayList<String> finalSubjs = new ArrayList<>();
+        for (String subjCode : subjsOnDay) {
+            boolean cancelled = false;
+            for (String subjCancelled : subjsCancelledOnDate) {
+                if (subjCode.equals(subjCancelled)) {
+                    cancelled = true;
+                    break;
+                }
+            }
+            if (!cancelled) {
+                finalSubjs.add(subjCode);
+            }
+        }
+        return getHomeworkFromCodes(finalSubjs.toArray(new String[0]), null);
     }
 
     public static String getHomeworkFromDay(String date) {
         return getHomeworkFromCodes(subjsConfig.getAllCodes(), date);
     }
 
+    public static List<OptionData> buildOptionData(OptionData firstOption) {
+        ArrayList<OptionData> optionData = new ArrayList<>();
+        optionData.add(firstOption);
+        return optionData;
+    }
+
+    public static List<OptionData> buildOptionData(OptionData firstOption, OptionData secondOption) {
+        ArrayList<OptionData> optionData = new ArrayList<>();
+        optionData.add(firstOption);
+        optionData.add(secondOption);
+        return optionData;
+    }
+
     private static String getHomeworkFromCodes(String[] subjCodes, @Nullable String onDate) {
-        if (subjCodes == null) {
-            return null;
+        if (subjCodes == null || subjCodes.length == 0) {
+            return noHomeworkString;
         }
         StringBuilder txt = new StringBuilder();
         for (String subjCode : subjCodes) {
@@ -43,6 +78,11 @@ public class SlashCommandGeneral {
                 }
             }
         }
-        return txt.toString();
+        String out = txt.toString();
+        if (out.isEmpty()) {
+            return noHomeworkString;
+        } else {
+            return txt.toString();
+        }
     }
 }

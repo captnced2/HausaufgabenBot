@@ -13,7 +13,11 @@ public class PermissionsConfig extends ConfigFile {
     }
 
     public JdaPermission getPermissionsById(String id) {
-        return JdaPermission.getFromInt(Character.getNumericValue(getKey(id).charAt(0)));
+        String permissions = getKey(id, true);
+        if (permissions == null) {
+            return JdaPermission.getFromInt(0);
+        }
+        return JdaPermission.getFromInt(Character.getNumericValue(permissions.charAt(0)));
     }
 
     public String[] getAllIdsWithPermission(int level) {

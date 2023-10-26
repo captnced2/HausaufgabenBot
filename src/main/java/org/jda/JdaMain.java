@@ -94,7 +94,7 @@ public class JdaMain {
         int registeredCommands = 0;
         List<Command> activeCommands = Jda.retrieveCommands().complete();
         for (JdaSlashCommand command : slashCommands) {
-            OptionData[] commandOptions = command.getOptions();
+            List<OptionData> commandOptions = command.getOptions();
             String name = command.getName();
             if (commandOptions != null) {
                 SlashCommandData commandData = Commands.slash(name, command.getDescription());

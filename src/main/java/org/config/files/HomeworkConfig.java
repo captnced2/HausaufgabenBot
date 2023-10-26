@@ -38,6 +38,7 @@ public class HomeworkConfig extends ConfigFile {
     }
 
     public boolean setHomework(String subjCode, String hw) {
+        if (hw == null) hw = "";
         try {
             String[] lines = getLines();
             BufferedWriter writer = new BufferedWriter(new FileWriter(getConfigFilePath()));

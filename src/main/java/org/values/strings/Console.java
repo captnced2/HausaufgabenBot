@@ -29,6 +29,7 @@ public class Console {
     private static final String delMessageSkipMessage = "No Homework To Delete. Skipping Message";
     private static final String addedHomeworkMessage = "%u added in %s the homework: %h";
     private static final String setHomeworkMessage = "%u set %s homework to: %h";
+    private static final String resetHomeworkMessage = "%u reset %s homework";
     private static final String requestHomeworkMessage = "%u requested homework for %s";
     private static final String requestHomeworkTomorrowMessage = "%u requested homework for tomorrow";
     private static final String requestHomeworkTodayMessage = "%u requested homework for today";
@@ -41,6 +42,7 @@ public class Console {
     private static final String registeredCommandsMessage = "Successfully registered %i1/%i2 commands";
     private static final String addedCancelledSubjMessage = "%u added cancelled subject %s on %d";
     private static final String deletedCommandsMessage = "Deleted %i unused commands";
+    private static final String anErrorOccurredMessage = "An Error occurred: ";
 
     public static void sendStartingMessage() {
         outLog(replaceIn(startingMessage, "%v", version));
@@ -114,6 +116,10 @@ public class Console {
         outLog(replaceHomework(replaceSubjCode(replaceUser(setHomeworkMessage, user), subjCode), homework));
     }
 
+    public static void sendResetHomework(User user, String subjCode) {
+        outLog(replaceUser(replaceSubjCode(resetHomeworkMessage, subjCode), user));
+    }
+
     public static void sendRequestedHomework(User user, String subjCode) {
         outLog(replaceSubjCode(replaceUser(requestHomeworkMessage, user), subjCode));
     }
@@ -161,6 +167,10 @@ public class Console {
 
     public static void sendDeletedCommands(int count) {
         outLog(replaceIn(deletedCommandsMessage, "%i", String.valueOf(count)));
+    }
+
+    public static void sendError(String message) {
+        out(anErrorOccurredMessage + message);
     }
 
     private static String replaceIn(String string, String regex, String with) {

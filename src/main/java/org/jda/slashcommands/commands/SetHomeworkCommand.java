@@ -1,10 +1,12 @@
 package org.jda.slashcommands.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.*;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 import static org.jda.JdaMain.replyEmbed;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
@@ -26,8 +28,8 @@ public class SetHomeworkCommand implements JdaSlashCommand {
     }
 
     @Override
-    public OptionData[] getOptions() {
-        return new OptionData[] {subjOption, new OptionData(OptionType.STRING, OptionHomeworkName, OptionHomeworkDescription, true)};
+    public List<OptionData> getOptions() {
+        return buildOptionData(subjOption, new OptionData(OptionType.STRING, OptionHomeworkName, OptionHomeworkDescription, true));
     }
 
     @Override
@@ -37,15 +39,8 @@ public class SetHomeworkCommand implements JdaSlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        OptionMapping subjCodeOption = event.getOption(OptionSubjName);
-        OptionMapping haOption = event.getOption(OptionHomeworkName);
-        if (subjCodeOption == null || haOption == null) {
-            sendCommandError(event.getUser(), this.getName());
-            replyEmbed(event, somethingWentWrongEmbed(), true);
-            return;
-        }
-        String subjCode = subjCodeOption.getAsString();
-        String ha = haOption.getAsString();
+        String subjCode = getOptionByName(event, OptionSubjName);
+        String ha = getOptionByName(event, OptionHomeworkName);
         if (ha.equals("null")) {
             ha = "";
         }
