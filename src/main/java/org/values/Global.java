@@ -28,9 +28,6 @@ public class Global {
     public static final String jpgExtension = ".jpg";
     public static final String configExtension = ".conf";
     public static final String homeworkChannel = "hausaufgaben";
-    public static final String logEmbedDelAll = "Hausaufgaben gelöscht von ";
-    public static final String logEmbedPartDel = "Hausaufgabe gelöscht von ";
-
     public static final String homeworkLogChannel = "hausaufgaben-log";
     public static final String tokenKey = "token";
     public static final String standardProfilePictureKey = "standardProfilePicture";
