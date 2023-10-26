@@ -1,7 +1,6 @@
 package org.time;
 
-import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.config.Config;
@@ -9,7 +8,7 @@ import org.jda.JdaMain;
 import org.jda.slashcommands.*;
 import org.quartz.*;
 
-import static org.jda.JdaMain.*;
+import static org.jda.JdaMain.sendEmbedToChannelByNameWithPing;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
 import static org.main.Variables.*;
 import static org.time.Time.isWeekend;
@@ -28,18 +27,7 @@ public class NewDay implements Job {
         if (isWeekend()) {
             return;
         }
-        for (Guild guild : getAllGuilds()) {
-            for (TextChannel channel : guild.getTextChannels()) {
-                if (channel.getName().equals(homeworkChannel)) {
-                    sendEmbed(channel, postMessageForToday());
-                    String ping = getPingRolePing(guild);
-                    if (ping != null) {
-                        sendWithDelay(channel, ping, 1);
-                    }
-                    break;
-                }
-            }
-        }
+        sendEmbedToChannelByNameWithPing(homeworkChannel, postMessageForToday());
         sendPostSuccess();
         String[] pendingDel = Config.getPendingDelSubj();
         if (pendingDel == null) {

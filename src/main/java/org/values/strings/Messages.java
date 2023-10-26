@@ -115,7 +115,8 @@ public class Messages {
 
     public static MessageEmbed deletedHomeworkLog(String subjCode, User user) {
         return logEmbed(user.getEffectiveName() + deletedHomeworkLogTitle, subjsConfig.getNameFromCode(subjCode));
-      
+    }
+
     public static MessageEmbed resetHomework(String subjCode) {
         return successEmbed(resetHomeworkTitle, subjsConfig.getNameFromCode(subjCode));
     }

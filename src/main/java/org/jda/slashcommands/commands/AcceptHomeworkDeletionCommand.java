@@ -49,7 +49,6 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
             replyEmbed(event, deletedAllHomework(txt.toString()));
             sendDelAll(event.getUser());
             sendEmbedToChannelsByName(homeworkLogChannel, deletedAllHomeworkLog(txt.toString(), event.getUser()));
-
         } else {
             homeworkConfig.resetHomework(subjCode);
             String[] pendingDelSubj = Config.getPendingDelSubj();

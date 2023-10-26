@@ -192,13 +192,32 @@ public class JdaMain {
         return null;
     }
 
-    public static void sendEmbedToChannelsByName(String name, MessageEmbed embed) {
-        for (Guild guild : getAllGuilds())
+    public static List<TextChannel> getAllChannelsFromName(String name) {
+        ArrayList<TextChannel> channels = new ArrayList<>();
+        for (Guild guild : getAllGuilds()) {
             for (TextChannel channel : guild.getTextChannels()) {
                 if (channel.getName().equals(name)) {
-                    sendEmbed(channel, embed);
+                    channels.add(channel);
                 }
             }
+        }
+        return channels;
+    }
+
+    public static void sendEmbedToChannelsByName(String channelName, MessageEmbed embed) {
+        for (TextChannel channel : getAllChannelsFromName(channelName)) {
+            sendEmbed(channel, embed);
+        }
+    }
+
+    public static void sendEmbedToChannelByNameWithPing(String channelName, MessageEmbed embed) {
+        for (TextChannel channel : getAllChannelsFromName(channelName)) {
+            sendEmbed(channel, embed);
+            String ping = getPingRolePing(channel.getGuild());
+            if (ping != null) {
+                sendWithDelay(channel, ping, 1);
+            }
+        }
     }
 
     public static void replyMessage(SlashCommandInteractionEvent event, String message, boolean ephemeral) {
