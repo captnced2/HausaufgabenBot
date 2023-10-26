@@ -31,6 +31,7 @@ public class Messages {
     public static final String homeworkFromDateTitle = " Hausaufgabe vom ";
     public static final String homeworkToDateTitle = "Hausaufgaben auf ";
     public static final String addedHomeworkTitle = "Hausaufgabe hinzugefügt";
+    public static final String resetHomeworkTitle = "Hausaufgabe zurückgesetzt";
     public static final String changedHomeworkTitle = "Hausaufgabe geändert";
     public static final String noHomeworkFoundTitle = " Hausaufgabe";
     public static final String noHomeworkFoundText = "*Keine Hausaufgabe*";
@@ -104,6 +105,10 @@ public class Messages {
 
     public static MessageEmbed addedHomework(String subjCode, String homework) {
         return successEmbed(addedHomeworkTitle, subjsConfig.getNameFromCode(subjCode) + subjsRegex + homework);
+    }
+
+    public static MessageEmbed resetHomework(String subjCode) {
+        return successEmbed(resetHomeworkTitle, subjsConfig.getNameFromCode(subjCode));
     }
 
     public static MessageEmbed changedHomework(String subjCode, String homework) {

@@ -29,6 +29,7 @@ public class Console {
     private static final String delMessageSkipMessage = "No Homework To Delete. Skipping Message";
     private static final String addedHomeworkMessage = "%u added in %s the homework: %h";
     private static final String setHomeworkMessage = "%u set %s homework to: %h";
+    private static final String resetHomeworkMessage = "%u reset %s homework";
     private static final String requestHomeworkMessage = "%u requested homework for %s";
     private static final String requestHomeworkTomorrowMessage = "%u requested homework for tomorrow";
     private static final String requestHomeworkTodayMessage = "%u requested homework for today";
@@ -113,6 +114,10 @@ public class Console {
 
     public static void sendSetHomework(User user, String subjCode, String homework) {
         outLog(replaceHomework(replaceSubjCode(replaceUser(setHomeworkMessage, user), subjCode), homework));
+    }
+
+    public static void sendResetHomework(User user, String subjCode) {
+        outLog(replaceUser(replaceSubjCode(resetHomeworkMessage, subjCode), user));
     }
 
     public static void sendRequestedHomework(User user, String subjCode) {
