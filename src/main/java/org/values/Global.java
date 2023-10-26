@@ -17,6 +17,7 @@ public class Global {
     public static final Color homeworkEmbedColor = Color.YELLOW;
     public static final Color errorEmbedColor = Color.RED;
     public static final Color successEmbedColor = Color.GREEN;
+    public static final Color logEmbedColor = Color.BLUE;
     public static final String embedFooterSeperator = " • ";
     public static final String newLine = "\n";
     public static final String doubleQuotesString = "\"";
@@ -27,6 +28,7 @@ public class Global {
     public static final String jpgExtension = ".jpg";
     public static final String configExtension = ".conf";
     public static final String homeworkChannel = "hausaufgaben";
+    public static final String homeworkLogChannel = "hausaufgaben-log";
     public static final String tokenKey = "token";
     public static final String standardProfilePictureKey = "standardProfilePicture";
     public static final String permissonsConfigKey = "permissions";

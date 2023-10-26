@@ -1,7 +1,7 @@
 package org.values.strings;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.*;
 import org.time.Weekday;
 
 import java.awt.*;
@@ -41,6 +41,8 @@ public class Messages {
     public static final String deletedHomeworkTitle = "Hausaufgabe gelöscht";
     public static final String acceptDelHomeworkTitle = "Hausaufgaben zur Löschung freigeben";
     public static final String addedCancelledSubjTitle = "Fach als entfällt eingetragen";
+    public static final String deletedAllHomeworkLogTitle = " hat alle Hausaufgaben gelöscht";
+    public static final String deletedHomeworkLogTitle = " hat eine Hausaufgabe gelöscht";
 
     private static MessageEmbed makeEmbed(Color color, String title, String text) {
         EmbedBuilder builder = new EmbedBuilder();
@@ -53,6 +55,10 @@ public class Messages {
 
     private static MessageEmbed successEmbed(String title, String text) {
         return makeEmbed(successEmbedColor, title, text);
+    }
+
+    private static MessageEmbed logEmbed(String title, String text) {
+        return makeEmbed(logEmbedColor, title, text);
     }
 
     private static MessageEmbed errorEmbed(String title, String text) {
@@ -103,6 +109,13 @@ public class Messages {
         return successEmbed(addedHomeworkTitle, subjsConfig.getNameFromCode(subjCode) + subjsRegex + homework);
     }
 
+    public static MessageEmbed deletedAllHomeworkLog(String subjs, User user) {
+        return logEmbed(user.getEffectiveName() + deletedAllHomeworkLogTitle, subjs);
+    }
+
+    public static MessageEmbed deletedHomeworkLog(String subjCode, User user) {
+        return logEmbed(user.getEffectiveName() + deletedHomeworkLogTitle, subjsConfig.getNameFromCode(subjCode));
+      
     public static MessageEmbed resetHomework(String subjCode) {
         return successEmbed(resetHomeworkTitle, subjsConfig.getNameFromCode(subjCode));
     }

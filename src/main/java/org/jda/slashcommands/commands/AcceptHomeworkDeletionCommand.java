@@ -6,10 +6,10 @@ import org.jda.JdaMain;
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
-import static org.jda.JdaMain.replyEmbed;
+import static org.jda.JdaMain.*;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
 import static org.main.Variables.*;
-import static org.values.Global.newLine;
+import static org.values.Global.*;
 import static org.values.strings.Console.*;
 import static org.values.strings.Messages.*;
 
@@ -48,6 +48,8 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
             JdaMain.resetAcceptDelCommand();
             replyEmbed(event, deletedAllHomework(txt.toString()));
             sendDelAll(event.getUser());
+            sendEmbedToChannelsByName(homeworkLogChannel, deletedAllHomeworkLog(txt.toString(), event.getUser()));
+
         } else {
             homeworkConfig.resetHomework(subjCode);
             String[] pendingDelSubj = Config.getPendingDelSubj();
@@ -56,6 +58,7 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
             }
             replyEmbed(event, deletedHomework(subjCode));
             sendDelSubj(event.getUser(), subjCode);
+            sendEmbedToChannelsByName(homeworkLogChannel, deletedHomeworkLog(subjCode, event.getUser()));
         }
     }
 }

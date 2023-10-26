@@ -192,6 +192,15 @@ public class JdaMain {
         return null;
     }
 
+    public static void sendEmbedToChannelsByName(String name, MessageEmbed embed) {
+        for (Guild guild : getAllGuilds())
+            for (TextChannel channel : guild.getTextChannels()) {
+                if (channel.getName().equals(name)) {
+                    sendEmbed(channel, embed);
+                }
+            }
+    }
+
     public static void replyMessage(SlashCommandInteractionEvent event, String message, boolean ephemeral) {
         event.reply(message).setEphemeral(ephemeral).queue();
     }
