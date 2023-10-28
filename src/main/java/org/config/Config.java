@@ -1,6 +1,7 @@
 package org.config;
 
 import org.config.files.*;
+import org.time.Time;
 import org.values.Global;
 
 import java.io.*;
@@ -20,6 +21,7 @@ public class Config {
         subjsConfig = new SubjectsConfig(mainConfig.getSubjectsFile());
         homeworkConfig = new HomeworkConfig(mainConfig.getHomeworkFile());
         cancelledConfig = new CancelledSubjectsConfig(mainConfig.getCancelledSubjectsFile());
+        holidayConfig = new HolidayConfig(mainConfig.getHolydayFile());
     }
 
     public static void checkFiles() {
@@ -78,9 +80,9 @@ public class Config {
         for (String subj : daySubjs) {
             String hwDate = homeworkConfig.getHomeworkDate(subj);
             String hw = homeworkConfig.getHomework(subj);
-            String[] cncldHw = cancelledConfig.getCancelledSubjs(getDate());
+            String[] cncldHw = cancelledConfig.getCancelledSubjs(getDateString());
             if (hwDate != null && hw != null) {
-                if (!hwDate.equals(getDate()) && !hwDate.isEmpty() && !hw.isEmpty()) {
+                if (!hwDate.equals(Time.getDateString()) && !hwDate.isEmpty() && !hw.isEmpty()) {
                     if (cncldHw == null) {
                         pendingDel.add(subj);
                     } else {

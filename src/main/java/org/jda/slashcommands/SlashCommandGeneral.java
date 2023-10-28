@@ -18,6 +18,8 @@ public class SlashCommandGeneral {
     public static final String OptionHomeworkDescription = "Hausaufgabe";
     public static final String OptionDateName = "datum";
     public static final String OptionDateDescription = "Datum";
+    public static final String OptionDateFromName = "von";
+    public static final String OptionDateToName = "bis";
     public static final String ChoiceAllName = "Alle";
     public static final String ChoiceAllValue = "all";
 

@@ -2,7 +2,7 @@ package org.config.files;
 
 import org.config.ConfigFile;
 
-import static org.time.Time.getDate;
+import static org.time.Time.getDateString;
 import static org.values.Global.*;
 
 public class HomeworkConfig extends ConfigFile {
@@ -37,7 +37,7 @@ public class HomeworkConfig extends ConfigFile {
 
     public boolean setHomework(String subjCode, String hw) {
         if (hw == null) hw = "";
-        return setKey(subjCode + dateSeperator + getDate(), hw);
+        return setKey(subjCode + dateSeperator + getDateString(), hw);
     }
 
     public void resetHomework(String subjCode) {

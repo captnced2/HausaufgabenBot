@@ -24,7 +24,8 @@ public class NewDay implements Job {
             return;
         }
         sendCalledDayLoopMessage();
-        if (isWeekend()) {
+        sendNextDayLoopScheduled(Time.getNextExecution());
+        if (isWeekend() || holidayConfig.isHolidayDay(Time.getDate())) {
             return;
         }
         sendEmbedToChannelByNameWithPing(homeworkChannel, postMessageForToday());
@@ -53,7 +54,6 @@ public class NewDay implements Job {
             sendDelMessageSuccess();
         }
         sendDoneDayLoopMessage();
-        sendNextDayLoopScheduled(Time.getNextExecution());
     }
 
     @Override

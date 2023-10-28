@@ -9,7 +9,7 @@ import static org.main.Variables.pfpsFolder;
 import static org.values.Global.*;
 
 public class MainConfig extends ConfigFile {
-    
+
     public MainConfig(String file) {
         super(file);
     }
@@ -22,20 +22,28 @@ public class MainConfig extends ConfigFile {
         return getKey(day.getAsString()).split(commaRegex);
     }
 
+    private String getConfigFileByKey(String key) {
+        return getKey(key) + configExtension;
+    }
+
     public String getPermissionsFile() {
-        return getKey(permissonsConfigKey) + configExtension;
+        return getConfigFileByKey(permissonsConfigKey);
     }
 
     public String getSubjectsFile() {
-        return getKey(subjectsConfigKey) + configExtension;
+        return getConfigFileByKey(subjectsConfigKey);
     }
 
     public String getHomeworkFile() {
-        return getKey(homeworkConfigKey) + configExtension;
+        return getConfigFileByKey(homeworkConfigKey);
     }
 
     public String getCancelledSubjectsFile() {
-        return getKey(cancelledConfigKey) + configExtension;
+        return getConfigFileByKey(cancelledConfigKey);
+    }
+
+    public String getHolydayFile() {
+        return getConfigFileByKey(holydayConfigKey);
     }
 
     public File getStandardProfilePictureFile() {

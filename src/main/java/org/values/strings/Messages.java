@@ -2,7 +2,7 @@ package org.values.strings;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
-import org.time.Weekday;
+import org.time.*;
 
 import java.awt.*;
 
@@ -33,6 +33,8 @@ public class Messages {
     public static final String addedHomeworkTitle = "Hausaufgabe hinzugefügt";
     public static final String resetHomeworkTitle = "Hausaufgabe zurückgesetzt";
     public static final String changedHomeworkTitle = "Hausaufgabe geändert";
+    public static final String setHolidaysTitle = "Ferien festgelegt";
+    public static final String setHolidaysText = " - ";
     public static final String noHomeworkFoundTitle = " Hausaufgabe";
     public static final String noHomeworkFoundText = "*Keine Hausaufgabe*";
     public static final String wrongChannelText = "Falscher Channel! Nur in dem hausaufgaben Channel verwendbar.";
@@ -49,7 +51,7 @@ public class Messages {
         builder.setColor(color);
         builder.setTitle(title);
         builder.setDescription(text);
-        builder.setFooter(getWeekday().getAsString() + embedFooterSeperator + getDate() + embedFooterSeperator + getCurrentTime());
+        builder.setFooter(getWeekday().getAsString() + embedFooterSeperator + Time.getDateString() + embedFooterSeperator + getCurrentTime());
         return builder.build();
     }
 
@@ -94,11 +96,11 @@ public class Messages {
     }
 
     public static MessageEmbed homeworkFromDay(String homework) {
-        return homeworkEmbed(homeworkFromDayTitle + getWeekday().getAsString() + " " + getDate(), homework);
+        return homeworkEmbed(homeworkFromDayTitle + getWeekday().getAsString() + " " + Time.getDateString(), homework);
     }
 
     public static MessageEmbed postMessageForToday() {
-        return homeworkFromDay(getHomeworkFromDay(getDate()));
+        return homeworkFromDay(getHomeworkFromDay(getDateString()));
     }
 
     public static MessageEmbed homeworkToDate(Weekday day, String date, String homework) {
@@ -123,6 +125,10 @@ public class Messages {
 
     public static MessageEmbed changedHomework(String subjCode, String homework) {
         return successEmbed(changedHomeworkTitle, subjsConfig.getNameFromCode(subjCode) + subjsRegex + homework);
+    }
+
+    public static MessageEmbed setHolidays(String dateFrom, String dateTo) {
+        return successEmbed(setHolidaysTitle, dateFrom + setHolidaysText + dateTo);
     }
 
     public static MessageEmbed noHomeworkFound(String subjCode) {

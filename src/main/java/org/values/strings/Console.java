@@ -1,13 +1,14 @@
 package org.values.strings;
 
 import net.dv8tion.jda.api.entities.User;
+import org.time.Time;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.config.Config.writeToLog;
 import static org.main.Variables.subjsConfig;
-import static org.time.Time.*;
+import static org.time.Time.getCurrentTime;
 import static org.values.Global.*;
 
 public class Console {
@@ -41,6 +42,7 @@ public class Console {
     private static final String commandRegisterErrorMessage = "Something went wrong while trying to register %c command";
     private static final String registeredCommandsMessage = "Successfully registered %i1/%i2 commands";
     private static final String addedCancelledSubjMessage = "%u added cancelled subject %s on %d";
+    private static final String setHolidays = "%u set new holidays period";
     private static final String deletedCommandsMessage = "Deleted %i unused commands";
     private static final String anErrorOccurredMessage = "An Error occurred: ";
 
@@ -165,6 +167,10 @@ public class Console {
         outLog(replaceDate(replaceSubjCode(replaceUser(addedCancelledSubjMessage, user), subjCode), date));
     }
 
+    public static void sendSetHolidays(User user) {
+        outLog(replaceUser(setHolidays, user));
+    }
+
     public static void sendDeletedCommands(int count) {
         outLog(replaceIn(deletedCommandsMessage, "%i", String.valueOf(count)));
     }
@@ -207,10 +213,10 @@ public class Console {
 
     private static void outLog(String out) {
         out(out);
-        writeToLog(getDate() + " " + getCurrentTime() + " : " + out);
+        writeToLog(Time.getDateString() + " " + getCurrentTime() + " : " + out);
     }
 
     private static void out(String out) {
-        System.out.println(getDate() + " " + getCurrentTime() + " : " + out);
+        System.out.println(Time.getDateString() + " " + getCurrentTime() + " : " + out);
     }
 }

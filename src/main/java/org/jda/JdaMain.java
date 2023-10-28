@@ -35,11 +35,10 @@ public class JdaMain {
     public static void initJda() {
         sendJdaStartup();
         createJda();
-        setSubjsOption();
+        defineOptions();
         getAllCommands();
         setPfp();
         addCommands();
-
         sendJdaStartupComplete();
     }
 
@@ -57,13 +56,14 @@ public class JdaMain {
         awaitInit();
     }
 
-    private static void setSubjsOption() {
+    private static void defineOptions() {
         subjOption = new OptionData(OptionType.STRING, OptionSubjName, OptionSubjDescription, true);
         String[] sub;
         for (String s : subjsConfig.getRaw()) {
             sub = s.split(keySeperator);
             subjOption.addChoice(sub[0], sub[1]);
         }
+        dateOption = new OptionData(OptionType.STRING, OptionDateName, OptionDateDescription, true);
     }
 
     private static void setPfp() {

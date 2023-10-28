@@ -4,8 +4,10 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
+import org.time.Time;
 
 import static org.jda.JdaMain.*;
+import static org.main.Variables.holidayConfig;
 import static org.time.Time.isWeekend;
 import static org.values.Global.homeworkChannel;
 import static org.values.strings.Console.sendPostSuccess;
@@ -42,7 +44,7 @@ public class PostHomeworkCommand implements JdaSlashCommand {
             replyEmbed(event, wrongChannel(), true);
             return;
         }
-        if (isWeekend()) {
+        if (isWeekend() || holidayConfig.isHolidayDay(Time.getDate())) {
             replyEmbed(event, notSchoolday(), true);
             return;
         }

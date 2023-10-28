@@ -11,9 +11,12 @@ public class Variables {
     public static SubjectsConfig subjsConfig;
     public static HomeworkConfig homeworkConfig;
     public static CancelledSubjectsConfig cancelledConfig;
+    public static HolidayConfig holidayConfig;
     public static String logFile;
     public static String pfpsFolder;
     public static OptionData subjOption;
+    public static OptionData dateOption;
+    public static OptionData dateOption2;
     public static int commandsCount;
 
     public static void initVariables() {

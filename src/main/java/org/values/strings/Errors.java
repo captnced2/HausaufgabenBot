@@ -9,6 +9,7 @@ public class Errors {
     public static String configFileEmpty = "%c config is empty";
     public static String noSubjectNameFound = "Could not find subject name for code %k";
     public static String noOptionValue = "Required option value was null when %u executed %cn command";
+    public static String optionNotADate = "User %u entered a String that is not a date in %cn command";
 
     public static String noKeyValueError(String keyName, String configFileName) {
         return replaceConfigAndKey(noKeyValueFound, keyName, configFileName);
@@ -23,6 +24,10 @@ public class Errors {
     }
 
     public static String noOptionValue(User user, String commandName) {
+        return replaceUserAndCommandName(noOptionValue, user, commandName);
+    }
+
+    public static String optionNotADate(User user, String commandName) {
         return replaceUserAndCommandName(noOptionValue, user, commandName);
     }
 
