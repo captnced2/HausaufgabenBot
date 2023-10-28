@@ -17,7 +17,7 @@ public class PostHomeworkCommand implements JdaSlashCommand {
 
     @Override
     public boolean isInactive() {
-        return false;
+        return true;
     }
 
     @NotNull
