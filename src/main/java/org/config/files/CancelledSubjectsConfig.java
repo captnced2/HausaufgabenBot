@@ -2,8 +2,6 @@ package org.config.files;
 
 import org.config.ConfigFile;
 
-import java.io.*;
-
 import static org.values.Global.*;
 
 public class CancelledSubjectsConfig extends ConfigFile {
@@ -20,24 +18,7 @@ public class CancelledSubjectsConfig extends ConfigFile {
     }
 
     public void addCancelledSubj(String subjCode, String date) {
-        try {
-            String[] lines = getLines();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(getConfigFilePath()));
-            boolean isNew = true;
-            for (String line : lines) {
-                if (getCancelledDate(line).equals(date)) {
-                    line = line + commaRegex + subjCode;
-                    isNew = false;
-                }
-                writer.write(line + newLine);
-            }
-            if (isNew) {
-                writer.write(date + keySeperator + subjCode + newLine);
-            }
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        setKey(date, subjCode, false);
     }
 
     public String[] getCancelledSubjs(String date) {

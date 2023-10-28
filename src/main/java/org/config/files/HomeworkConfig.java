@@ -2,8 +2,6 @@ package org.config.files;
 
 import org.config.ConfigFile;
 
-import java.io.*;
-
 import static org.time.Time.getDate;
 import static org.values.Global.*;
 
@@ -39,25 +37,7 @@ public class HomeworkConfig extends ConfigFile {
 
     public boolean setHomework(String subjCode, String hw) {
         if (hw == null) hw = "";
-        try {
-            String[] lines = getLines();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(getConfigFilePath()));
-            boolean newHw = true;
-            for (String line : lines) {
-                if (getHwCode(line).equals(subjCode)) {
-                    line = subjCode + dateSeperator + getDate() + keySeperator + hw;
-                    newHw = false;
-                }
-                writer.write(line + newLine);
-            }
-            if (newHw) {
-                writer.write(subjCode + dateSeperator + getDate() + keySeperator + hw + newLine);
-            }
-            writer.close();
-            return newHw;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return setKey(subjCode + dateSeperator + getDate(), hw);
     }
 
     public void resetHomework(String subjCode) {

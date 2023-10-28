@@ -69,6 +69,37 @@ public abstract class ConfigFile {
         }
     }
 
+    public boolean setKey(String key, String value, boolean overwrite) {
+        try {
+            String[] lines = getLines();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(getConfigFilePath()));
+            String completeLine = key + keySeperator + value;
+            boolean isNew = true;
+            for (String line : lines) {
+                if (line.split(keySeperator)[0].equals(key)) {
+                    isNew = false;
+                    if (overwrite) {
+                        line = completeLine;
+                    } else {
+                        line = line + commaRegex + value;
+                    }
+                }
+                writer.write(line + newLine);
+            }
+            if (isNew) {
+                writer.write(completeLine + newLine);
+            }
+            writer.close();
+            return isNew;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean setKey(String key, String value) {
+        return setKey(key, value, true);
+    }
+
     public String getKey(String key) {
         return getKey(key, false);
     }
