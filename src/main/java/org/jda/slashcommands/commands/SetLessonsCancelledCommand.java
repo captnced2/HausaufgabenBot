@@ -1,7 +1,6 @@
 package org.jda.slashcommands.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +28,7 @@ public class SetLessonsCancelledCommand implements JdaSlashCommand {
 
     @Override
     public List<OptionData> getOptions() {
-        return buildOptionData(subjOption, new OptionData(OptionType.STRING, OptionDateName, OptionDateDescription, true));
+        return buildOptionData(subjOption, dateOption);
     }
 
     @Override

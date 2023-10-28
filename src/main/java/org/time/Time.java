@@ -24,7 +24,7 @@ public class Time {
             scheduler = schedFact.getScheduler();
             scheduler.start();
             JobDetail job = newJob(NewDay.class).withIdentity("newDayLoopJob", "dayLoop").build();
-            loopTrigger = newTrigger().withIdentity("newDayLoopTrigger", "dayLoop").startNow().withSchedule(cronSchedule("0 0 14 ? * *")).build();
+            loopTrigger = newTrigger().withIdentity("newDayLoopTrigger", "dayLoop").withSchedule(cronSchedule("0 0 14 ? * *")).build();
             scheduler.scheduleJob(job, loopTrigger);
             sendNextDayLoopScheduled(loopTrigger.getNextFireTime());
             TimeUnit.SECONDS.sleep(1);
@@ -52,18 +52,28 @@ public class Time {
         return sdf.format(cal.getTime());
     }
 
-    public static String getDate() {
+    public static Date getDate() {
         return getDate(0);
     }
 
-    public static String getDate(int shift) {
-        Date dt = new Date();
+    public static Date getDate(int shift) {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(dt);
         cal.add(Calendar.DATE, shift);
-        dt = cal.getTime();
+        return cal.getTime();
+    }
+
+    public static String getDateString() {
+        return getDateString(0);
+    }
+
+    public static String getDateString(int shift) {
+        Date dt = getDate(shift);
+        return formatDate(dt);
+    }
+
+    public static String formatDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat(dayMonthYearPattern);
-        return sdf.format(dt);
+        return sdf.format(date);
     }
 
     public static Weekday getWeekday() {

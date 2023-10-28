@@ -29,13 +29,13 @@ public class GettomorrowCommand implements JdaSlashCommand {
     @Override
     public void execute(SlashCommandInteractionEvent event) {
         Weekday day = getWeekday(1);
-        String date = getDate(1);
+        String date = getDateString(1);
         boolean reply = false;
         if (isWeekend()) {
             if (day == Weekday.SATURDAY) {
-                date = getDate(3);
+                date = getDateString(3);
             } else {
-                date = getDate(2);
+                date = getDateString(2);
             }
             day = Weekday.MONDAY;
             replyMessage(event, Messages.notSchooldayTomorrow, true);
