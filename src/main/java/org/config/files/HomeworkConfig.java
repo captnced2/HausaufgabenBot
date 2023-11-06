@@ -37,7 +37,7 @@ public class HomeworkConfig extends ConfigFile {
 
     public boolean setHomework(String subjCode, String hw) {
         if (hw == null) hw = "";
-        return setKey(subjCode + dateSeperator + getDateString(), hw);
+        return setKeyWithSeperator(subjCode, getDateString() + keySeperator + hw, dateSeperator, true);
     }
 
     public void resetHomework(String subjCode) {

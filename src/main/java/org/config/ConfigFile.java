@@ -69,7 +69,7 @@ public abstract class ConfigFile {
         }
     }
 
-    public boolean setKey(String key, String value, boolean overwrite) {
+    public boolean setKeyWithSeperator(String key, String value, String keySeperator, boolean overwrite) {
         try {
             String[] lines = getLines();
             BufferedWriter writer = new BufferedWriter(new FileWriter(getConfigFilePath()));
@@ -94,6 +94,10 @@ public abstract class ConfigFile {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean setKey(String key, String value, boolean overwrite) {
+        return setKeyWithSeperator(key, value, keySeperator, overwrite);
     }
 
     public boolean setKey(String key, String value) {
