@@ -72,7 +72,7 @@ public abstract class ConfigFile {
     public boolean setKeyWithSeperator(String key, String value, String keySeperator, boolean overwrite) {
         try {
             String[] lines = getLines();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(getConfigFilePath()));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(getConfigFilePath()), StandardCharsets.UTF_8));
             String completeLine = key + keySeperator + value;
             boolean isNew = true;
             for (String line : lines) {
