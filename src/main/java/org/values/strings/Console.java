@@ -155,8 +155,8 @@ public class Console {
         outLog(replaceCommand(replaceUser(commandErrorMessage, user), command));
     }
 
-    public static void sendRegisteredCommands(int count, int total) {
-        outLog(replaceIn(replaceIn(registeredCommandsMessage, "%i1", count), "%i2", total));
+    public static void sendRegisteredCommands(int count, int total, String commandList) {
+        outLog(replaceIn(replaceIn(registeredCommandsMessage, "%i1", count), "%i2", total) + subjsRegex + commandList);
     }
 
     public static void sendCommandRegisterError(String command) {

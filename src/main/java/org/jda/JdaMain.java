@@ -92,6 +92,7 @@ public class JdaMain {
 
     private static void addCommands() {
         int registeredCommands = 0;
+        StringBuilder commandList = new StringBuilder();
         List<Command> activeCommands = Jda.retrieveCommands().complete();
         for (JdaSlashCommand command : slashCommands) {
             List<OptionData> commandOptions = command.getOptions();
@@ -106,9 +107,14 @@ public class JdaMain {
                 setCommand(command);
             }
             activeCommands.removeIf(c -> c.getName().equals(name));
+            if (registeredCommands == 0) {
+                commandList.append(name);
+            } else {
+                commandList.append(commaRegex).append(name);
+            }
             registeredCommands++;
         }
-        sendRegisteredCommands(registeredCommands, commandsCount);
+        sendRegisteredCommands(registeredCommands, commandsCount, commandList.toString());
         if (!activeCommands.isEmpty()) {
             int removedCommands = 0;
             for (Command c : activeCommands) {
