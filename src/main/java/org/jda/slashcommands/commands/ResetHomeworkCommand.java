@@ -29,7 +29,7 @@ public class ResetHomeworkCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Setzt eine Hausaufgabe zurück";
+        return "Setzt die Hausaufgabe von einem bestimmten Fach auf null";
     }
 
     @Override

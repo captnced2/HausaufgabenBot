@@ -45,8 +45,7 @@ public class Console {
     private static final String setHolidays = "%u set new holidays period";
     private static final String deletedCommandsMessage = "Deleted %i unused commands";
     private static final String anErrorOccurredMessage = "An Error occurred: ";
-
-    private static final String helpCommandUse = "%u asked for help";
+    private static final String usedHelpCommandMessage = "%u asked for help";
 
     public static void sendStartingMessage() {
         outLog(replaceIn(startingMessage, "%v", version));
@@ -157,8 +156,8 @@ public class Console {
         outLog(replaceCommand(replaceUser(commandErrorMessage, user), command));
     }
 
-    public static void sendHelpCommandUse(User user) {
-        outLog(replaceUser(helpCommandUse, user));
+    public static void sendUsedHelpCommand(User user) {
+        outLog(replaceUser(usedHelpCommandMessage, user));
     }
 
     public static void sendRegisteredCommands(int count, int total) {

@@ -29,7 +29,7 @@ public class GettomorrowCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Gibt dir die Hausaufgaben von morgen aus, du Huans...!";
+        return "Gibt alle Hausaufgaben auf morgen aus";
     }
 
     @Override

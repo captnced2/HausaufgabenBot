@@ -5,13 +5,11 @@ import org.jda.slashcommands.JdaSlashCommand;
 import org.jetbrains.annotations.NotNull;
 import org.time.Weekday;
 
-import static org.jda.JdaMain.replyEmbed;
-import static org.jda.JdaMain.replyMessage;
+import static org.jda.JdaMain.*;
 import static org.jda.slashcommands.SlashCommandGeneral.getHomeworkToDay;
 import static org.time.Time.*;
 import static org.values.strings.Console.sendRequestedTodayHomework;
-import static org.values.strings.Messages.homeworkToDate;
-import static org.values.strings.Messages.notSchooldayToday;
+import static org.values.strings.Messages.*;
 
 public class GettodayCommand implements JdaSlashCommand {
     @NotNull
@@ -29,7 +27,7 @@ public class GettodayCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Gibt die Hausaufgaben von Heute aus";
+        return "Gibt alle noch vorhandenen Hausaufgaben auf heute aus";
     }
 
     @Override

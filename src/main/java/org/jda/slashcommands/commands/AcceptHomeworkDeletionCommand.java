@@ -29,7 +29,7 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Akzeptiert die Löschung von ungeänderten Hausaufgaben";
+        return "Akzeptiert das vom Bot vorgeschlagene Hausaufgabe*n gelöscht werden";
     }
 
     @Override

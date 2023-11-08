@@ -25,7 +25,7 @@ public class ShutdownCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Fährt den Hausaufgaben Bot herunter";
+        return "Knipst das Licht aus";
     }
 
     @Override

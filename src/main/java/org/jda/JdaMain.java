@@ -90,7 +90,7 @@ public class JdaMain {
         }
     }
 
-    public static String getHelpDescriptionCommands(User user) {
+    public static String getAllHelpDescriptions(User user) {
         StringBuilder helpDescription = new StringBuilder();
         for (JdaSlashCommand command : slashCommands) {
             if (hasRequiredPermissions(user, command.getRequiredPermission())) {

@@ -165,9 +165,8 @@ public class Messages {
         return homeworkEmbed(acceptDelHomeworkTitle, homework);
     }
 
-    public static MessageEmbed helpCommand(User user, String helpCommand) {
-        String finalHelpCommandTitle = helpCommandTitle + JdaMain.getUserPermissions(user);
-        return successEmbed(finalHelpCommandTitle, helpCommand);
+    public static MessageEmbed helpCommand(User user, String helpText) {
+        return successEmbed(helpCommandTitle + JdaMain.getUserPermissions(user), helpText);
     }
 
 }

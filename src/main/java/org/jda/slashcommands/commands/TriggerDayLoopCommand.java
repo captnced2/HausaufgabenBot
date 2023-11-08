@@ -31,7 +31,7 @@ public class TriggerDayLoopCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Simuliert einen neuen Tag";
+        return "Simuliert einen neuen Tag (momentan inactive)";
     }
 
     @Override

@@ -29,7 +29,7 @@ public class SetLessonsCancelledCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Setzt ausfallende Fächer fest";
+        return "Markiert ein bestimmtes Fach als ausfallen an einem bestimmten Datum";
     }
 
     @Override

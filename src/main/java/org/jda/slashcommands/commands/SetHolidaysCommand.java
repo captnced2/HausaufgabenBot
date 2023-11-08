@@ -33,7 +33,7 @@ public class SetHolidaysCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Setzt Ferien fest";
+        return "Setzt eine Ferienperiode fest. Lässt sich nicht abändern!!";
     }
 
     @Override

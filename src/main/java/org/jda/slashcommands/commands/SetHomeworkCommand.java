@@ -30,7 +30,7 @@ public class SetHomeworkCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Speichert eine Hausaufgabe";
+        return "Speichert eine Hausaufgabe von einem bestimmten Fach";
     }
 
     @Override
