@@ -26,6 +26,12 @@ public class SetLessonsCancelledCommand implements JdaSlashCommand {
         return "Setzt ausfallende Fächer fest";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Setzt ausfallende Fächer fest";
+    }
+
     @Override
     public List<OptionData> getOptions() {
         return buildOptionData(subjOption, dateOption);

@@ -22,6 +22,7 @@ public class SlashCommandGeneral {
     public static final String OptionDateToName = "bis";
     public static final String ChoiceAllName = "Alle";
     public static final String ChoiceAllValue = "all";
+    public static final String helpCommand = "Befehle: \n /gettoday: Gibt die Hausaufgaben von HEUTE aus \n /gettomorrow: Gibt die Hausaufgaben von morgen aus";
 
     public static String getHomeworkToDay(Weekday day, String dateForCancelledSubjs) {
         String[] subjsOnDay = mainConfig.getSubjsOnDay(day);

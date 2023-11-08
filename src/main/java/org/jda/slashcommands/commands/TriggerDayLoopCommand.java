@@ -28,6 +28,12 @@ public class TriggerDayLoopCommand implements JdaSlashCommand {
         return "Führt den Tages Loop aus";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Simuliert einen neuen Tag";
+    }
+
     @Override
     public JdaPermission getRequiredPermission() {
         return JdaPermission.OWNER;

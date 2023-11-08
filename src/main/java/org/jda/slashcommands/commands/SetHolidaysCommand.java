@@ -30,6 +30,12 @@ public class SetHolidaysCommand implements JdaSlashCommand {
         return "Setzt Ferien fest";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Setzt Ferien fest";
+    }
+
     @Override
     public JdaPermission getRequiredPermission() {
         return JdaPermission.ADMIN;

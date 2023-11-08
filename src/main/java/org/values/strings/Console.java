@@ -46,6 +46,8 @@ public class Console {
     private static final String deletedCommandsMessage = "Deleted %i unused commands";
     private static final String anErrorOccurredMessage = "An Error occurred: ";
 
+    private static final String helpCommandUse = "%u asked for help";
+
     public static void sendStartingMessage() {
         outLog(replaceIn(startingMessage, "%v", version));
     }
@@ -153,6 +155,10 @@ public class Console {
 
     public static void sendCommandError(User user, String command) {
         outLog(replaceCommand(replaceUser(commandErrorMessage, user), command));
+    }
+
+    public static void sendHelpCommandUse(User user) {
+        outLog(replaceUser(helpCommandUse, user));
     }
 
     public static void sendRegisteredCommands(int count, int total) {

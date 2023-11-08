@@ -26,6 +26,12 @@ public class ResetHomeworkCommand implements JdaSlashCommand {
         return "Setzt eine Hausaufgabe zurück";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Setzt eine Hausaufgabe zurück";
+    }
+
     @Override
     public JdaPermission getRequiredPermission() {
         return JdaPermission.MOD;

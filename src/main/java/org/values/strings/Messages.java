@@ -2,6 +2,7 @@ package org.values.strings;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
+import org.jda.JdaMain;
 import org.time.*;
 
 import java.awt.*;
@@ -45,6 +46,7 @@ public class Messages {
     public static final String addedCancelledSubjTitle = "Fach als entfällt eingetragen";
     public static final String deletedAllHomeworkLogTitle = " hat alle Hausaufgaben gelöscht";
     public static final String deletedHomeworkLogTitle = " hat eine Hausaufgabe gelöscht";
+    public static final String helpCommandTitle = "Alle Commands für Rechte-Level ";
 
     private static MessageEmbed makeEmbed(Color color, String title, String text) {
         EmbedBuilder builder = new EmbedBuilder();
@@ -162,4 +164,10 @@ public class Messages {
     public static MessageEmbed acceptDelHomework(String homework) {
         return homeworkEmbed(acceptDelHomeworkTitle, homework);
     }
+
+    public static MessageEmbed helpCommand(User user, String helpCommand) {
+        String finalHelpCommandTitle = helpCommandTitle + JdaMain.getUserPermissions(user);
+        return successEmbed(finalHelpCommandTitle, helpCommand);
+    }
+
 }

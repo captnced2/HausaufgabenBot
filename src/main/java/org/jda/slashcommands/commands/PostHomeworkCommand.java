@@ -32,6 +32,12 @@ public class PostHomeworkCommand implements JdaSlashCommand {
         return "Gibt die Hausaufgaben von heute aus";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Akzeptiert die Löschung von ungeänderten Hausaufgaben";
+    }
+
     @Override
     public JdaPermission getRequiredPermission() {
         return JdaPermission.ADMIN;

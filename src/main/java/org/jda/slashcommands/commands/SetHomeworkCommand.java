@@ -27,6 +27,12 @@ public class SetHomeworkCommand implements JdaSlashCommand {
         return "Setzt eine Hausaufgabe fest";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Speichert eine Hausaufgabe";
+    }
+
     @Override
     public List<OptionData> getOptions() {
         return buildOptionData(subjOption, new OptionData(OptionType.STRING, OptionHomeworkName, OptionHomeworkDescription, true));

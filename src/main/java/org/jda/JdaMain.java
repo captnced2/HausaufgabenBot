@@ -90,6 +90,16 @@ public class JdaMain {
         }
     }
 
+    public static String getHelpDescriptionCommands(User user) {
+        StringBuilder helpDescription = new StringBuilder();
+        for (JdaSlashCommand command : slashCommands) {
+            if (hasRequiredPermissions(user, command.getRequiredPermission())) {
+                helpDescription.append(command.getName()).append(subjsRegex).append(command.getHelpDescription()).append(newLine);
+            }
+        }
+        return helpDescription.toString();
+    }
+
     private static void addCommands() {
         int registeredCommands = 0;
         List<Command> activeCommands = Jda.retrieveCommands().complete();

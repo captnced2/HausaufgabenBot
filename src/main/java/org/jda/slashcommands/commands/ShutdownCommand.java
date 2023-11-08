@@ -22,6 +22,12 @@ public class ShutdownCommand implements JdaSlashCommand {
         return "Fährt den Bot herunter";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Fährt den Hausaufgaben Bot herunter";
+    }
+
     @Override
     public JdaPermission getRequiredPermission() {
         return JdaPermission.OWNER;

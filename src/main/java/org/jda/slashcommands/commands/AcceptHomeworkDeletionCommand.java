@@ -26,6 +26,12 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
         return "Akzeptiert die Löschung von ungeänderten Hausaufgaben";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Akzeptiert die Löschung von ungeänderten Hausaufgaben";
+    }
+
     @Override
     public JdaPermission getRequiredPermission() {
         return JdaPermission.ADMIN;
