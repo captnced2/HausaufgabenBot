@@ -4,7 +4,8 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import org.jda.slashcommands.JdaSlashCommand;
 import org.jetbrains.annotations.NotNull;
 
-import static org.jda.JdaMain.*;
+import static org.jda.JdaMain.getHelpDescriptionCommands;
+import static org.jda.JdaMain.replyEmbed;
 import static org.values.strings.Console.sendHelpCommandUse;
 import static org.values.strings.Messages.helpCommand;
 
@@ -24,7 +25,7 @@ public class HelpCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Akzeptiert die Löschung von ungeänderten Hausaufgaben";
+        return "Wenn du Hilfe gebraucht hast, yippie!!! You found the command :)";
     }
 
     public void execute(SlashCommandInteractionEvent event) {

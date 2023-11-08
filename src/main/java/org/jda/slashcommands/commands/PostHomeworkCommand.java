@@ -2,7 +2,8 @@ package org.jda.slashcommands.commands;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import org.jda.slashcommands.*;
+import org.jda.slashcommands.JdaPermission;
+import org.jda.slashcommands.JdaSlashCommand;
 import org.jetbrains.annotations.NotNull;
 import org.time.Time;
 
@@ -35,7 +36,7 @@ public class PostHomeworkCommand implements JdaSlashCommand {
     @NotNull
     @Override
     public String getHelpDescription() {
-        return "Akzeptiert die Löschung von ungeänderten Hausaufgaben";
+        return "Postet eine Message (momentan inactive)";
     }
 
     @Override
