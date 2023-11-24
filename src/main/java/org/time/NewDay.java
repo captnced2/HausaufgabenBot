@@ -24,7 +24,6 @@ public class NewDay implements Job {
             return;
         }
         sendCalledDayLoopMessage();
-        sendNextDayLoopScheduled(Time.getNextExecution());
         if (isWeekend() || holidayConfig.isHolidayDay(Time.getDate())) {
             return;
         }

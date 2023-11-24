@@ -3,9 +3,6 @@ package org.values.strings;
 import net.dv8tion.jda.api.entities.User;
 import org.time.Time;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import static org.config.Config.writeToLog;
 import static org.main.Variables.subjsConfig;
 import static org.time.Time.getCurrentTime;
@@ -37,7 +34,6 @@ public class Console {
     private static final String postSuccess = "%u used the post command successfully";
     private static final String delAllMessage = "%u deleted all unchanged homework from today";
     private static final String delSubjMessage = "%u deleted unchanged homework in %s";
-    private static final String nextDayLoopAt = "Next Day Loop scheduled for ";
     private static final String commandErrorMessage = "Something went wrong while %u used the %c command";
     private static final String commandRegisterErrorMessage = "Something went wrong while trying to register %c command";
     private static final String registeredCommandsMessage = "Successfully registered %i1/%i2 commands";
@@ -144,11 +140,6 @@ public class Console {
 
     public static void sendDelSubj(User user, String subjCode) {
         outLog(replaceSubjCode(replaceUser(delSubjMessage, user), subjCode));
-    }
-
-    public static void sendNextDayLoopScheduled(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat(weekdayDayMonthYearHoursMinutesPattern);
-        outLog(nextDayLoopAt + sdf.format(date));
     }
 
     public static void sendCommandError(User user, String command) {

@@ -11,7 +11,6 @@ import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 import static org.values.Global.*;
-import static org.values.strings.Console.sendNextDayLoopScheduled;
 
 public class Time {
     private static CronTrigger loopTrigger;
@@ -26,7 +25,6 @@ public class Time {
             JobDetail job = newJob(NewDay.class).withIdentity("newDayLoopJob", "dayLoop").build();
             loopTrigger = newTrigger().withIdentity("newDayLoopTrigger", "dayLoop").withSchedule(cronSchedule("0 0 14 ? * *")).build();
             scheduler.scheduleJob(job, loopTrigger);
-            sendNextDayLoopScheduled(loopTrigger.getNextFireTime());
             TimeUnit.SECONDS.sleep(1);
             NewDay.buffer = 1;
         } catch (SchedulerException | InterruptedException e) {
