@@ -31,11 +31,11 @@ public class GettomorrowCommand implements JdaSlashCommand {
         Weekday day = getWeekday(1);
         String date = getDateString(1);
         boolean reply = false;
-        if (isWeekend()) {
+        if (day == Weekday.FRIDAY || day == Weekday.SATURDAY) {
             if (day == Weekday.SATURDAY) {
-                date = getDateString(3);
-            } else {
                 date = getDateString(2);
+            } else {
+                date = getDateString(3);
             }
             day = Weekday.MONDAY;
             replyMessage(event, Messages.notSchooldayTomorrow, true);
