@@ -15,6 +15,7 @@ import org.jda.listeners.*;
 import org.jda.slashcommands.*;
 import org.reflections.Reflections;
 import org.reflections.scanners.Scanners;
+import org.time.Weekday;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.jda.slashcommands.SlashCommandGeneral.*;
 import static org.main.Variables.*;
+import static org.time.Time.*;
 import static org.values.Global.*;
 import static org.values.strings.Console.*;
 import static org.values.strings.Messages.defaultActivity;
@@ -63,7 +65,27 @@ public class JdaMain {
             sub = s.split(keySeperator);
             subjOption.addChoice(sub[0], sub[1]);
         }
+        updateDateOption();
+    }
+
+    public static void updateDateOption() {
+        int shift = 0;
+        ArrayList<String> dates = new ArrayList<>();
+        if (isWeekend()) {
+            if (getWeekday() == Weekday.SATURDAY) {
+                shift = 2;
+            } else {
+                shift = 1;
+            }
+        }
+        while (getWeekday(shift) != Weekday.SATURDAY) {
+            dates.add(getDateString(shift));
+            shift++;
+        }
         dateOption = new OptionData(OptionType.STRING, OptionDateName, OptionDateDescription, true);
+        for (String d : dates) {
+            dateOption.addChoice(d, d);
+        }
     }
 
     private static void setPfp() {
@@ -140,6 +162,19 @@ public class JdaMain {
             return;
         }
         setCommand(acceptDelCommand);
+    }
+
+    public static void refreshCommand(JdaSlashCommand command) {
+        List<OptionData> commandOptions = command.getOptions();
+        if (commandOptions != null) {
+            SlashCommandData commandData = Commands.slash(command.getName(), command.getDescription());
+            for (OptionData data : commandOptions) {
+                commandData.addOptions(data);
+            }
+            setCommand(commandData);
+        } else {
+            setCommand(command);
+        }
     }
 
     public static void setCommand(String cmd, String desc) {

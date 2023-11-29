@@ -6,9 +6,12 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.config.Config;
 import org.jda.JdaMain;
 import org.jda.slashcommands.*;
+import org.jda.slashcommands.commands.SetLessonsCancelledCommand;
 import org.quartz.*;
 
-import static org.jda.JdaMain.sendEmbedToChannelByNameWithPing;
+import java.util.Objects;
+
+import static org.jda.JdaMain.*;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
 import static org.main.Variables.*;
 import static org.time.Time.isWeekend;
@@ -52,6 +55,8 @@ public class NewDay implements Job {
             }
             sendDelMessageSuccess();
         }
+        updateDateOption();
+        refreshCommand(Objects.requireNonNull(getCommandFromName(new SetLessonsCancelledCommand().getName())));
         sendDoneDayLoopMessage();
     }
 
