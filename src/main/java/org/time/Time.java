@@ -83,7 +83,7 @@ public class Time {
         Calendar cal = Calendar.getInstance();
         int day = cal.get(Calendar.DAY_OF_WEEK) + shift;
         if (day > 7) {
-            day = 1;
+            day = day - 7;
         }
         switch (day) {
             case 3 -> returnDay = Weekday.TUESDAY;
