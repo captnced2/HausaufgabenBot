@@ -1,6 +1,7 @@
 package org.config.files;
 
 import org.config.ConfigFile;
+import org.main.Variables;
 import org.time.Weekday;
 
 import java.io.File;
@@ -47,6 +48,6 @@ public class MainConfig extends ConfigFile {
     }
 
     public File getStandardProfilePictureFile() {
-        return new File(pfpsFolder + "\\" + getKey(standardProfilePictureKey) + jpgExtension);
+        return new File(pfpsFolder + Variables.slash + getKey(standardProfilePictureKey) + jpgExtension);
     }
 }
