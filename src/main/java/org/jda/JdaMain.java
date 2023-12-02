@@ -19,6 +19,7 @@ import org.time.Weekday;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.net.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -45,6 +46,25 @@ public class JdaMain {
     }
 
     private static void createJda() {
+        int retries = 100;
+        int retryCount = 0;
+        while (retryCount <= retries) {
+            try {
+                URI url = new URI("https://www.google.com");
+                URLConnection connection = url.toURL().openConnection();
+                connection.connect();
+                connection.getInputStream().close();
+                break;
+            } catch (URISyntaxException | IOException e) {
+                retryCount++;
+                sendRetryingInternetConnection(retries - retryCount);
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }
         Jda = JDABuilder.createDefault(mainConfig.getToken())
                 .setStatus(OnlineStatus.ONLINE)
                 .addEventListeners(new SlashCommandListener())
