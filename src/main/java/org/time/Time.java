@@ -13,7 +13,6 @@ import static org.quartz.TriggerBuilder.newTrigger;
 import static org.values.Global.*;
 
 public class Time {
-    private static CronTrigger loopTrigger;
     private static Scheduler scheduler;
 
     public static void initDayLoop() {
@@ -23,7 +22,7 @@ public class Time {
             scheduler = schedFact.getScheduler();
             scheduler.start();
             JobDetail job = newJob(NewDay.class).withIdentity("newDayLoopJob", "dayLoop").build();
-            loopTrigger = newTrigger().withIdentity("newDayLoopTrigger", "dayLoop").withSchedule(cronSchedule("0 0 14 ? * *")).build();
+            CronTrigger loopTrigger = newTrigger().withIdentity("newDayLoopTrigger", "dayLoop").withSchedule(cronSchedule("0 0 14 ? * *")).build();
             scheduler.scheduleJob(job, loopTrigger);
             TimeUnit.SECONDS.sleep(1);
             NewDay.buffer = 1;
@@ -38,10 +37,6 @@ public class Time {
         } catch (SchedulerException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static Date getNextExecution() {
-        return loopTrigger.getNextFireTime();
     }
 
     public static String getCurrentTime() {
