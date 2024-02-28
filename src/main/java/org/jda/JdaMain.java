@@ -232,14 +232,6 @@ public class JdaMain {
         setCustomActivity(defaultActivity);
     }
 
-    public static TextChannel getTextChannelFromId(String guildId, String channelId) {
-        Guild guild = Jda.getGuildById(guildId);
-        if (guild == null) {
-            return null;
-        }
-        return guild.getTextChannelById(channelId);
-    }
-
     public static List<Guild> getAllGuilds() {
         return Jda.getGuilds();
     }
