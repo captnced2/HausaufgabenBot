@@ -204,10 +204,14 @@ public class Console {
 
     private static void outLog(String out) {
         out(out);
-        writeToLog(Time.getDateString() + " " + getCurrentTime() + " : " + out);
+        writeToLog(outMessage(out));
     }
 
     private static void out(String out) {
-        System.out.println(Time.getDateString() + " " + getCurrentTime() + " : " + out);
+        System.out.println(outMessage(out));
+    }
+
+    private static String outMessage(String out) {
+        return "[" + Time.getDateString() + " - " + getCurrentTime() + "] : " + out;
     }
 }
