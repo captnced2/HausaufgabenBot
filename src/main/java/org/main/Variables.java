@@ -4,6 +4,8 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.config.files.*;
 import org.values.Global;
 
+import java.nio.file.FileSystems;
+
 public class Variables {
     public static String mainConfPath;
     public static MainConfig mainConfig;
@@ -20,7 +22,7 @@ public class Variables {
     public static String slash;
 
     public static void initVariables() {
-        slash = System.getProperty("file.separator");
+        slash = FileSystems.getDefault().getSeparator();
         mainConfPath = "." + slash + Global.configFolder + slash;
         logFile = Global.logFileName;
         pfpsFolder = mainConfPath + Global.pfpsPath;
