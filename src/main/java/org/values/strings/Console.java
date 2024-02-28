@@ -35,7 +35,6 @@ public class Console {
     private static final String postSuccess = "%u used the post command successfully";
     private static final String delAllMessage = "%u deleted all unchanged homework from today";
     private static final String delSubjMessage = "%u deleted unchanged homework in %s";
-    private static final String commandErrorMessage = "Something went wrong while %u used the %c command";
     private static final String commandRegisterErrorMessage = "Something went wrong while trying to register %c command";
     private static final String registeredCommandsMessage = "Successfully registered %i1/%i2 commands";
     private static final String addedCancelledSubjMessage = "%u added cancelled subject %s on %d";
@@ -145,10 +144,6 @@ public class Console {
 
     public static void sendDelSubj(User user, String subjCode) {
         outLog(replaceSubjCode(replaceUser(delSubjMessage, user), subjCode));
-    }
-
-    public static void sendCommandError(User user, String command) {
-        outLog(replaceCommand(replaceUser(commandErrorMessage, user), command));
     }
 
     public static void sendRegisteredCommands(int count, int total, String commandList) {

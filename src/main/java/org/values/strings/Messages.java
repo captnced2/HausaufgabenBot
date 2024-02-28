@@ -12,7 +12,6 @@ import static org.time.Time.*;
 import static org.values.Global.*;
 
 public class Messages {
-    public static final String waitingOnLukasMessage = "Wartet auf Luggas...";
     public static final String LukasIsHere = "Luggas ist da!";
     public static final String defaultActivity = "Verwaltet Hausaufgaben...";
     public static final String noHomeworkString = "*Keine Hausaufgaben*";

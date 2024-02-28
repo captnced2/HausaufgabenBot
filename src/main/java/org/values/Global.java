@@ -23,7 +23,6 @@ public class Global {
     public static final String commandPackageName = "org.jda.slashcommands.commands";
     public static final String hoursMinutesPattern = "HH:mm";
     public static final String dayMonthYearPattern = "dd.MM.yyyy";
-    public static final String weekdayDayMonthYearHoursMinutesPattern = "EEEE dd.MM.yyyy HH:mm";
     public static final String jpgExtension = ".jpg";
     public static final String configExtension = ".conf";
     public static final String homeworkChannel = "hausaufgaben";
