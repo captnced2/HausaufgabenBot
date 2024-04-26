@@ -34,7 +34,7 @@ public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
 
     @Override
     public JdaPermission getRequiredPermission() {
-        return JdaPermission.ADMIN;
+        return JdaPermission.MOD;
     }
 
     @Override
