@@ -26,6 +26,12 @@ public class GetHomeworkCommand implements JdaSlashCommand {
         return "Gibt eine Hausaufgabe aus";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Gibt die Hausaufgabe in einem bestimmten Fach aus.";
+    }
+
     @Override
     public List<OptionData> getOptions() {
         return buildOptionData(subjOption);

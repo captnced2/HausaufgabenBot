@@ -21,6 +21,9 @@ public interface JdaSlashCommand {
     @Nonnull
     String getDescription();
 
+    @Nonnull
+    String getHelpDescription();
+
     default JdaPermission getRequiredPermission() {
         return JdaPermission.USER;
     }

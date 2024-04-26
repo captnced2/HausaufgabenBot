@@ -26,14 +26,20 @@ public class SetLessonsCancelledCommand implements JdaSlashCommand {
         return "Setzt ausfallende Fächer fest";
     }
 
+    @NotNull
     @Override
-    public List<OptionData> getOptions() {
-        return buildOptionData(subjOption, dateOption);
+    public String getHelpDescription() {
+        return "Setzt Fächer als ausfallend fest. Diese Fächer werden an dem bestimmten Tag nicht berücksichtigt. Nicht mehr änderbar!";
     }
 
     @Override
     public JdaPermission getRequiredPermission() {
         return JdaPermission.ADMIN;
+    }
+
+    @Override
+    public List<OptionData> getOptions() {
+        return buildOptionData(subjOption, dateOption);
     }
 
     @Override
