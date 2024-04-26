@@ -30,6 +30,12 @@ public class SetHolidaysCommand implements JdaSlashCommand {
         return "Setzt Ferien fest";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Legt Ferien fest, in denen der Bot inaktiv ist. Nicht mehr änderbar!";
+    }
+
     @Override
     public JdaPermission getRequiredPermission() {
         return JdaPermission.ADMIN;

@@ -32,6 +32,12 @@ public class PostHomeworkCommand implements JdaSlashCommand {
         return "Gibt die Hausaufgaben von heute aus";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Lässt den Bot alle Hausaufgaben ausgeben, die heute aufgegeben wurden.";
+    }
+
     @Override
     public JdaPermission getRequiredPermission() {
         return JdaPermission.ADMIN;
@@ -40,7 +46,7 @@ public class PostHomeworkCommand implements JdaSlashCommand {
     @Override
     public void execute(SlashCommandInteractionEvent event) {
         Guild guild = event.getGuild();
-        if (!event.getChannel().getName().equals(homeworkChannel) || guild == null) {
+        if (! event.getChannel().getName().equals(homeworkChannel) || guild == null) {
             replyEmbed(event, wrongChannel(), true);
             return;
         }

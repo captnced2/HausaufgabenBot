@@ -44,6 +44,7 @@ public class Messages {
     public static final String addedCancelledSubjTitle = "Fach als entfällt eingetragen";
     public static final String deletedAllHomeworkLogTitle = " hat alle Hausaufgaben gelöscht";
     public static final String deletedHomeworkLogTitle = " hat eine Hausaufgabe gelöscht";
+    public static final String helpTitle = "Verfügbare Commands";
 
     private static MessageEmbed makeEmbed(Color color, String title, String text) {
         EmbedBuilder builder = new EmbedBuilder();
@@ -110,6 +111,10 @@ public class Messages {
         return successEmbed(addedHomeworkTitle, subjsConfig.getNameFromCode(subjCode) + subjsRegex + homework);
     }
 
+    public static MessageEmbed helpEmbed(String helpDescriptions) {
+        return successEmbed(helpTitle, helpDescriptions);
+    }
+    
     public static MessageEmbed deletedAllHomeworkLog(String subjs, User user) {
         return logEmbed(user.getEffectiveName() + deletedAllHomeworkLogTitle, subjs);
     }

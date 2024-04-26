@@ -41,6 +41,7 @@ public class Console {
     private static final String setHolidays = "%u set new holidays period";
     private static final String deletedCommandsMessage = "Deleted %i unused commands";
     private static final String anErrorOccurredMessage = "An Error occurred: ";
+    private static final String askedForHelp = "%u asked for help";
 
     public static void sendStartingMessage() {
         outLog(replaceIn(startingMessage, "%v", version));
@@ -128,6 +129,10 @@ public class Console {
 
     public static void sendRequestedTomorrowHomework(User user) {
         outLog(replaceUser(requestHomeworkTomorrowMessage, user));
+    }
+
+    public static void sendAskedForHelp(User user) {
+        outLog(replaceUser(askedForHelp, user));
     }
 
     public static void sendRequestedTodayHomework(User user) {

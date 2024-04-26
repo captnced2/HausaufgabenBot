@@ -24,6 +24,12 @@ public class GettodayCommand implements JdaSlashCommand {
         return "Gibt die Hausaufgaben von Heute aus";
     }
 
+    @NotNull
+    @Override
+    public String getHelpDescription() {
+        return "Gibt alle Hausaufgaben auf heute aus.";
+    }
+
     @Override
     public void execute(SlashCommandInteractionEvent event) {
         Weekday day = getWeekday();
