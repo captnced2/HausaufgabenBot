@@ -184,7 +184,7 @@ public class Console {
     }
 
     private static String replaceUser(String string, User user) {
-        return replaceIn(string, "%u", user.getEffectiveName());
+        return replaceIn(string, "%u", user.getEffectiveName() + " (@" + user.getName() + ")");
     }
 
     private static String replaceSubjCode(String string, String subjCode) {
