@@ -257,6 +257,16 @@ public class JdaMain {
         return channels;
     }
 
+    public static ArrayList<JdaSlashCommand> getAllowedCommands(User user) {
+        ArrayList<JdaSlashCommand> allowedCommands = new ArrayList<>();
+        for (JdaSlashCommand command : slashCommands) {
+            if (hasRequiredPermissions(user, command.getRequiredPermission())) {
+                allowedCommands.add(command);
+            }
+        }
+        return allowedCommands;
+    }
+
     public static void sendEmbedToChannelsByName(String channelName, MessageEmbed embed) {
         for (TextChannel channel : getAllChannelsFromName(channelName)) {
             sendEmbed(channel, embed);
