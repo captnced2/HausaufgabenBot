@@ -28,7 +28,7 @@ public class Errors {
     }
 
     public static String optionNotADate(User user, String commandName) {
-        return replaceUserAndCommandName(noOptionValue, user, commandName);
+        return replaceUserAndCommandName(optionNotADate, user, commandName);
     }
 
     private static String replaceConfigAndKey(String in, String key, String config) {
