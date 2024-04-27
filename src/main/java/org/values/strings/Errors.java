@@ -5,11 +5,11 @@ import net.dv8tion.jda.api.entities.User;
 import static org.values.Global.doubleQuotesString;
 
 public class Errors {
-    public static String noKeyValueFound = "Could not find value in config %c for key %k";
-    public static String configFileEmpty = "%c config is empty";
-    public static String noSubjectNameFound = "Could not find subject name for code %k";
-    public static String noOptionValue = "Required option value was null when %u executed %cn command";
-    public static String optionNotADate = "User %u entered a String that is not a date in %cn command";
+    public static final String noKeyValueFound = "Could not find value in config %c for key %k";
+    public static final String configFileEmpty = "%c config is empty";
+    public static final String noSubjectNameFound = "Could not find subject name for code %k";
+    public static final String noOptionValue = "Required option value was null when %u executed %cn command";
+    public static final String optionNotADate = "User %u entered a String that is not a date in %cn command";
 
     public static String noKeyValueError(String keyName, String configFileName) {
         return replaceConfigAndKey(noKeyValueFound, keyName, configFileName);
