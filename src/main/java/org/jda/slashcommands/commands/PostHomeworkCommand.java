@@ -13,6 +13,7 @@ import static org.values.Global.homeworkChannel;
 import static org.values.strings.Console.sendPostSuccess;
 import static org.values.strings.Messages.*;
 
+@SuppressWarnings("unused")
 public class PostHomeworkCommand implements JdaSlashCommand {
 
     @Override
@@ -46,7 +47,7 @@ public class PostHomeworkCommand implements JdaSlashCommand {
     @Override
     public void execute(SlashCommandInteractionEvent event) {
         Guild guild = event.getGuild();
-        if (! event.getChannel().getName().equals(homeworkChannel) || guild == null) {
+        if (!event.getChannel().getName().equals(homeworkChannel) || guild == null) {
             replyEmbed(event, wrongChannel(), true);
             return;
         }

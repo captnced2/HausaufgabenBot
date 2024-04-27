@@ -8,7 +8,7 @@ import org.time.NewDay;
 import static org.jda.JdaMain.replyEmbed;
 import static org.values.strings.Messages.triggeredDayLoopEmbed;
 
-
+@SuppressWarnings("unused")
 public class TriggerDayLoopCommand implements JdaSlashCommand {
 
     @Override

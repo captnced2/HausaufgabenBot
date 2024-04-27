@@ -61,6 +61,7 @@ public class Config {
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static void writeConfigTemplate(String filePath, String template) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
@@ -107,6 +108,7 @@ public class Config {
         return pendingDel.toArray(out);
     }
 
+    @SuppressWarnings("unused")
     private static File[] getAllPfps() {
         File path = new File(pfpsFolder);
         if (!path.exists()) {

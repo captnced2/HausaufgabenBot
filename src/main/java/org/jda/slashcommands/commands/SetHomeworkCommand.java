@@ -14,6 +14,7 @@ import static org.main.Variables.*;
 import static org.values.strings.Console.*;
 import static org.values.strings.Messages.*;
 
+@SuppressWarnings("unused")
 public class SetHomeworkCommand implements JdaSlashCommand {
     @NotNull
     @Override

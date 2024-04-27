@@ -17,6 +17,7 @@ import static org.values.strings.Console.sendSetHolidays;
 import static org.values.strings.Errors.optionNotADate;
 import static org.values.strings.Messages.setHolidays;
 
+@SuppressWarnings("unused")
 public class SetHolidaysCommand implements JdaSlashCommand {
     @NotNull
     @Override

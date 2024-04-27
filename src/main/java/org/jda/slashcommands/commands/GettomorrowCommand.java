@@ -13,6 +13,7 @@ import static org.time.Time.*;
 import static org.values.strings.Console.sendRequestedTomorrowHomework;
 import static org.values.strings.Messages.homeworkToDate;
 
+@SuppressWarnings("unused")
 public class GettomorrowCommand implements JdaSlashCommand {
     @NotNull
     @Override

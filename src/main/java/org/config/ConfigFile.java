@@ -100,6 +100,7 @@ public abstract class ConfigFile {
         return setKeyWithSeperator(key, value, keySeperator, overwrite);
     }
 
+    @SuppressWarnings("unused")
     public boolean setKey(String key, String value) {
         return setKey(key, value, true);
     }

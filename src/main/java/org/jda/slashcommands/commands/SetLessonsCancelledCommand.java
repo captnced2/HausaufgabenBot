@@ -13,6 +13,7 @@ import static org.main.Variables.*;
 import static org.values.strings.Console.sendAddedCancelledSubj;
 import static org.values.strings.Messages.addedCancelledSubj;
 
+@SuppressWarnings("unused")
 public class SetLessonsCancelledCommand implements JdaSlashCommand {
     @NotNull
     @Override

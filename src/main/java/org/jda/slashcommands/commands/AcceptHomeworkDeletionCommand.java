@@ -13,6 +13,7 @@ import static org.values.Global.*;
 import static org.values.strings.Console.*;
 import static org.values.strings.Messages.*;
 
+@SuppressWarnings("unused")
 public class AcceptHomeworkDeletionCommand implements JdaSlashCommand {
     @NotNull
     @Override

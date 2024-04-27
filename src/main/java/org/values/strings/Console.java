@@ -195,6 +195,7 @@ public class Console {
         return replaceIn(string, "%d", date);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static String replaceCommand(String string, String command) {
         return replaceIn(string, "%c", surroundQuotes(command));
     }

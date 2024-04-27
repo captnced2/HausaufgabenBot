@@ -10,6 +10,7 @@ import static org.jda.JdaMain.*;
 import static org.values.strings.Console.sendAskedForHelp;
 import static org.values.strings.Messages.helpEmbed;
 
+@SuppressWarnings("unused")
 public class HelpCommand implements JdaSlashCommand {
     @NotNull
     @Override

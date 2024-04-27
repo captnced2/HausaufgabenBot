@@ -13,6 +13,7 @@ import static org.main.Variables.*;
 import static org.values.strings.Console.sendResetHomework;
 import static org.values.strings.Messages.resetHomework;
 
+@SuppressWarnings("unused")
 public class ResetHomeworkCommand implements JdaSlashCommand {
     @NotNull
     @Override

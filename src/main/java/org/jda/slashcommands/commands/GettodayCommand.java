@@ -11,6 +11,7 @@ import static org.time.Time.*;
 import static org.values.strings.Console.sendRequestedTodayHomework;
 import static org.values.strings.Messages.*;
 
+@SuppressWarnings("unused")
 public class GettodayCommand implements JdaSlashCommand {
     @NotNull
     @Override

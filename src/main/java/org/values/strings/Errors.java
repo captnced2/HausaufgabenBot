@@ -31,6 +31,7 @@ public class Errors {
         return replaceUserAndCommandName(optionNotADate, user, commandName);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static String replaceConfigAndKey(String in, String key, String config) {
         return replaceKey(replaceConfig(in, config), key);
     }

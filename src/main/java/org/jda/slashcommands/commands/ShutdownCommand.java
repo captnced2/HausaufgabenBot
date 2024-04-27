@@ -8,6 +8,7 @@ import org.main.Main;
 import static org.jda.JdaMain.replyEmbed;
 import static org.values.strings.Messages.shutdownEmbed;
 
+@SuppressWarnings("unused")
 public class ShutdownCommand implements JdaSlashCommand {
 
     @NotNull
