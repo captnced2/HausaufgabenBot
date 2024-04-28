@@ -1,10 +1,10 @@
 package org.values.strings;
 
 import net.dv8tion.jda.api.entities.User;
+import org.config.files.subjects.Subject;
 import org.time.Time;
 
 import static org.config.Config.writeToLog;
-import static org.main.Variables.subjsConfig;
 import static org.time.Time.getCurrentTime;
 import static org.values.Global.*;
 
@@ -24,8 +24,6 @@ public class Console {
     private static final String calledDayLoopMessage = "Called Day Loop Function";
     private static final String doneDayLoopMessage = "Finished Day Loop";
     private static final String postSuccessMessage = "Posted Homework Successfully";
-    private static final String delMessageSuccessMessage = "Sent Deletion Messages To Admins";
-    private static final String delMessageSkipMessage = "No Homework To Delete. Skipping Message";
     private static final String addedHomeworkMessage = "%u added in %s the homework: %h";
     private static final String setHomeworkMessage = "%u set %s homework to: %h";
     private static final String resetHomeworkMessage = "%u reset %s homework";
@@ -33,11 +31,8 @@ public class Console {
     private static final String requestHomeworkTomorrowMessage = "%u requested homework for tomorrow";
     private static final String requestHomeworkTodayMessage = "%u requested homework for today";
     private static final String postSuccess = "%u used the post command successfully";
-    private static final String delAllMessage = "%u deleted all unchanged homework from today";
-    private static final String delSubjMessage = "%u deleted unchanged homework in %s";
     private static final String commandRegisterErrorMessage = "Something went wrong while trying to register %c command";
     private static final String registeredCommandsMessage = "Successfully registered %i1/%i2 commands";
-    private static final String addedCancelledSubjMessage = "%u added cancelled subject %s on %d";
     private static final String setHolidays = "%u set new holidays period";
     private static final String deletedCommandsMessage = "Deleted %i unused commands";
     private static final String anErrorOccurredMessage = "An Error occurred: ";
@@ -103,28 +98,20 @@ public class Console {
         outLog(postSuccessMessage);
     }
 
-    public static void sendDelMessageSuccess() {
-        outLog(delMessageSuccessMessage);
+    public static void sendAddedHomework(User user, Subject subject, String homework) {
+        outLog(replaceHomework(replaceSubjCode(replaceUser(addedHomeworkMessage, user), subject), homework));
     }
 
-    public static void sendDelMessageSkip() {
-        outLog(delMessageSkipMessage);
+    public static void sendSetHomework(User user, Subject subject, String homework) {
+        outLog(replaceHomework(replaceSubjCode(replaceUser(setHomeworkMessage, user), subject), homework));
     }
 
-    public static void sendAddedHomework(User user, String subjCode, String homework) {
-        outLog(replaceHomework(replaceSubjCode(replaceUser(addedHomeworkMessage, user), subjCode), homework));
+    public static void sendResetHomework(User user, Subject subject) {
+        outLog(replaceUser(replaceSubjCode(resetHomeworkMessage, subject), user));
     }
 
-    public static void sendSetHomework(User user, String subjCode, String homework) {
-        outLog(replaceHomework(replaceSubjCode(replaceUser(setHomeworkMessage, user), subjCode), homework));
-    }
-
-    public static void sendResetHomework(User user, String subjCode) {
-        outLog(replaceUser(replaceSubjCode(resetHomeworkMessage, subjCode), user));
-    }
-
-    public static void sendRequestedHomework(User user, String subjCode) {
-        outLog(replaceSubjCode(replaceUser(requestHomeworkMessage, user), subjCode));
+    public static void sendRequestedHomework(User user, Subject subject) {
+        outLog(replaceSubjCode(replaceUser(requestHomeworkMessage, user), subject));
     }
 
     public static void sendRequestedTomorrowHomework(User user) {
@@ -143,24 +130,12 @@ public class Console {
         outLog(replaceUser(postSuccess, user));
     }
 
-    public static void sendDelAll(User user) {
-        outLog(replaceUser(delAllMessage, user));
-    }
-
-    public static void sendDelSubj(User user, String subjCode) {
-        outLog(replaceSubjCode(replaceUser(delSubjMessage, user), subjCode));
-    }
-
     public static void sendRegisteredCommands(int count, int total, String commandList) {
         outLog(replaceIn(replaceIn(registeredCommandsMessage, "%i1", count), "%i2", total) + subjsRegex + commandList);
     }
 
     public static void sendCommandRegisterError(String command) {
         outLog(replaceCommand(commandRegisterErrorMessage, command));
-    }
-
-    public static void sendAddedCancelledSubj(User user, String subjCode, String date) {
-        outLog(replaceDate(replaceSubjCode(replaceUser(addedCancelledSubjMessage, user), subjCode), date));
     }
 
     public static void sendSetHolidays(User user) {
@@ -187,10 +162,11 @@ public class Console {
         return replaceIn(string, "%u", user.getEffectiveName() + " (@" + user.getName() + ")");
     }
 
-    private static String replaceSubjCode(String string, String subjCode) {
-        return replaceIn(string, "%s", surroundQuotes(subjsConfig.getNameFromCode(subjCode)));
+    private static String replaceSubjCode(String string, Subject subject) {
+        return replaceIn(string, "%s", surroundQuotes(subject.name()));
     }
 
+    @SuppressWarnings("unused")
     private static String replaceDate(String string, String date) {
         return replaceIn(string, "%d", date);
     }

@@ -1,6 +1,7 @@
 package org.config.files;
 
 import org.config.ConfigFile;
+import org.config.files.subjects.Subject;
 
 import static org.time.Time.getDateString;
 import static org.values.Global.*;
@@ -26,34 +27,34 @@ public class HomeworkConfig extends ConfigFile {
         return line.split(keySeperator)[1];
     }
 
-    private String getHwLineFromCode(String subjCode) {
+    private String getHwLineFromCode(Subject subject) {
         for (String line : getLines()) {
-            if (getHwCode(line).equals(subjCode)) {
+            if (getHwCode(line).equals(subject.code())) {
                 return line;
             }
         }
         return null;
     }
 
-    public boolean setHomework(String subjCode, String hw) {
+    public boolean setHomework(Subject subject, String hw) {
         if (hw == null) hw = "";
-        return setKeyWithSeperator(subjCode, getDateString() + keySeperator + hw, dateSeperator, true);
+        return setKeyWithSeperator(subject.code(), getDateString() + keySeperator + hw, dateSeperator, true);
     }
 
-    public void resetHomework(String subjCode) {
-        setHomework(subjCode, null);
+    public void resetHomework(Subject subject) {
+        setHomework(subject, null);
     }
 
-    public String getHomework(String subjCode) {
-        String hwLine = getHwLineFromCode(subjCode);
+    public String getHomework(Subject subject) {
+        String hwLine = getHwLineFromCode(subject);
         if (hwLine == null) {
             return null;
         }
         return getHwValue(hwLine);
     }
 
-    public String getHomeworkDate(String subjCode) {
-        String hwLine = getHwLineFromCode(subjCode);
+    public String getHomeworkDate(Subject subject) {
+        String hwLine = getHwLineFromCode(subject);
         if (hwLine == null) {
             return null;
         }

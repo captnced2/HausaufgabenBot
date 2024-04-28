@@ -1,8 +1,8 @@
 package org.jda.slashcommands;
 
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import org.config.files.subjects.Subject;
 import org.jetbrains.annotations.Nullable;
-import org.time.Weekday;
 
 import java.util.*;
 
@@ -11,7 +11,6 @@ import static org.values.Global.*;
 import static org.values.strings.Messages.noHomeworkString;
 
 public class SlashCommandGeneral {
-    public static final String AcceptDelName = "accept";
     public static final String OptionSubjName = "fach";
     public static final String OptionSubjDescription = "Fach der Hausaufgabe";
     public static final String OptionHomeworkName = "hausi";
@@ -20,33 +19,13 @@ public class SlashCommandGeneral {
     public static final String OptionDateDescription = "Datum";
     public static final String OptionDateFromName = "von";
     public static final String OptionDateToName = "bis";
-    public static final String ChoiceAllName = "Alle";
-    public static final String ChoiceAllValue = "all";
 
-    public static String getHomeworkToDay(Weekday day, String dateForCancelledSubjs) {
-        String[] subjsOnDay = mainConfig.getSubjsOnDay(day);
-        String[] subjsCancelledOnDate = cancelledConfig.getCancelledSubjs(dateForCancelledSubjs);
-        if (subjsCancelledOnDate == null) {
-            return getHomeworkFromCodes(subjsOnDay, null);
-        }
-        ArrayList<String> finalSubjs = new ArrayList<>();
-        for (String subjCode : subjsOnDay) {
-            boolean cancelled = false;
-            for (String subjCancelled : subjsCancelledOnDate) {
-                if (subjCode.equals(subjCancelled)) {
-                    cancelled = true;
-                    break;
-                }
-            }
-            if (!cancelled) {
-                finalSubjs.add(subjCode);
-            }
-        }
-        return getHomeworkFromCodes(finalSubjs.toArray(new String[0]), null);
+    public static String getHomeworkToDay(Date date) {
+        return getHomeworkFromSubjs(timetableConfig.getSubjsOnDate(date), null);
     }
 
     public static String getHomeworkFromDay(String date) {
-        return getHomeworkFromCodes(subjsConfig.getAllCodes(), date);
+        return getHomeworkFromSubjs(subjsConfig.getAllSubjects(), date);
     }
 
     public static List<OptionData> buildOptionData(OptionData firstOption) {
@@ -62,20 +41,20 @@ public class SlashCommandGeneral {
         return optionData;
     }
 
-    private static String getHomeworkFromCodes(String[] subjCodes, @Nullable String onDate) {
-        if (subjCodes == null || subjCodes.length == 0) {
+    private static String getHomeworkFromSubjs(Subject[] subjects, @Nullable String onDate) {
+        if (subjects == null || subjects.length == 0) {
             return noHomeworkString;
         }
         StringBuilder txt = new StringBuilder();
-        for (String subjCode : subjCodes) {
-            String hw = homeworkConfig.getHomework(subjCode);
-            String date = homeworkConfig.getHomeworkDate(subjCode);
+        for (Subject subj : subjects) {
+            String hw = homeworkConfig.getHomework(subj);
+            String date = homeworkConfig.getHomeworkDate(subj);
             if (hw != null && !hw.isEmpty() && date != null) {
                 if (onDate == null) {
-                    txt.append(subjsConfig.getNameFromCode(subjCode)).append(subjsRegex).append(hw).append(newLine);
+                    txt.append(subj.name()).append(subjsRegex).append(hw).append(newLine);
                 } else {
                     if (date.equals(onDate)) {
-                        txt.append(subjsConfig.getNameFromCode(subjCode)).append(subjsRegex).append(hw).append(newLine);
+                        txt.append(subj.name()).append(subjsRegex).append(hw).append(newLine);
                     }
                 }
             }

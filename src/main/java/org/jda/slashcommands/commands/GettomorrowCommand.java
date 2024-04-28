@@ -7,6 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import org.time.Weekday;
 import org.values.strings.Messages;
 
+import java.util.Date;
+
 import static org.jda.JdaMain.*;
 import static org.jda.slashcommands.SlashCommandGeneral.getHomeworkToDay;
 import static org.time.Time.*;
@@ -36,19 +38,19 @@ public class GettomorrowCommand implements JdaSlashCommand {
     @Override
     public void execute(SlashCommandInteractionEvent event) {
         Weekday day = getWeekday(1);
-        String date = getDateString(1);
+        Date date = getDate(1);
         boolean reply = false;
         if (day == Weekday.SATURDAY || day == Weekday.SUNDAY) {
             if (day == Weekday.SATURDAY) {
-                date = getDateString(3);
+                date = getDate(3);
             } else {
-                date = getDateString(2);
+                date = getDate(2);
             }
             day = Weekday.MONDAY;
             replyMessage(event, Messages.notSchooldayTomorrow, true);
             reply = true;
         }
-        MessageEmbed embed = homeworkToDate(day, date, getHomeworkToDay(day, date));
+        MessageEmbed embed = homeworkToDate(day, date, getHomeworkToDay(date));
         if (reply) {
             replyEmbedHook(event, embed);
         } else {

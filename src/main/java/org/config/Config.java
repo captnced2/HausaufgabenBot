@@ -1,14 +1,13 @@
 package org.config;
 
 import org.config.files.*;
-import org.time.Time;
+import org.config.files.subjects.SubjectsConfig;
+import org.config.files.timetable.TimetableConfig;
 import org.values.Global;
 
 import java.io.*;
-import java.util.ArrayList;
 
 import static org.main.Variables.*;
-import static org.time.Time.*;
 import static org.values.Global.*;
 import static org.values.strings.Console.*;
 
@@ -20,8 +19,8 @@ public class Config {
         permissionsConfig = new PermissionsConfig(mainConfig.getPermissionsFile());
         subjsConfig = new SubjectsConfig(mainConfig.getSubjectsFile());
         homeworkConfig = new HomeworkConfig(mainConfig.getHomeworkFile());
-        cancelledConfig = new CancelledSubjectsConfig(mainConfig.getCancelledSubjectsFile());
-        holidayConfig = new HolidayConfig(mainConfig.getHolydayFile());
+        holidayConfig = new HolidayConfig(mainConfig.getHolidayFile());
+        timetableConfig = new TimetableConfig(mainConfig.getTimetableFile());
     }
 
     public static void checkFiles() {
@@ -70,42 +69,6 @@ public class Config {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static String[] getPendingDelSubj() {
-        ArrayList<String> pendingDel = new ArrayList<>();
-        String[] daySubjs = mainConfig.getSubjsOnDay(getWeekday());
-        if (daySubjs == null) {
-            return null;
-        }
-        for (String subj : daySubjs) {
-            String hwDate = homeworkConfig.getHomeworkDate(subj);
-            String hw = homeworkConfig.getHomework(subj);
-            String[] cncldHw = cancelledConfig.getCancelledSubjs(getDateString());
-            if (hwDate != null && hw != null) {
-                if (!hwDate.equals(Time.getDateString()) && !hwDate.isEmpty() && !hw.isEmpty()) {
-                    if (cncldHw == null) {
-                        pendingDel.add(subj);
-                    } else {
-                        boolean isCncld = false;
-                        for (String s : cncldHw) {
-                            if (s.equals(subj)) {
-                                isCncld = true;
-                                break;
-                            }
-                        }
-                        if (!isCncld) {
-                            pendingDel.add(subj);
-                        }
-                    }
-                }
-            }
-        }
-        if (pendingDel.isEmpty()) {
-            return null;
-        }
-        String[] out = new String[pendingDel.size()];
-        return pendingDel.toArray(out);
     }
 
     @SuppressWarnings("unused")

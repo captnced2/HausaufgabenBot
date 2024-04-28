@@ -3,7 +3,7 @@ package org.values;
 import java.awt.*;
 
 public class Global {
-    public static final String version = "5.9.4";
+    public static final String version = "6.0.0";
     public static final String configFolder = "configs";
     public static final String configFileName = "config.conf";
     public static final String pfpsPath = "pfp";
@@ -16,7 +16,6 @@ public class Global {
     public static final Color homeworkEmbedColor = Color.YELLOW;
     public static final Color errorEmbedColor = Color.RED;
     public static final Color successEmbedColor = Color.GREEN;
-    public static final Color logEmbedColor = Color.BLUE;
     public static final String embedFooterSeperator = " • ";
     public static final String newLine = "\n";
     public static final String doubleQuotesString = "\"";
@@ -26,14 +25,13 @@ public class Global {
     public static final String jpgExtension = ".jpg";
     public static final String configExtension = ".conf";
     public static final String homeworkChannel = "hausaufgaben";
-    public static final String homeworkLogChannel = "hausaufgaben-log";
     public static final String tokenKey = "token";
     public static final String standardProfilePictureKey = "standardProfilePicture";
     public static final String permissonsConfigKey = "permissions";
     public static final String subjectsConfigKey = "subjects";
     public static final String homeworkConfigKey = "homework";
-    public static final String cancelledConfigKey = "cancelledSubjects";
-    public static final String holydayConfigKey = "holidays";
+    public static final String holidayConfigKey = "holidays";
+    public static final String timetableConfigKey = "timetable";
     public static final String pingRoleName = "Hausaufgaben Ping";
     public static final String lukasIDKey = "LukasID";
     public static final String mainConfigTemplate = """
@@ -41,7 +39,7 @@ public class Global {
             # token=
 
             # Stundenplan
-            # {WOCHENTAG}={CODE}, {CODE}, {...}
+            # timetable=
 
             # Rechte Datei
             # permissions=

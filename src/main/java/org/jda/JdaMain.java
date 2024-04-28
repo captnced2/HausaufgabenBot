@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import okhttp3.OkHttpClient;
+import org.config.files.subjects.Subject;
 import org.jda.listeners.*;
 import org.jda.slashcommands.*;
 import org.reflections.Reflections;
@@ -80,10 +81,8 @@ public class JdaMain {
 
     private static void defineOptions() {
         subjOption = new OptionData(OptionType.STRING, OptionSubjName, OptionSubjDescription, true);
-        String[] sub;
-        for (String s : subjsConfig.getRaw()) {
-            sub = s.split(keySeperator);
-            subjOption.addChoice(sub[0], sub[1]);
+        for (Subject subject : subjsConfig.getAllSubjects()) {
+            subjOption.addChoice(subject.name(), subject.code());
         }
         updateDateOption();
     }
@@ -176,14 +175,7 @@ public class JdaMain {
         return null;
     }
 
-    public static void resetAcceptDelCommand() {
-        JdaSlashCommand acceptDelCommand = getCommandFromName(AcceptDelName);
-        if (acceptDelCommand == null) {
-            return;
-        }
-        setCommand(acceptDelCommand);
-    }
-
+    @SuppressWarnings("unused")
     public static void refreshCommand(JdaSlashCommand command) {
         List<OptionData> commandOptions = command.getOptions();
         if (commandOptions != null) {
@@ -205,6 +197,7 @@ public class JdaMain {
         setCommand(command.getName(), command.getDescription());
     }
 
+    @SuppressWarnings("unused")
     public static void setCommand(JdaSlashCommand command, OptionData options) {
         setCommand(command.getName(), command.getDescription(), options);
     }
@@ -217,6 +210,7 @@ public class JdaMain {
         Jda.upsertCommand(command, description).addOptions(options).queue();
     }
 
+    @SuppressWarnings("unused")
     public static void sendPrivateMessage(String id, MessageEmbed embed) {
         User u = Jda.getUserById(id);
         if (!(u == null)) {
@@ -265,12 +259,6 @@ public class JdaMain {
             }
         }
         return allowedCommands;
-    }
-
-    public static void sendEmbedToChannelsByName(String channelName, MessageEmbed embed) {
-        for (TextChannel channel : getAllChannelsFromName(channelName)) {
-            sendEmbed(channel, embed);
-        }
     }
 
     public static void sendEmbedToChannelByNameWithPing(String channelName, MessageEmbed embed) {

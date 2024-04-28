@@ -7,7 +7,7 @@ import static org.values.Global.doubleQuotesString;
 public class Errors {
     public static final String noKeyValueFound = "Could not find value in config %c for key %k";
     public static final String configFileEmpty = "%c config is empty";
-    public static final String noSubjectNameFound = "Could not find subject name for code %k";
+    public static final String noSubjectNameFound = "Could not find subject for code %k";
     public static final String noOptionValue = "Required option value was null when %u executed %cn command";
     public static final String optionNotADate = "User %u entered a String that is not a date in %cn command";
 
@@ -19,8 +19,8 @@ public class Errors {
         return replaceConfig(configFileEmpty, configFileName);
     }
 
-    public static String noSubjectNameError(String codeName) {
-        return replaceKey(noSubjectNameFound, codeName);
+    public static String noSubjectNameError(String subjCode) {
+        return replaceKey(noSubjectNameFound, subjCode);
     }
 
     public static String noOptionValue(User user, String commandName) {

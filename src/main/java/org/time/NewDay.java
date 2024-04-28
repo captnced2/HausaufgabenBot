@@ -1,23 +1,13 @@
 package org.time;
 
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.config.Config;
-import org.jda.JdaMain;
-import org.jda.slashcommands.*;
-import org.jda.slashcommands.commands.SetLessonsCancelledCommand;
 import org.quartz.*;
 
-import java.util.Objects;
-
 import static org.jda.JdaMain.*;
-import static org.jda.slashcommands.SlashCommandGeneral.*;
-import static org.main.Variables.*;
+import static org.main.Variables.holidayConfig;
 import static org.time.Time.isWeekend;
-import static org.values.Global.*;
+import static org.values.Global.homeworkChannel;
 import static org.values.strings.Console.*;
-import static org.values.strings.Messages.*;
+import static org.values.strings.Messages.postMessageForToday;
 
 public class NewDay implements Job {
     public static int buffer;
@@ -32,31 +22,7 @@ public class NewDay implements Job {
         }
         sendEmbedToChannelByNameWithPing(homeworkChannel, postMessageForToday());
         sendPostSuccess();
-        String[] pendingDel = Config.getPendingDelSubj();
-        if (pendingDel == null) {
-            JdaMain.resetAcceptDelCommand();
-            sendDelMessageSkip();
-        } else {
-            StringBuilder txt = new StringBuilder();
-            OptionData faecher = new OptionData(OptionType.STRING, OptionSubjName, OptionSubjDescription, true);
-            faecher.addChoice(ChoiceAllName, ChoiceAllValue);
-            for (String s : pendingDel) {
-                faecher.addChoice(subjsConfig.getNameFromCode(s), s);
-                txt.append(subjsConfig.getNameFromCode(s)).append(newLine);
-            }
-            JdaSlashCommand acceptDelCommand = JdaMain.getCommandFromName(AcceptDelName);
-            if (acceptDelCommand == null) {
-                return;
-            }
-            JdaMain.setCommand(acceptDelCommand, faecher);
-            MessageEmbed embed = acceptDelHomework(txt.toString());
-            for (String a : permissionsConfig.getAllIdsWithPermission(JdaPermission.ADMIN)) {
-                JdaMain.sendPrivateMessage(a, embed);
-            }
-            sendDelMessageSuccess();
-        }
         updateDateOption();
-        refreshCommand(Objects.requireNonNull(getCommandFromName(new SetLessonsCancelledCommand().getName())));
         sendDoneDayLoopMessage();
     }
 

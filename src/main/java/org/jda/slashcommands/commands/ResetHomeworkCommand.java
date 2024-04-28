@@ -2,6 +2,7 @@ package org.jda.slashcommands.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import org.config.files.subjects.Subject;
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,9 +46,9 @@ public class ResetHomeworkCommand implements JdaSlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        String subjCode = getOptionByName(event, OptionSubjName);
-        homeworkConfig.resetHomework(subjCode);
-        replyEmbed(event, resetHomework(subjCode));
-        sendResetHomework(event.getUser(), subjCode);
+        Subject subject = subjsConfig.getSubjectFromCode(getOptionByName(event, OptionSubjName));
+        homeworkConfig.resetHomework(subject);
+        replyEmbed(event, resetHomework(subject));
+        sendResetHomework(event.getUser(), subject);
     }
 }

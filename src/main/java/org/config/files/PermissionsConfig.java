@@ -20,6 +20,7 @@ public class PermissionsConfig extends ConfigFile {
         return JdaPermission.getFromInt(Character.getNumericValue(permissions.charAt(0)));
     }
 
+    @SuppressWarnings("unused")
     public String[] getAllIdsWithPermission(int level) {
         String[] lines = getLines();
         ArrayList<String> ids = new ArrayList<>();
@@ -30,9 +31,5 @@ public class PermissionsConfig extends ConfigFile {
         }
         String[] out = new String[ids.size()];
         return ids.toArray(out);
-    }
-
-    public String[] getAllIdsWithPermission(JdaPermission permission) {
-        return getAllIdsWithPermission(permission.getAsInt());
     }
 }

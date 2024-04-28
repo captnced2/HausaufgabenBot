@@ -3,6 +3,7 @@ package org.jda.slashcommands.commands;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import org.config.files.subjects.Subject;
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -46,18 +47,18 @@ public class SetHomeworkCommand implements JdaSlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        String subjCode = getOptionByName(event, OptionSubjName);
+        Subject subject = subjsConfig.getSubjectFromCode(getOptionByName(event, OptionSubjName));
         String ha = getOptionByName(event, OptionHomeworkName);
         if (ha.equals("null")) {
             ha = "";
         }
-        boolean New = homeworkConfig.setHomework(subjCode, ha);
+        boolean New = homeworkConfig.setHomework(subject, ha);
         if (New) {
-            replyEmbed(event, addedHomework(subjCode, ha));
-            sendAddedHomework(event.getUser(), subjCode, ha);
+            replyEmbed(event, addedHomework(subject, ha));
+            sendAddedHomework(event.getUser(), subject, ha);
         } else {
-            replyEmbed(event, changedHomework(subjCode, ha));
-            sendSetHomework(event.getUser(), subjCode, ha);
+            replyEmbed(event, changedHomework(subject, ha));
+            sendSetHomework(event.getUser(), subject, ha);
         }
     }
 }

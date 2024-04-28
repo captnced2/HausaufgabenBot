@@ -2,7 +2,6 @@ package org.config.files;
 
 import org.config.ConfigFile;
 import org.main.Variables;
-import org.time.Weekday;
 
 import java.io.File;
 
@@ -11,16 +10,16 @@ import static org.values.Global.*;
 
 public class MainConfig extends ConfigFile {
 
-    public MainConfig(String file) {
-        super(file);
+    public MainConfig(String fileName) {
+        super(fileName);
     }
 
     public String getToken() {
         return getKey(tokenKey);
     }
 
-    public String[] getSubjsOnDay(Weekday day) {
-        return getKey(day.getAsString()).split(commaRegex);
+    public String getTimetableFile() {
+        return getConfigFileByKey(timetableConfigKey);
     }
 
     private String getConfigFileByKey(String key) {
@@ -39,12 +38,8 @@ public class MainConfig extends ConfigFile {
         return getConfigFileByKey(homeworkConfigKey);
     }
 
-    public String getCancelledSubjectsFile() {
-        return getConfigFileByKey(cancelledConfigKey);
-    }
-
-    public String getHolydayFile() {
-        return getConfigFileByKey(holydayConfigKey);
+    public String getHolidayFile() {
+        return getConfigFileByKey(holidayConfigKey);
     }
 
     public File getStandardProfilePictureFile() {

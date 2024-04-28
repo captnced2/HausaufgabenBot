@@ -1,13 +1,14 @@
 package org.values.strings;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.*;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import org.config.files.subjects.Subject;
 import org.time.*;
 
 import java.awt.*;
+import java.util.Date;
 
 import static org.jda.slashcommands.SlashCommandGeneral.getHomeworkFromDay;
-import static org.main.Variables.subjsConfig;
 import static org.time.Time.*;
 import static org.values.Global.*;
 
@@ -37,13 +38,6 @@ public class Messages {
     public static final String noHomeworkFoundTitle = " Hausaufgabe";
     public static final String noHomeworkFoundText = "*Keine Hausaufgabe*";
     public static final String wrongChannelText = "Falscher Channel! Nur in dem hausaufgaben Channel verwendbar.";
-    public static final String noHomeworkToDeleteText = "Es gibt keine Hausaufgaben zum Löschen.";
-    public static final String deletedAllHomeworkTitle = "Hausaufgaben gelöscht";
-    public static final String deletedHomeworkTitle = "Hausaufgabe gelöscht";
-    public static final String acceptDelHomeworkTitle = "Hausaufgaben zur Löschung freigeben";
-    public static final String addedCancelledSubjTitle = "Fach als entfällt eingetragen";
-    public static final String deletedAllHomeworkLogTitle = " hat alle Hausaufgaben gelöscht";
-    public static final String deletedHomeworkLogTitle = " hat eine Hausaufgabe gelöscht";
     public static final String helpTitle = "Verfügbare Commands";
 
     private static MessageEmbed makeEmbed(Color color, String title, String text) {
@@ -57,10 +51,6 @@ public class Messages {
 
     private static MessageEmbed successEmbed(String title, String text) {
         return makeEmbed(successEmbedColor, title, text);
-    }
-
-    private static MessageEmbed logEmbed(String title, String text) {
-        return makeEmbed(logEmbedColor, title, text);
     }
 
     private static MessageEmbed errorEmbed(String title, String text) {
@@ -103,67 +93,39 @@ public class Messages {
         return homeworkFromDay(getHomeworkFromDay(getDateString()));
     }
 
-    public static MessageEmbed homeworkToDate(Weekday day, String date, String homework) {
-        return homeworkEmbed(homeworkToDateTitle + day.getAsString() + " " + date, homework);
+    public static MessageEmbed homeworkToDate(Weekday day, Date date, String homework) {
+        return homeworkEmbed(homeworkToDateTitle + day.getAsString() + " " + getDateAsString(date), homework);
     }
 
-    public static MessageEmbed addedHomework(String subjCode, String homework) {
-        return successEmbed(addedHomeworkTitle, subjsConfig.getNameFromCode(subjCode) + subjsRegex + homework);
+    public static MessageEmbed addedHomework(Subject subject, String homework) {
+        return successEmbed(addedHomeworkTitle, subject.name() + subjsRegex + homework);
     }
 
     public static MessageEmbed helpEmbed(String helpDescriptions) {
         return successEmbed(helpTitle, helpDescriptions);
     }
-    
-    public static MessageEmbed deletedAllHomeworkLog(String subjs, User user) {
-        return logEmbed(user.getEffectiveName() + deletedAllHomeworkLogTitle, subjs);
+
+    public static MessageEmbed resetHomework(Subject subject) {
+        return successEmbed(resetHomeworkTitle, subject.name());
     }
 
-    public static MessageEmbed deletedHomeworkLog(String subjCode, User user) {
-        return logEmbed(user.getEffectiveName() + deletedHomeworkLogTitle, subjsConfig.getNameFromCode(subjCode));
-    }
-
-    public static MessageEmbed resetHomework(String subjCode) {
-        return successEmbed(resetHomeworkTitle, subjsConfig.getNameFromCode(subjCode));
-    }
-
-    public static MessageEmbed changedHomework(String subjCode, String homework) {
-        return successEmbed(changedHomeworkTitle, subjsConfig.getNameFromCode(subjCode) + subjsRegex + homework);
+    public static MessageEmbed changedHomework(Subject subject, String homework) {
+        return successEmbed(changedHomeworkTitle, subject.name() + subjsRegex + homework);
     }
 
     public static MessageEmbed setHolidays(String dateFrom, String dateTo) {
         return successEmbed(setHolidaysTitle, dateFrom + setHolidaysText + dateTo);
     }
 
-    public static MessageEmbed noHomeworkFound(String subjCode) {
-        return homeworkEmbed(subjsConfig.getNameFromCode(subjCode) + noHomeworkFoundTitle, noHomeworkFoundText);
+    public static MessageEmbed noHomeworkFound(Subject subject) {
+        return homeworkEmbed(subject.name() + noHomeworkFoundTitle, noHomeworkFoundText);
     }
 
-    public static MessageEmbed homeworkFromDate(String subjCode, String date, String homework) {
-        return homeworkEmbed(subjsConfig.getNameFromCode(subjCode) + homeworkFromDateTitle + date, homework);
-    }
-
-    public static MessageEmbed addedCancelledSubj(String subjCode, String date) {
-        return successEmbed(addedCancelledSubjTitle, date + subjsRegex + subjsConfig.getNameFromCode(subjCode));
+    public static MessageEmbed homeworkFromDate(Subject subject, String date, String homework) {
+        return homeworkEmbed(subject.name() + homeworkFromDateTitle + date, homework);
     }
 
     public static MessageEmbed wrongChannel() {
         return errorTitleEmbed(wrongChannelText);
-    }
-
-    public static MessageEmbed noHomeworkToDelete() {
-        return errorTitleEmbed(noHomeworkToDeleteText);
-    }
-
-    public static MessageEmbed deletedAllHomework(String homework) {
-        return successEmbed(deletedAllHomeworkTitle, homework);
-    }
-
-    public static MessageEmbed deletedHomework(String subjCode) {
-        return successEmbed(deletedHomeworkTitle, subjsConfig.getNameFromCode(subjCode));
-    }
-
-    public static MessageEmbed acceptDelHomework(String homework) {
-        return homeworkEmbed(acceptDelHomeworkTitle, homework);
     }
 }
