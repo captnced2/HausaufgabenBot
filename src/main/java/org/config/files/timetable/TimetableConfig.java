@@ -9,7 +9,7 @@ import org.time.Time;
 import java.io.IOException;
 import java.util.*;
 
-import static org.main.Variables.subjsConfig;
+import static org.main.Variables.*;
 
 public class TimetableConfig extends ConfigFile {
 
@@ -31,7 +31,7 @@ public class TimetableConfig extends ConfigFile {
 
     private void updateTimeTableFile() {
         try {
-            String path = "node \".\\JavaScript\\bin\\TimetableRequester.js\"";
+            String path = "node JavaScript" + slash + "bin" + slash + "TimetableRequester.js " + System.getProperty("user.dir");
             Process javascript = Runtime.getRuntime().exec(path);
             javascript.waitFor();
         } catch (IOException | InterruptedException e) {
