@@ -3,7 +3,7 @@ package org.time;
 import org.quartz.*;
 
 import static org.jda.JdaMain.*;
-import static org.main.Variables.holidayConfig;
+import static org.main.Variables.*;
 import static org.time.Time.isWeekend;
 import static org.values.Global.homeworkChannel;
 import static org.values.strings.Console.*;
@@ -17,6 +17,7 @@ public class NewDay implements Job {
             return;
         }
         sendCalledDayLoopMessage();
+        timetableConfig.updateTimeTable();
         if (isWeekend() || holidayConfig.isHolidayDay(Time.getDate())) {
             return;
         }
