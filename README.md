@@ -8,6 +8,7 @@ https://mvnrepository.com/artifact/org.reflections/reflections
 https://mvnrepository.com/artifact/org.slf4j/slf4j-api  
 https://mvnrepository.com/artifact/org.slf4j/slf4j-simple  
 https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
+https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 
 Danke an Jacob für geistige Unterstützung :D
 
