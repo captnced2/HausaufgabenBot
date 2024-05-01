@@ -26,6 +26,7 @@ public class TimetableConfig extends ConfigFile {
     }
 
     public Subject[] getSubjsOnDate(Date date) {
+        updateTimeTable();
         return getDayFromDate(date).getAllSubjects();
     }
 
