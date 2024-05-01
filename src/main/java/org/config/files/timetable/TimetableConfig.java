@@ -46,7 +46,7 @@ public class TimetableConfig extends ConfigFile {
             JsonNode node = mapper.readTree(lines).get(0);
             days = new ArrayList<>();
             for (JsonNode lesson : node) {
-                if (lesson.get("activityType").asText().equals("Unterricht") && lesson.get("code") == null) {
+                if (lesson.get("activityType") != null && lesson.get("activityType").asText().equals("Unterricht") && lesson.get("code") == null) {
                     Date lessonDate = Time.getDateFromWebUntis(lesson.get("date").asText());
                     TimetableDay day = getDayFromDate(lessonDate);
                     Subject subject = subjsConfig.getSubjectFromWebuntis(lesson.get("su").get(0).get("name").asText());
