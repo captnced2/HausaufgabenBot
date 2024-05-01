@@ -301,7 +301,8 @@ public class JdaMain {
 
     public static void setProfilePicture(File iconPath) {
         try {
-            Jda.getSelfUser().getManager().setAvatar(Icon.from(iconPath)).queue();
+            Jda.getSelfUser().getManager().setAvatar(Icon.from(iconPath)).queue((success) -> {
+            }, (error) -> sendCantChangeAvatar());
         } catch (IOException ignored) {
         }
     }

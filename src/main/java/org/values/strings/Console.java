@@ -16,6 +16,7 @@ public class Console {
     private static final String jdaStartupMessage = "Starting Jda...";
     private static final String jdaStartupCompleteMessage = "Jda startup complete";
     private static final String mainConfigCreateEnterValuesMessage = "Created main config file, please enter required values to proceed";
+    private static final String cantChangeAvatarMessage = "Can't change Avatar. This message can probably be ignored";
     private static final String cantCreateConfigFileErrorMessage = "Error! Couldn't create config file ";
     private static final String cantCreateFolderErrorMessage = "Error! Couldn't create config folder ";
     private static final String creatingNewFileMessage = "Creating new file ";
@@ -52,6 +53,10 @@ public class Console {
 
     public static void sendRetryingInternetConnection(int leftRetries) {
         outLog(retryingInternetConnection + leftRetries);
+    }
+
+    public static void sendCantChangeAvatar() {
+        out(cantChangeAvatarMessage);
     }
 
     public static void sendMainConfigCreatedEnterValues() {
