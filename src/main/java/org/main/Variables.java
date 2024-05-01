@@ -6,8 +6,6 @@ import org.config.files.subjects.SubjectsConfig;
 import org.config.files.timetable.TimetableConfig;
 import org.values.Global;
 
-import java.nio.file.FileSystems;
-
 public class Variables {
     public static String mainConfPath;
     public static MainConfig mainConfig;
@@ -21,11 +19,9 @@ public class Variables {
     public static OptionData subjOption;
     public static OptionData dateOption;
     public static int commandsCount;
-    public static String slash;
 
     public static void initVariables() {
-        slash = FileSystems.getDefault().getSeparator();
-        mainConfPath = "." + slash + Global.configFolder + slash;
+        mainConfPath = "./" + Global.configFolder + "/";
         logFile = Global.logFileName;
         pfpsFolder = mainConfPath + Global.pfpsPath;
     }
