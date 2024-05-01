@@ -6,10 +6,10 @@ import org.config.ConfigFile;
 import org.config.files.subjects.Subject;
 import org.time.Time;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
-import static org.main.Variables.*;
+import static org.main.Variables.subjsConfig;
 
 public class TimetableConfig extends ConfigFile {
 
@@ -31,8 +31,8 @@ public class TimetableConfig extends ConfigFile {
 
     private void updateTimeTableFile() {
         try {
-            String path = "node JavaScript" + slash + "bin" + slash + "TimetableRequester.js " + System.getProperty("user.dir");
-            Process javascript = Runtime.getRuntime().exec(path);
+            String path = "node JavaScript/bin/TimetableRequester.js";
+            Process javascript = Runtime.getRuntime().exec(path, null, new File(System.getProperty("user.dir")));
             javascript.waitFor();
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
