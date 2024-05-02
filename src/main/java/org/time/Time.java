@@ -2,7 +2,7 @@ package org.time;
 
 import org.quartz.*;
 
-import java.text.SimpleDateFormat;
+import java.text.*;
 import java.util.Calendar;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -61,6 +61,15 @@ public class Time {
 
     public static String getDateString() {
         return getDateString(0);
+    }
+
+    public static Date getDateFromString(String dateString) {
+        try {
+            DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
+            return format.parse(dateString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static String getDateString(int shift) {

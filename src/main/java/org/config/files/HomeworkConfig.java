@@ -3,7 +3,9 @@ package org.config.files;
 import org.config.ConfigFile;
 import org.config.files.subjects.Subject;
 
-import static org.time.Time.getDateString;
+import java.util.Date;
+
+import static org.time.Time.*;
 import static org.values.Global.*;
 
 public class HomeworkConfig extends ConfigFile {
@@ -45,6 +47,13 @@ public class HomeworkConfig extends ConfigFile {
         setHomework(subject, null);
     }
 
+    public void resetHomeworkIfOld(Subject subject) {
+        Date date = getHomeworkDate(subject);
+        if (date.toInstant().isBefore(getDate().toInstant())) {
+            resetHomework(subject);
+        }
+    }
+
     public String getHomework(Subject subject) {
         String hwLine = getHwLineFromCode(subject);
         if (hwLine == null) {
@@ -53,11 +62,11 @@ public class HomeworkConfig extends ConfigFile {
         return getHwValue(hwLine);
     }
 
-    public String getHomeworkDate(Subject subject) {
+    public Date getHomeworkDate(Subject subject) {
         String hwLine = getHwLineFromCode(subject);
         if (hwLine == null) {
             return null;
         }
-        return getHwDate(hwLine);
+        return getDateFromString(getHwDate(hwLine));
     }
 }

@@ -24,7 +24,7 @@ public class SlashCommandGeneral {
         return getHomeworkFromSubjs(timetableConfig.getSubjsOnDate(date), null);
     }
 
-    public static String getHomeworkFromDay(String date) {
+    public static String getHomeworkFromDay(Date date) {
         return getHomeworkFromSubjs(subjsConfig.getAllSubjects(), date);
     }
 
@@ -41,14 +41,14 @@ public class SlashCommandGeneral {
         return optionData;
     }
 
-    private static String getHomeworkFromSubjs(Subject[] subjects, @Nullable String onDate) {
+    private static String getHomeworkFromSubjs(Subject[] subjects, @Nullable Date onDate) {
         if (subjects == null || subjects.length == 0) {
             return noHomeworkString;
         }
         StringBuilder txt = new StringBuilder();
         for (Subject subj : subjects) {
             String hw = homeworkConfig.getHomework(subj);
-            String date = homeworkConfig.getHomeworkDate(subj);
+            Date date = homeworkConfig.getHomeworkDate(subj);
             if (hw != null && !hw.isEmpty() && date != null) {
                 if (onDate == null) {
                     txt.append(subj.name()).append(subjsRegex).append(hw).append(newLine);

@@ -20,7 +20,7 @@ public class TimetableConfig extends ConfigFile {
         updateTimeTable();
     }
 
-    public void updateTimeTable() {
+    private void updateTimeTable() {
         updateTimeTableFile();
         getLessons();
     }

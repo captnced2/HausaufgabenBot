@@ -90,7 +90,7 @@ public class Messages {
     }
 
     public static MessageEmbed postMessageForToday() {
-        return homeworkFromDay(getHomeworkFromDay(getDateString()));
+        return homeworkFromDay(getHomeworkFromDay(getDate()));
     }
 
     public static MessageEmbed homeworkToDate(Weekday day, Date date, String homework) {
@@ -121,8 +121,8 @@ public class Messages {
         return homeworkEmbed(subject.name() + noHomeworkFoundTitle, noHomeworkFoundText);
     }
 
-    public static MessageEmbed homeworkFromDate(Subject subject, String date, String homework) {
-        return homeworkEmbed(subject.name() + homeworkFromDateTitle + date, homework);
+    public static MessageEmbed homeworkFromDate(Subject subject, Date date, String homework) {
+        return homeworkEmbed(subject.name() + homeworkFromDateTitle + getDateAsString(date), homework);
     }
 
     public static MessageEmbed wrongChannel() {
