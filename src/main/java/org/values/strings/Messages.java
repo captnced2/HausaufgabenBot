@@ -33,8 +33,6 @@ public class Messages {
     public static final String addedHomeworkTitle = "Hausaufgabe hinzugefügt";
     public static final String resetHomeworkTitle = "Hausaufgabe zurückgesetzt";
     public static final String changedHomeworkTitle = "Hausaufgabe geändert";
-    public static final String setHolidaysTitle = "Ferien festgelegt";
-    public static final String setHolidaysText = " - ";
     public static final String noHomeworkFoundTitle = " Hausaufgabe";
     public static final String noHomeworkFoundText = "*Keine Hausaufgabe*";
     public static final String wrongChannelText = "Falscher Channel! Nur in dem hausaufgaben Channel verwendbar.";
@@ -111,10 +109,6 @@ public class Messages {
 
     public static MessageEmbed changedHomework(Subject subject, String homework) {
         return successEmbed(changedHomeworkTitle, subject.name() + subjsRegex + homework);
-    }
-
-    public static MessageEmbed setHolidays(String dateFrom, String dateTo) {
-        return successEmbed(setHolidaysTitle, dateFrom + setHolidaysText + dateTo);
     }
 
     public static MessageEmbed noHomeworkFound(Subject subject) {

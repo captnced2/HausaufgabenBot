@@ -18,7 +18,7 @@ public class NewDay implements Job {
             return;
         }
         sendCalledDayLoopMessage();
-        if (isWeekend() || holidayConfig.isHolidayDay(Time.getDate())) {
+        if (isWeekend()) {
             return;
         }
         for (Subject subject : timetableConfig.getSubjsOnDate(getDate())) {

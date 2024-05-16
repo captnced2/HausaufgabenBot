@@ -34,7 +34,6 @@ public class Console {
     private static final String postSuccess = "%u used the post command successfully";
     private static final String commandRegisterErrorMessage = "Something went wrong while trying to register %c command";
     private static final String registeredCommandsMessage = "Successfully registered %i1/%i2 commands";
-    private static final String setHolidays = "%u set new holidays period";
     private static final String deletedCommandsMessage = "Deleted %i unused commands";
     private static final String anErrorOccurredMessage = "An Error occurred: ";
     private static final String askedForHelp = "%u asked for help";
@@ -141,10 +140,6 @@ public class Console {
 
     public static void sendCommandRegisterError(String command) {
         outLog(replaceCommand(commandRegisterErrorMessage, command));
-    }
-
-    public static void sendSetHolidays(User user) {
-        outLog(replaceUser(setHolidays, user));
     }
 
     public static void sendDeletedCommands(int count) {

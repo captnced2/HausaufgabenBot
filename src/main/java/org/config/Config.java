@@ -19,7 +19,6 @@ public class Config {
         permissionsConfig = new PermissionsConfig(mainConfig.getPermissionsFile());
         subjsConfig = new SubjectsConfig(mainConfig.getSubjectsFile());
         homeworkConfig = new HomeworkConfig(mainConfig.getHomeworkFile());
-        holidayConfig = new HolidayConfig(mainConfig.getHolidayFile());
         timetableConfig = new TimetableConfig(mainConfig.getTimetableFile());
     }
 

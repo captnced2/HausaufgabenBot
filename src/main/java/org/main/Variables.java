@@ -12,7 +12,6 @@ public class Variables {
     public static PermissionsConfig permissionsConfig;
     public static SubjectsConfig subjsConfig;
     public static HomeworkConfig homeworkConfig;
-    public static HolidayConfig holidayConfig;
     public static TimetableConfig timetableConfig;
     public static String logFile;
     public static String pfpsFolder;
