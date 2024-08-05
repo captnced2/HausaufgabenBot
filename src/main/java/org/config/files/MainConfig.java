@@ -13,6 +13,34 @@ public class MainConfig extends ConfigFile {
         super(fileName);
     }
 
+    @Override
+    protected String getTemplate() {
+        return """
+                # Discord Bot Token
+                # token=
+
+                # Stundenplan
+                # timetable=
+
+                # Rechte Datei
+                # permissions=
+
+                # Fächer Datei
+                # subjects=
+
+                # Hausaufgaben Datei
+                # homework=
+
+                # Entfallene Fächer Datei
+                # cancelledSubjects=
+
+                # Standart Profilbild Datei im pfp Ordner
+                # standardProfilePicture=
+
+                # Ids
+                """;
+    }
+
     public String getToken() {
         return getKey(tokenKey);
     }

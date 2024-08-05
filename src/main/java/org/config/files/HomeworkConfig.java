@@ -13,6 +13,13 @@ public class HomeworkConfig extends ConfigFile {
         super(fileName);
     }
 
+    @Override
+    protected String getTemplate() {
+        return """
+                # Nichts anfassen
+                """;
+    }
+
     private String getHwCode(String line) {
         return line.split(dateSeperator)[0];
     }

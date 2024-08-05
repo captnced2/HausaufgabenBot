@@ -3,7 +3,7 @@ package org.values;
 import java.awt.*;
 
 public class Global {
-    public static final String version = "6.3.4";
+    public static final String version = "6.3.6";
     public static final String configFolder = "configs";
     public static final String configFileName = "config.conf";
     public static final String pfpsPath = "pfp";
@@ -32,27 +32,4 @@ public class Global {
     public static final String homeworkConfigKey = "homework";
     public static final String timetableConfigKey = "timetable";
     public static final String lukasIDKey = "LukasID";
-    public static final String mainConfigTemplate = """
-            # Discord Bot Token
-            # token=
-
-            # Stundenplan
-            # timetable=
-
-            # Rechte Datei
-            # permissions=
-
-            # Fächer Datei
-            # subjects=
-
-            # Hausaufgaben Datei
-            # homework=
-
-            # Entfallene Fächer Datei
-            # cancelledSubjects=
-
-            # Standart Profilbild Datei im pfp Ordner
-            # standardProfilePicture=
-
-            # Ids""";
 }

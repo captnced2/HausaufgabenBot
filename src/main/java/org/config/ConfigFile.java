@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-import static org.config.Config.createFile;
+import static org.config.Config.*;
 import static org.main.Variables.mainConfPath;
 import static org.values.Global.*;
 import static org.values.strings.Errors.*;
@@ -21,8 +21,11 @@ public abstract class ConfigFile {
         configFile = new File(configFilePath);
         if (!configFile.exists()) {
             createFile(configFile);
+            writeConfigTemplate(configFilePath, getTemplate());
         }
     }
+
+    protected abstract String getTemplate();
 
     public String getConfigFileName() {
         return configFileName;

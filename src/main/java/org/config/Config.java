@@ -29,7 +29,7 @@ public class Config {
         createFolder(configFolder);
         createFolder(pfpFolder);
         if (!new File(mainConfigPath).exists()) {
-            writeConfigTemplate(mainConfigPath, mainConfigTemplate);
+            new MainConfig(configFileName);
             sendMainConfigCreatedEnterValues();
             System.exit(0);
         }
@@ -59,8 +59,7 @@ public class Config {
         }
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private static void writeConfigTemplate(String filePath, String template) {
+    static void writeConfigTemplate(String filePath, String template) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             writer.write(template);

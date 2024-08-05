@@ -20,6 +20,11 @@ public class TimetableConfig extends ConfigFile {
         updateTimeTable();
     }
 
+    @Override
+    protected String getTemplate() {
+        return "";
+    }
+
     private void updateTimeTable() {
         updateTimeTableFile();
         getLessons();

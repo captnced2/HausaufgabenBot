@@ -12,6 +12,13 @@ public class PermissionsConfig extends ConfigFile {
         super(fileName);
     }
 
+    @Override
+    protected String getTemplate() {
+        return """
+                # Rechte im Schema {DISCORDID}={RECHTELEVEL 1-4} (alles danach wird ignoriert (Platz für Namen))
+                """;
+    }
+
     public JdaPermission getPermissionsById(String id) {
         String permissions = getKey(id, true);
         if (permissions == null) {

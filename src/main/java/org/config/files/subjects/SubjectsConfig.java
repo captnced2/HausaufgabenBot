@@ -16,6 +16,13 @@ public class SubjectsConfig extends ConfigFile {
         getSubjects();
     }
 
+    @Override
+    protected String getTemplate() {
+        return """
+                # Fächer Abkürzungen im Schema {FACHNAME}={CODE}={WEBUNTISCODE}
+                """;
+    }
+
     private void getSubjects() {
         String[] lines = getLines();
         subjects = new ArrayList<>();
