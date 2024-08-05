@@ -24,7 +24,7 @@ public class NewDay implements Job {
         for (Subject subject : timetableConfig.getSubjsOnDate(getDate())) {
             homeworkConfig.resetHomeworkIfOld(subject);
         }
-        sendEmbedToChannelByNameWithPing(homeworkChannel, postMessageForToday());
+        sendEmbedToChannelByName(homeworkChannel, postMessageForToday());
         sendPostSuccess();
         updateDateOption();
         sendDoneDayLoopMessage();

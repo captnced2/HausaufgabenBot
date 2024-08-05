@@ -43,6 +43,7 @@ public class Errors {
         return replaceRegex(in, "%cn", doubleQuotesString + commandName + doubleQuotesString);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static String replaceUser(String in, User user) {
         return replaceRegex(in, "%u", doubleQuotesString + user.getEffectiveName() + doubleQuotesString);
     }

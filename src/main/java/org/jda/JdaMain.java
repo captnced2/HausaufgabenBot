@@ -3,7 +3,6 @@ package org.jda;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.interactions.commands.build.*;
@@ -230,15 +229,6 @@ public class JdaMain {
         return Jda.getGuilds();
     }
 
-    public static String getPingRolePing(Guild guild) {
-        for (Role role : guild.getRoles()) {
-            if (role.getName().equals(pingRoleName)) {
-                return "<@&" + role.getId() + ">";
-            }
-        }
-        return null;
-    }
-
     public static List<TextChannel> getAllChannelsFromName(String name) {
         ArrayList<TextChannel> channels = new ArrayList<>();
         for (Guild guild : getAllGuilds()) {
@@ -261,13 +251,9 @@ public class JdaMain {
         return allowedCommands;
     }
 
-    public static void sendEmbedToChannelByNameWithPing(String channelName, MessageEmbed embed) {
+    public static void sendEmbedToChannelByName(String channelName, MessageEmbed embed) {
         for (TextChannel channel : getAllChannelsFromName(channelName)) {
             sendEmbed(channel, embed);
-            String ping = getPingRolePing(channel.getGuild());
-            if (ping != null) {
-                sendWithDelay(channel, ping, 1);
-            }
         }
     }
 
@@ -289,14 +275,6 @@ public class JdaMain {
 
     public static void sendEmbed(TextChannel channel, MessageEmbed embed) {
         channel.sendMessageEmbeds(embed).queue();
-    }
-
-    public static void sendWithDelay(TextChannel channel, String text, int delay) {
-        channel.sendMessage(text).queueAfter(delay, TimeUnit.SECONDS);
-    }
-
-    public static void sendWithDelay(MessageChannelUnion channel, String text, int delay) {
-        channel.sendMessage(text).queueAfter(delay, TimeUnit.SECONDS);
     }
 
     public static void setProfilePicture(File iconPath) {

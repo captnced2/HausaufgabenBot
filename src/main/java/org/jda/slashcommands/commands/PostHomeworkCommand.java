@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import org.jda.slashcommands.*;
 import org.jetbrains.annotations.NotNull;
 
-import static org.jda.JdaMain.*;
+import static org.jda.JdaMain.replyEmbed;
 import static org.time.Time.isWeekend;
 import static org.values.Global.homeworkChannel;
 import static org.values.strings.Console.sendPostSuccess;
@@ -54,10 +54,6 @@ public class PostHomeworkCommand implements JdaSlashCommand {
             return;
         }
         replyEmbed(event, postMessageForToday());
-        String ping = getPingRolePing(guild);
-        if (ping != null) {
-            sendWithDelay(event.getChannel(), ping, 1);
-        }
         sendPostSuccess(event.getUser());
     }
 }
