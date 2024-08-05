@@ -37,10 +37,6 @@ public class MainConfig extends ConfigFile {
         return getConfigFileByKey(homeworkConfigKey);
     }
 
-    public String getHolidayFile() {
-        return getConfigFileByKey(holidayConfigKey);
-    }
-
     public File getStandardProfilePictureFile() {
         return new File(pfpsFolder + "/" + getKey(standardProfilePictureKey) + jpgExtension);
     }
