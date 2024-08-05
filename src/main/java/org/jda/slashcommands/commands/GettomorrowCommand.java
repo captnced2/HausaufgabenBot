@@ -39,7 +39,6 @@ public class GettomorrowCommand implements JdaSlashCommand {
     public void execute(SlashCommandInteractionEvent event) {
         Weekday day = getWeekday(1);
         Date date = getDate(1);
-        boolean reply = false;
         if (day == Weekday.SATURDAY || day == Weekday.SUNDAY) {
             if (day == Weekday.SATURDAY) {
                 date = getDate(3);
@@ -48,14 +47,9 @@ public class GettomorrowCommand implements JdaSlashCommand {
             }
             day = Weekday.MONDAY;
             replyMessage(event, Messages.notSchooldayTomorrow, true);
-            reply = true;
         }
         MessageEmbed embed = homeworkToDate(day, date, getHomeworkToDay(date));
-        if (reply) {
-            replyEmbedHook(event, embed);
-        } else {
-            replyEmbed(event, embed);
-        }
+        replyEmbed(event, embed);
         sendRequestedTomorrowHomework(event.getUser());
     }
 }

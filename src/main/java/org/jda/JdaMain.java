@@ -258,7 +258,8 @@ public class JdaMain {
     }
 
     public static void replyMessage(SlashCommandInteractionEvent event, String message, boolean ephemeral) {
-        event.reply(message).setEphemeral(ephemeral).queue();
+        event.deferReply(ephemeral).queue();
+        event.getHook().sendMessage(message).queue();
     }
 
     public static void replyEmbed(SlashCommandInteractionEvent event, MessageEmbed embed) {
@@ -266,11 +267,12 @@ public class JdaMain {
     }
 
     public static void replyEmbed(SlashCommandInteractionEvent event, MessageEmbed embed, boolean ephemeral) {
-        event.replyEmbeds(embed).setEphemeral(ephemeral).queue();
-    }
-
-    public static void replyEmbedHook(SlashCommandInteractionEvent event, MessageEmbed embed) {
-        event.getHook().getInteraction().getMessageChannel().sendMessageEmbeds(embed).queue();
+        if (!event.isAcknowledged()) {
+            event.deferReply(ephemeral).queue();
+            event.getHook().sendMessageEmbeds(embed).queue();
+        } else {
+            event.getHook().getInteraction().getMessageChannel().sendMessageEmbeds(embed).queue();
+        }
     }
 
     public static void sendEmbed(TextChannel channel, MessageEmbed embed) {
