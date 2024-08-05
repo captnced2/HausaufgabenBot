@@ -41,7 +41,6 @@ public class JdaMain {
         createJda();
         defineOptions();
         getAllCommands();
-        setPfp();
         addCommands();
         sendJdaStartupComplete();
     }
@@ -107,6 +106,7 @@ public class JdaMain {
         }
     }
 
+    @SuppressWarnings("unused")
     private static void setPfp() {
         setProfilePicture(mainConfig.getStandardProfilePictureFile());
     }
