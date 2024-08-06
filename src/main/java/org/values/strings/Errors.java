@@ -2,13 +2,14 @@ package org.values.strings;
 
 import net.dv8tion.jda.api.entities.User;
 
-import static org.values.Global.doubleQuotesString;
+import static org.values.Global.*;
 
 public class Errors {
-    public static final String noKeyValueFound = "Could not find value in config %c for key %k";
-    public static final String configFileEmpty = "%c config is empty";
-    public static final String noSubjectNameFound = "Could not find subject for code %k";
-    public static final String noOptionValue = "Required option value was null when %u executed %cn command";
+    private static final String noKeyValueFound = "Could not find value in config %c for key %k";
+    private static final String configFileEmpty = "%c config is empty";
+    private static final String noSubjectNameFound = "Could not find subject for code %k";
+    private static final String noOptionValue = "Required option value was null when %u executed %cn command";
+    private static final String cantFindUntisClass = "Could not find Untis class ";
 
     public static String noKeyValueError(String keyName, String configFileName) {
         return replaceConfigAndKey(noKeyValueFound, keyName, configFileName);
@@ -24,6 +25,10 @@ public class Errors {
 
     public static String noOptionValue(User user, String commandName) {
         return replaceCommandName(replaceUser(noOptionValue, user), commandName);
+    }
+
+    public static String cantFindUntisClass() {
+        return cantFindUntisClass + className;
     }
 
     @SuppressWarnings("SameParameterValue")
