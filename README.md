@@ -1,15 +1,23 @@
 # HausaufgabenBot
+Discord Hausaufgaben Bot zum verwalten von Hausaufgaben der [Q12].  
+Falls ihr irgendwie diese Seite gefunden habt und ***nicht*** auf dem Discord Server seid, meldet euch bei mir. <sup>(Cedric)</sup>  
+Danke an Jacob für teilweise geistige Unterstützung :D
 
-Discord Hausaufgaben Bot zum verwalten von Hausaufgaben der [11a]
+# Dependencies
+## Maven Repositories:  
+- [Java Discord API](https://mvnrepository.com/artifact/net.dv8tion/JDA)  
+- [Reflections](https://mvnrepository.com/artifact/org.reflections/reflections)  
+- [SLF4J Api](https://mvnrepository.com/artifact/org.slf4j/slf4j-api)  
+- [SLF4J Simple](https://mvnrepository.com/artifact/org.slf4j/slf4j-simple)  
+- [Quartz](https://mvnrepository.com/artifact/org.quartz-scheduler/quartz)  
+- [Jackson Databind](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind)  
+- [JSON](https://mvnrepository.com/artifact/org.json/json)  
+## GitHub Repositories:  
+- [WebUntisAPI](https://github.com/Keule0010/WebUntisAPI)  
 
-Maven Repositories:  
-https://mvnrepository.com/artifact/net.dv8tion/JDA  
-https://mvnrepository.com/artifact/org.reflections/reflections  
-https://mvnrepository.com/artifact/org.slf4j/slf4j-api  
-https://mvnrepository.com/artifact/org.slf4j/slf4j-simple  
-https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
-https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-
-Danke an Jacob für geistige Unterstützung :D
-
-Enthaltener Code ist geistiges Eigentum und darf nicht ohne Erlaubnis weiterverwendet werden.
+# License
+> [!WARNING]
+No License!!
+> 
+The code contained is considered intellectual property and may not be used without permission.  
+I have my reasons.
