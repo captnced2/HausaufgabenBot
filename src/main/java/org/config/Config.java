@@ -2,7 +2,6 @@ package org.config;
 
 import org.config.files.*;
 import org.config.files.subjects.SubjectsConfig;
-import org.config.files.timetable.TimetableConfig;
 import org.values.Global;
 
 import java.io.*;
@@ -19,7 +18,6 @@ public class Config {
         permissionsConfig = new PermissionsConfig(mainConfig.getPermissionsFile());
         subjsConfig = new SubjectsConfig(mainConfig.getSubjectsFile());
         homeworkConfig = new HomeworkConfig(mainConfig.getHomeworkFile());
-        timetableConfig = new TimetableConfig(mainConfig.getTimetableFile());
     }
 
     public static void checkFiles() {

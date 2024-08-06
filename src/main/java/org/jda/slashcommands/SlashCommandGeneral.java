@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+import static org.config.WebUntisAPI.getSubjsOnDate;
 import static org.main.Variables.*;
 import static org.values.Global.*;
 import static org.values.strings.Messages.noHomeworkString;
@@ -19,7 +20,7 @@ public class SlashCommandGeneral {
     public static final String OptionDateDescription = "Datum";
 
     public static String getHomeworkToDay(Date date) {
-        return getHomeworkFromSubjs(timetableConfig.getSubjsOnDate(date), null);
+        return getHomeworkFromSubjs(getSubjsOnDate(date), null);
     }
 
     public static String getHomeworkFromDay(Date date) {

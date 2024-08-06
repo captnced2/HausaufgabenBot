@@ -3,8 +3,9 @@ package org.time;
 import org.config.files.subjects.Subject;
 import org.quartz.*;
 
+import static org.config.WebUntisAPI.getSubjsOnDate;
 import static org.jda.JdaMain.*;
-import static org.main.Variables.*;
+import static org.main.Variables.homeworkConfig;
 import static org.time.Time.*;
 import static org.values.Global.homeworkChannel;
 import static org.values.strings.Console.*;
@@ -21,7 +22,7 @@ public class NewDay implements Job {
         if (isWeekend()) {
             return;
         }
-        for (Subject subject : timetableConfig.getSubjsOnDate(getDate())) {
+        for (Subject subject : getSubjsOnDate(getDate())) {
             homeworkConfig.resetHomeworkIfOld(subject);
         }
         sendEmbedToChannelByName(homeworkChannel, postMessageForToday());
