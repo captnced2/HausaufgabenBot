@@ -10,9 +10,29 @@ import static org.main.Variables.*;
 import static org.values.Global.*;
 import static org.values.strings.Console.*;
 
-public class Config {
+public class ConfigManager {
 
-    public static void initConfigs() {
+    static void writeConfigTemplate(String filePath, String template) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            writer.write(template);
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void writeToLog(String line) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true));
+            writer.write(line + newLine);
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void initConfigs() {
         checkFiles();
         mainConfig = new MainConfig(configFileName);
         permissionsConfig = new PermissionsConfig(mainConfig.getPermissionsFile());
@@ -20,7 +40,7 @@ public class Config {
         homeworkConfig = new HomeworkConfig(mainConfig.getHomeworkFile());
     }
 
-    public static void checkFiles() {
+    private void checkFiles() {
         File configFolder = new File(Global.configFolder);
         File pfpFolder = new File(pfpsFolder);
         String mainConfigPath = mainConfPath + configFileName;
@@ -33,7 +53,7 @@ public class Config {
         }
     }
 
-    public static void createFolder(File folder) {
+    private void createFolder(File folder) {
         if (!folder.exists()) {
             sendCreatingNewFolder(folder.getName());
             boolean success = folder.mkdir();
@@ -43,32 +63,8 @@ public class Config {
         }
     }
 
-    public static void createFile(File file) {
-        if (!file.exists()) {
-            sendCreatingNewFile(file.getName());
-            try {
-                boolean success = file.createNewFile();
-                if (!success) {
-                    sendCantCreateConfError(file.getName());
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    static void writeConfigTemplate(String filePath, String template) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-            writer.write(template);
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     @SuppressWarnings("unused")
-    private static File[] getAllPfps() {
+    private File[] getAllPfps() {
         File path = new File(pfpsFolder);
         if (!path.exists()) {
             return null;
@@ -77,15 +73,5 @@ public class Config {
             return null;
         }
         return path.listFiles(file -> file.isFile() && file.getName().toLowerCase().endsWith(jpgExtension));
-    }
-
-    public static void writeToLog(String line) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true));
-            writer.write(line + newLine);
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

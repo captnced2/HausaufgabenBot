@@ -4,9 +4,10 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-import static org.config.Config.*;
+import static org.config.ConfigManager.writeConfigTemplate;
 import static org.main.Variables.mainConfPath;
 import static org.values.Global.*;
+import static org.values.strings.Console.*;
 import static org.values.strings.Errors.*;
 
 public abstract class ConfigFile {
@@ -51,6 +52,20 @@ public abstract class ConfigFile {
         }
         String[] arr = new String[lines.size()];
         return lines.toArray(arr);
+    }
+
+    private void createFile(File file) {
+        if (!file.exists()) {
+            sendCreatingNewFile(file.getName());
+            try {
+                boolean success = file.createNewFile();
+                if (!success) {
+                    sendCantCreateConfError(file.getName());
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     public String getKey(String key, boolean returnNull) {

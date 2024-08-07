@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.entities.User;
 import org.config.files.subjects.Subject;
 import org.time.Time;
 
-import static org.config.Config.writeToLog;
+import static org.config.ConfigManager.writeToLog;
 import static org.time.Time.getCurrentTime;
 import static org.values.Global.*;
 
