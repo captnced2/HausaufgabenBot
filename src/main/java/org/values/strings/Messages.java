@@ -3,6 +3,7 @@ package org.values.strings;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.config.files.subjects.Subject;
+import org.jda.slashcommands.JdaPermission;
 import org.time.*;
 
 import java.awt.*;
@@ -36,7 +37,7 @@ public class Messages {
     public static final String noHomeworkFoundTitle = " Hausaufgabe";
     public static final String noHomeworkFoundText = "*Keine Hausaufgabe*";
     public static final String wrongChannelText = "Falscher Channel! Nur in dem hausaufgaben Channel verwendbar.";
-    public static final String helpTitle = "Verfügbare Commands";
+    public static final String helpTitle = "Verfügbare Commands für Rechtelevel ";
 
     private static MessageEmbed makeEmbed(Color color, String title, String text) {
         EmbedBuilder builder = new EmbedBuilder();
@@ -99,8 +100,8 @@ public class Messages {
         return successEmbed(addedHomeworkTitle, subject.name() + subjsRegex + homework);
     }
 
-    public static MessageEmbed helpEmbed(String helpDescriptions) {
-        return successEmbed(helpTitle, helpDescriptions);
+    public static MessageEmbed helpEmbed(JdaPermission permissions, String helpDescriptions) {
+        return successEmbed(helpTitle + permissions.getAsInt() + " (" + permissions + ")", helpDescriptions);
     }
 
     public static MessageEmbed resetHomework(Subject subject) {
