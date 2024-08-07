@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import okhttp3.OkHttpClient;
+import org.config.ConfigManager;
 import org.config.files.subjects.Subject;
 import org.jda.listeners.*;
 import org.jda.slashcommands.*;
@@ -34,14 +35,10 @@ public class JdaMain {
 
     private static JDA Jda;
     private static ArrayList<JdaSlashCommand> slashCommands;
+    private final ConfigManager configManager;
 
-    public static void initJda() {
-        sendJdaStartup();
-        createJda();
-        defineOptions();
-        getAllCommands();
-        addCommands();
-        sendJdaStartupComplete();
+    public JdaMain() {
+        this.configManager = new ConfigManager();
     }
 
     private static void createJda() {
@@ -322,5 +319,15 @@ public class JdaMain {
             }
         } catch (InterruptedException ignored) {
         }
+    }
+
+    public void initJda() {
+        configManager.initConfigs();
+        sendJdaStartup();
+        createJda();
+        defineOptions();
+        getAllCommands();
+        addCommands();
+        sendJdaStartupComplete();
     }
 }
