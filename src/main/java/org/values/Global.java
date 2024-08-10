@@ -30,7 +30,6 @@ public class Global {
     public static final String permissonsConfigKey = "permissions";
     public static final String subjectsConfigKey = "subjects";
     public static final String homeworkConfigKey = "homework";
-    public static final String timetableConfigKey = "timetable";
     public static final String lukasIDKey = "LukasID";
     public static final String className = "11a";
 }
