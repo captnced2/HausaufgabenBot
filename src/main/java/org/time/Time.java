@@ -86,15 +86,6 @@ public class Time {
         return sdf.format(date);
     }
 
-    public static Date getDateFromWebUntis(String date) {
-        Calendar cal = Calendar.getInstance();
-        cal.clear();
-        cal.set(Calendar.YEAR, Integer.parseInt(date.substring(0, 4)));
-        cal.set(Calendar.MONTH, Integer.parseInt(date.substring(4, 6)) - 1);
-        cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date.substring(6, 8)));
-        return cal.getTime();
-    }
-
     public static int getWebUntisDateFromDate(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
         return Integer.parseInt(formatter.format(date));
