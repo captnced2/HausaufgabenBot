@@ -29,7 +29,7 @@ public class SlashCommandListener extends ListenerAdapter {
                     sendError(e.getMessage());
                 }
             } else {
-                replyEmbed(event, noPermissionsEmbed());
+                replyEmbed(event, noPermissionsEmbed(), true);
             }
         }
     }

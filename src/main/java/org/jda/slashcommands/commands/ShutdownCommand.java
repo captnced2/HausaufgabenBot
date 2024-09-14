@@ -36,7 +36,7 @@ public class ShutdownCommand implements JdaSlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        replyEmbed(event, shutdownEmbed(), true);
+        replyEmbed(event, shutdownEmbed());
         Main.shutdown();
     }
 }
