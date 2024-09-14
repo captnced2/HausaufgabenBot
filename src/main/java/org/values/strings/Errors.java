@@ -44,7 +44,7 @@ public class Errors {
         return replaceRegex(in, "%k", doubleQuotesString + name + doubleQuotesString);
     }
 
-    @SuppressWarnings("SameParameterValue")
+    @SuppressWarnings({"SameParameterValue", "unused"})
     private static String replaceKey(String in, int name) {
         return replaceRegex(in, "%k", doubleQuotesString + name + doubleQuotesString);
     }
