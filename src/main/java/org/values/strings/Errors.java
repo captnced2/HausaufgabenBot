@@ -7,7 +7,7 @@ import static org.values.Global.*;
 public class Errors {
     private static final String noKeyValueFound = "Could not find value in config %c for key %k";
     private static final String configFileEmpty = "%c config is empty";
-    private static final String noSubjectNameFound = "Could not find subject for code %k";
+    private static final String noSubjectFound = "Could not find subject for name %k";
     private static final String noOptionValue = "Required option value was null when %u executed %cn command";
     private static final String cantFindUntisClass = "Could not find Untis class ";
 
@@ -19,8 +19,8 @@ public class Errors {
         return replaceConfig(configFileEmpty, configFileName);
     }
 
-    public static String noSubjectNameError(String subjCode) {
-        return replaceKey(noSubjectNameFound, subjCode);
+    public static String noSubjectFoundError(String name) {
+        return replaceKey(noSubjectFound, name);
     }
 
     public static String noOptionValue(User user, String commandName) {
@@ -28,7 +28,7 @@ public class Errors {
     }
 
     public static String cantFindUntisClass() {
-        return cantFindUntisClass + className;
+        return cantFindUntisClass + untisClassName;
     }
 
     @SuppressWarnings("SameParameterValue")
@@ -41,6 +41,11 @@ public class Errors {
     }
 
     private static String replaceKey(String in, String name) {
+        return replaceRegex(in, "%k", doubleQuotesString + name + doubleQuotesString);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private static String replaceKey(String in, int name) {
         return replaceRegex(in, "%k", doubleQuotesString + name + doubleQuotesString);
     }
 

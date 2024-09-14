@@ -1,7 +1,7 @@
 package org.values.strings;
 
 import net.dv8tion.jda.api.entities.User;
-import org.config.files.subjects.Subject;
+import org.config.files.records.Subject;
 import org.time.Time;
 
 import static org.config.ConfigManager.writeToLog;

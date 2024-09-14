@@ -2,12 +2,13 @@ package org.jda.slashcommands.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.config.files.subjects.Subject;
+import org.config.files.records.Subject;
 import org.jda.slashcommands.JdaSlashCommand;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static org.config.files.webuntis.WebUntisAPI.getSubjectFromName;
 import static org.jda.JdaMain.replyEmbed;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
 import static org.main.Variables.*;
@@ -41,7 +42,7 @@ public class GetHomeworkCommand implements JdaSlashCommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
-        Subject subject = subjsConfig.getSubjectFromCode(getOptionByName(event, OptionSubjName));
+        Subject subject = getSubjectFromName(getOptionByName(event, OptionSubjName));
         String hw = homeworkConfig.getHomework(subject);
         sendRequestedHomework(event.getUser(), subject);
         if (hw == null || hw.isEmpty()) {

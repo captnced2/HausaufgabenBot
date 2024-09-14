@@ -1,7 +1,7 @@
 package org.config.files;
 
 import org.config.ConfigFile;
-import org.config.files.subjects.Subject;
+import org.config.files.records.Subject;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ public class HomeworkConfig extends ConfigFile {
     @Override
     protected String getTemplate() {
         return """
-                # Nichts anfassen
+                # Hausaufgaben automatisch generiert, nichts anfassen!
                 """;
     }
 
@@ -36,9 +36,9 @@ public class HomeworkConfig extends ConfigFile {
         return line.split(keySeperator)[1];
     }
 
-    private String getHwLineFromCode(Subject subject) {
+    private String getHwLineFromSubject(Subject subject) {
         for (String line : getLines()) {
-            if (getHwCode(line).equals(subject.code())) {
+            if (getHwCode(line).equals(subject.name())) {
                 return line;
             }
         }
@@ -47,7 +47,7 @@ public class HomeworkConfig extends ConfigFile {
 
     public boolean setHomework(Subject subject, String hw) {
         if (hw == null) hw = "";
-        return setKeyWithSeperator(subject.code(), getDateString() + keySeperator + hw, dateSeperator, true);
+        return setKeyWithSeperator(subject.name(), getDateString() + keySeperator + hw, dateSeperator, true);
     }
 
     public void resetHomework(Subject subject) {
@@ -62,7 +62,7 @@ public class HomeworkConfig extends ConfigFile {
     }
 
     public String getHomework(Subject subject) {
-        String hwLine = getHwLineFromCode(subject);
+        String hwLine = getHwLineFromSubject(subject);
         if (hwLine == null) {
             return null;
         }
@@ -70,7 +70,7 @@ public class HomeworkConfig extends ConfigFile {
     }
 
     public Date getHomeworkDate(Subject subject) {
-        String hwLine = getHwLineFromCode(subject);
+        String hwLine = getHwLineFromSubject(subject);
         if (hwLine == null) {
             return null;
         }

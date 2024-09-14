@@ -1,9 +1,9 @@
 package org.time;
 
-import org.config.files.subjects.Subject;
+import org.config.files.records.Subject;
 import org.quartz.*;
 
-import static org.config.WebUntisAPI.getSubjsOnDate;
+import static org.config.files.webuntis.WebUntisAPI.getSubjsOnDate;
 import static org.jda.JdaMain.*;
 import static org.main.Variables.homeworkConfig;
 import static org.time.Time.*;

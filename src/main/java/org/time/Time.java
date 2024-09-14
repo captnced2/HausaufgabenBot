@@ -95,6 +95,11 @@ public class Time {
         return cal.getTime();
     }
 
+    public static int getWebUntisDateFromDate(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+        return Integer.parseInt(formatter.format(date));
+    }
+
     public static Weekday getWeekday() {
         return getWeekday(0);
     }
