@@ -1,13 +1,13 @@
 package org.jda.slashcommands;
 
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.config.files.subjects.Subject;
+import org.config.files.records.Subject;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-import static org.config.WebUntisAPI.getSubjsOnDate;
-import static org.main.Variables.*;
+import static org.config.files.webuntis.WebUntisAPI.*;
+import static org.main.Variables.homeworkConfig;
 import static org.values.Global.*;
 import static org.values.strings.Messages.noHomeworkString;
 
@@ -24,20 +24,13 @@ public class SlashCommandGeneral {
     }
 
     public static String getHomeworkFromDay(Date date) {
-        return getHomeworkFromSubjs(subjsConfig.getAllSubjects(), date);
+        return getHomeworkFromSubjs(getAllSubjects(), date);
     }
 
-    public static List<OptionData> buildOptionData(OptionData firstOption) {
-        ArrayList<OptionData> optionData = new ArrayList<>();
-        optionData.add(firstOption);
-        return optionData;
-    }
-
-    public static List<OptionData> buildOptionData(OptionData firstOption, OptionData secondOption) {
-        ArrayList<OptionData> optionData = new ArrayList<>();
-        optionData.add(firstOption);
-        optionData.add(secondOption);
-        return optionData;
+    public static List<OptionData> buildOptionData(OptionData... optionData) {
+        ArrayList<OptionData> returnData = new ArrayList<>();
+        Collections.addAll(returnData, optionData);
+        return returnData;
     }
 
     private static String getHomeworkFromSubjs(Subject[] subjects, @Nullable Date onDate) {

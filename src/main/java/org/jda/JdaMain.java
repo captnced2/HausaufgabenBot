@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import okhttp3.OkHttpClient;
 import org.config.ConfigManager;
-import org.config.files.subjects.Subject;
 import org.jda.listeners.*;
 import org.jda.slashcommands.*;
 import org.reflections.Reflections;
@@ -65,6 +64,7 @@ public class JdaMain {
                 .setStatus(OnlineStatus.ONLINE)
                 .addEventListeners(new SlashCommandListener())
                 .addEventListeners(new UserOnlineListener())
+                .addEventListeners(new CommandAutoCompleteListener())
                 .enableIntents(GatewayIntent.GUILD_PRESENCES)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .enableCache(CacheFlag.ONLINE_STATUS)
@@ -75,10 +75,7 @@ public class JdaMain {
     }
 
     private static void defineOptions() {
-        subjOption = new OptionData(OptionType.STRING, OptionSubjName, OptionSubjDescription, true);
-        for (Subject subject : subjsConfig.getAllSubjects()) {
-            subjOption.addChoice(subject.name(), subject.code());
-        }
+        subjOption = new OptionData(OptionType.STRING, OptionSubjName, OptionSubjDescription, true, true);
         updateDateOption();
     }
 

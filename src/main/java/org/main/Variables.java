@@ -2,14 +2,12 @@ package org.main;
 
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.config.files.*;
-import org.config.files.subjects.SubjectsConfig;
 import org.values.Global;
 
 public class Variables {
     public static String mainConfPath;
     public static MainConfig mainConfig;
     public static PermissionsConfig permissionsConfig;
-    public static SubjectsConfig subjsConfig;
     public static HomeworkConfig homeworkConfig;
     public static String logFile;
     public static String pfpsFolder;

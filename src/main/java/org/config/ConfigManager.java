@@ -1,7 +1,6 @@
 package org.config;
 
 import org.config.files.*;
-import org.config.files.subjects.SubjectsConfig;
 import org.values.Global;
 
 import java.io.*;
@@ -36,8 +35,8 @@ public class ConfigManager {
         checkFiles();
         mainConfig = new MainConfig(configFileName);
         permissionsConfig = new PermissionsConfig(mainConfig.getPermissionsFile());
-        subjsConfig = new SubjectsConfig(mainConfig.getSubjectsFile());
         homeworkConfig = new HomeworkConfig(mainConfig.getHomeworkFile());
+        userConfig = new UserConfig(mainConfig.getUsersFile());
     }
 
     private void checkFiles() {

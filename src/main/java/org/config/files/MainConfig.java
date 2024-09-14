@@ -22,8 +22,8 @@ public class MainConfig extends ConfigFile {
                 # Rechte Datei
                 # permissions=
                 
-                # Fächer Datei
-                # subjects=
+                # Users Datei
+                # users=
                 
                 # Hausaufgaben Datei
                 # homework=
@@ -31,7 +31,7 @@ public class MainConfig extends ConfigFile {
                 # Entfallene Fächer Datei
                 # cancelledSubjects=
                 
-                # Standart Profilbild Datei im pfp Ordner
+                # Standard Profilbild Datei im pfp Ordner
                 # standardProfilePicture=
                 
                 # Ids
@@ -48,10 +48,6 @@ public class MainConfig extends ConfigFile {
 
     public String getPermissionsFile() {
         return getConfigFileByKey(permissonsConfigKey);
-    }
-
-    public String getSubjectsFile() {
-        return getConfigFileByKey(subjectsConfigKey);
     }
 
     public String getHomeworkFile() {
