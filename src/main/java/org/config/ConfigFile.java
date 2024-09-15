@@ -94,6 +94,9 @@ public abstract class ConfigFile {
             String completeLine = key + keySeperator + value;
             boolean isNew = true;
             for (String line : lines) {
+                if (line.startsWith(commentSymbol)) {
+                    writer.write(line);
+                }
                 if (line.split(keySeperator)[0].equals(key)) {
                     isNew = false;
                     if (overwrite) {
