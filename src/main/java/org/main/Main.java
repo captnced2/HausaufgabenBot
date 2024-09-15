@@ -9,6 +9,7 @@ import static org.values.strings.Console.*;
 
 public class Main {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private static JdaMain main;
 
     public static void main(String[] args) {

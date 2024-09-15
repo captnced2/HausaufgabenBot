@@ -38,8 +38,14 @@ public class Messages {
     public static final String noHomeworkFoundText = "*Keine Hausaufgabe*";
     public static final String noSubjectFoundTitle = "Fach nicht gefunden";
     public static final String noSubjectFoundText = "\" wurde nicht gefunden, bitte probiere es noch einmal";
+    public static final String subjectSelectTitle = "Fächer auswahl";
+    public static final String subjectSelectText = "Benutze die Auswahlfelder unter dieser Nachricht, um deine eigenen Fächer auszuwählen\n(Es sind 25 pro Feld wegen Discords limitierungen)";
+    public static final String savedChangesTitle = "Änderungen gespeichert :thumbsup:";
+    public static final String notYourMessageTitle = "Nicht deine Nachricht!";
+    public static final String notYourMessageText = "Finger weg :rage:";
     public static final String wrongChannelText = "Falscher Channel! Nur in dem hausaufgaben Channel verwendbar.";
     public static final String helpTitle = "Verfügbare Commands für Rechtelevel ";
+    public static final String noSubjectsSelected = "Du hast noch nicht deine eigenen Fächer ausgewählt! Hier ist die Nachricht dazu:\n(Du kannst auch jederzeit /selectsubjects verwenden)";
 
     private static MessageEmbed makeEmbed(Color color, String title, String text) {
         EmbedBuilder builder = new EmbedBuilder();
@@ -84,6 +90,18 @@ public class Messages {
 
     public static MessageEmbed notSchoolday() {
         return errorTitleEmbed(notSchooldayText);
+    }
+
+    public static MessageEmbed subjectSelect() {
+        return homeworkEmbed(subjectSelectTitle, subjectSelectText);
+    }
+
+    public static MessageEmbed savedChanges() {
+        return successEmbed(savedChangesTitle, null);
+    }
+
+    public static MessageEmbed notYourMessage() {
+        return errorEmbed(notYourMessageTitle, notYourMessageText);
     }
 
     public static MessageEmbed homeworkFromDay(String homework) {

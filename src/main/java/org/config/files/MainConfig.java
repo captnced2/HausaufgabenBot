@@ -54,6 +54,10 @@ public class MainConfig extends ConfigFile {
         return getConfigFileByKey(homeworkConfigKey);
     }
 
+    public String getUsersFile() {
+        return getConfigFileByKey(usersConfigKey);
+    }
+
     public File getStandardProfilePictureFile() {
         return new File(pfpsFolder + "/" + getKey(standardProfilePictureKey) + jpgExtension);
     }

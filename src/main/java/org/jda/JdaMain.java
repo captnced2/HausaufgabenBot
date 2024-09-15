@@ -4,9 +4,11 @@ import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.*;
 import net.dv8tion.jda.api.interactions.commands.build.*;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.requests.restaction.WebhookMessageCreateAction;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import okhttp3.OkHttpClient;
@@ -62,9 +64,7 @@ public class JdaMain {
         }
         Jda = JDABuilder.createDefault(mainConfig.getToken())
                 .setStatus(OnlineStatus.ONLINE)
-                .addEventListeners(new SlashCommandListener())
-                .addEventListeners(new UserOnlineListener())
-                .addEventListeners(new CommandAutoCompleteListener())
+                .addEventListeners(new SlashCommandListener(), new UserOnlineListener(), new CommandAutoCompleteListener(), new StringSelectMenuListener())
                 .enableIntents(GatewayIntent.GUILD_PRESENCES)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
                 .enableCache(CacheFlag.ONLINE_STATUS)
@@ -260,13 +260,30 @@ public class JdaMain {
         replyEmbed(event, embed, false);
     }
 
+    @SuppressWarnings("unused")
+    public static void replyEmbed(StringSelectInteractionEvent event, MessageEmbed embed) {
+        replyEmbed(event, embed, false);
+    }
+
+    public static void replyEmbed(StringSelectInteractionEvent event, MessageEmbed embed, boolean ephemeral) {
+        if (!event.isAcknowledged()) {
+            event.deferReply(ephemeral).queue();
+        }
+        event.getHook().sendMessageEmbeds(embed).queue();
+    }
+
     public static void replyEmbed(SlashCommandInteractionEvent event, MessageEmbed embed, boolean ephemeral) {
         if (!event.isAcknowledged()) {
             event.deferReply(ephemeral).queue();
-            event.getHook().sendMessageEmbeds(embed).queue();
-        } else {
-            event.getHook().getInteraction().getMessageChannel().sendMessageEmbeds(embed).queue();
         }
+        event.getHook().sendMessageEmbeds(embed).queue();
+    }
+
+    public static Message replyCustom(SlashCommandInteractionEvent event, WebhookMessageCreateAction<Message> action) {
+        if (!event.isAcknowledged()) {
+            event.deferReply().queue();
+        }
+        return action.complete();
     }
 
     public static void sendEmbed(TextChannel channel, MessageEmbed embed) {

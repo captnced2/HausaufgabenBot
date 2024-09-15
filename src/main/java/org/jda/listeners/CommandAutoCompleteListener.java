@@ -9,12 +9,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 import static org.config.files.webuntis.WebUntisAPI.getAllSubjects;
+import static org.main.Variables.userConfig;
 
 public class CommandAutoCompleteListener extends ListenerAdapter {
     @Override
     public void onCommandAutoCompleteInteraction(@NotNull CommandAutoCompleteInteractionEvent event) {
         if (event.getFocusedOption().getName().equals("fach")) {
-            ArrayList<Subject> subjects = new ArrayList<>(List.of(getAllSubjects()));
+            ArrayList<Subject> subjects = new ArrayList<>(List.of(userConfig.filterUserSubjects(getAllSubjects(), event.getUser())));
             List<Command.Choice> options = subjects.stream()
                     .filter(word -> word.name().toLowerCase().startsWith(event.getFocusedOption().getValue().toLowerCase()))
                     .map(word -> new Command.Choice(word.name(), word.name()))
