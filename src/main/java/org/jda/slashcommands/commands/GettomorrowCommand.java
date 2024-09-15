@@ -10,7 +10,7 @@ import org.values.strings.Messages;
 import java.util.Date;
 
 import static org.jda.JdaMain.*;
-import static org.jda.slashcommands.SlashCommandGeneral.getHomeworkToDay;
+import static org.jda.slashcommands.SlashCommandGeneral.getHomeworkToDayByUser;
 import static org.time.Time.*;
 import static org.values.strings.Console.sendRequestedTomorrowHomework;
 import static org.values.strings.Messages.homeworkToDate;
@@ -48,7 +48,7 @@ public class GettomorrowCommand implements JdaSlashCommand {
             day = Weekday.MONDAY;
             replyMessage(event, Messages.notSchooldayTomorrow, true);
         }
-        MessageEmbed embed = homeworkToDate(day, date, getHomeworkToDay(date));
+        MessageEmbed embed = homeworkToDate(day, date, getHomeworkToDayByUser(date, event.getUser()));
         replyEmbed(event, embed);
         sendRequestedTomorrowHomework(event.getUser());
     }

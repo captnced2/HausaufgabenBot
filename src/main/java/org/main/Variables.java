@@ -9,6 +9,7 @@ public class Variables {
     public static MainConfig mainConfig;
     public static PermissionsConfig permissionsConfig;
     public static HomeworkConfig homeworkConfig;
+    public static UserConfig userConfig;
     public static String logFile;
     public static String pfpsFolder;
     public static OptionData subjOption;

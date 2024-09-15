@@ -1,5 +1,6 @@
 package org.jda.slashcommands;
 
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.config.files.records.Subject;
 import org.jetbrains.annotations.Nullable;
@@ -7,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 import static org.config.files.webuntis.WebUntisAPI.*;
-import static org.main.Variables.homeworkConfig;
+import static org.main.Variables.*;
 import static org.values.Global.*;
 import static org.values.strings.Messages.noHomeworkString;
 
@@ -19,8 +20,8 @@ public class SlashCommandGeneral {
     public static final String OptionDateName = "datum";
     public static final String OptionDateDescription = "Datum";
 
-    public static String getHomeworkToDay(Date date) {
-        return getHomeworkFromSubjs(getSubjsOnDate(date), null);
+    public static String getHomeworkToDayByUser(Date date, User user) {
+        return getHomeworkFromSubjs(userConfig.filterUserSubjects(getSubjsOnDate(date), user), null);
     }
 
     public static String getHomeworkFromDay(Date date) {

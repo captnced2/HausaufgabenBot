@@ -8,7 +8,7 @@ import org.time.Weekday;
 import java.util.Date;
 
 import static org.jda.JdaMain.*;
-import static org.jda.slashcommands.SlashCommandGeneral.getHomeworkToDay;
+import static org.jda.slashcommands.SlashCommandGeneral.getHomeworkToDayByUser;
 import static org.time.Time.*;
 import static org.values.strings.Console.sendRequestedTodayHomework;
 import static org.values.strings.Messages.*;
@@ -40,7 +40,7 @@ public class GettodayCommand implements JdaSlashCommand {
         if (isWeekend()) {
             replyMessage(event, notSchooldayToday, true);
         } else {
-            replyEmbed(event, homeworkToDate(day, date, getHomeworkToDay(date)));
+            replyEmbed(event, homeworkToDate(day, date, getHomeworkToDayByUser(date, event.getUser())));
         }
         sendRequestedTodayHomework(event.getUser());
     }
