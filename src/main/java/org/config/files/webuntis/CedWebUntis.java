@@ -58,19 +58,21 @@ public class CedWebUntis extends WebUntis {
         }
     }
 
-    public Subject[] getSubjectsFromTimetable(Timetable timetable) {
+    public Subject[] getSubjectsFromTimetable(Timetable timetable, boolean includeCanceled) {
         ArrayList<Subject> subjects = new ArrayList<>();
         for (Period period : timetable.getPeriods()) {
-            for (de.keule.webuntis.response.Subject subject : period.getSubjects()) {
-                boolean exists = false;
-                for (Subject sub : subjects) {
-                    if (sub.id() == subject.getId()) {
-                        exists = true;
-                        break;
+            if ((!period.isCancled()) || (period.isCancled() && includeCanceled)) {
+                for (de.keule.webuntis.response.Subject subject : period.getSubjects()) {
+                    boolean exists = false;
+                    for (Subject sub : subjects) {
+                        if (sub.id() == subject.getId()) {
+                            exists = true;
+                            break;
+                        }
                     }
-                }
-                if (!exists) {
-                    subjects.add(new Subject(subject.getName(), subject.getLongName(), subject.getId()));
+                    if (!exists) {
+                        subjects.add(new Subject(subject.getName(), subject.getLongName(), subject.getId()));
+                    }
                 }
             }
         }
