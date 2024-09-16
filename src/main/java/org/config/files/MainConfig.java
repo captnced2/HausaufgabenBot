@@ -44,10 +44,6 @@ public class MainConfig extends ConfigFile {
         return getKey(key) + configExtension;
     }
 
-    public String getPermissionsFile() {
-        return getConfigFileByKey(permissonsConfigKey);
-    }
-
     public String getHomeworkFile() {
         return getConfigFileByKey(homeworkConfigKey);
     }

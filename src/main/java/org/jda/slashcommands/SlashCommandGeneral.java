@@ -19,6 +19,10 @@ public class SlashCommandGeneral {
     public static final String OptionHomeworkDescription = "Hausaufgabe";
     public static final String OptionDateName = "datum";
     public static final String OptionDateDescription = "Datum";
+    public static final String OptionPermissionName = "rechte";
+    public static final String OptionPermissionDescription = "Rechtelevel";
+    public static final String OptionUserName = "user";
+    public static final String OptionUserDescription = "User";
 
     public static String getHomeworkToDayByUser(Date date, User user) {
         return getHomeworkFromSubjs(userConfig.filterUserSubjects(getSubjsOnDate(date), user), null);

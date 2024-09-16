@@ -2,6 +2,7 @@ package org.values.strings;
 
 import net.dv8tion.jda.api.entities.User;
 import org.config.files.records.Subject;
+import org.jda.slashcommands.JdaPermission;
 import org.time.Time;
 
 import static org.config.ConfigManager.writeToLog;
@@ -38,6 +39,7 @@ public class Console {
     private static final String deletedCommandsMessage = "Deleted %i unused commands";
     private static final String anErrorOccurredMessage = "An Error occurred: ";
     private static final String askedForHelp = "%u asked for help";
+    private static final String setPermissionsMessage = "%u set %u permissions to %p";
 
     public static void sendStartingMessage() {
         outLog(replaceIn(startingMessage, "%v", version));
@@ -125,6 +127,10 @@ public class Console {
 
     public static void sendChangedSubjects(User user) {
         outLog(replaceUser(changedPersonalSubjectsMessage, user));
+    }
+
+    public static void sendSetPermissions(User user, User permsUser, JdaPermission perms) {
+        outLog(replaceIn(replaceUser(replaceUser(setPermissionsMessage, user), permsUser), "%p", perms.toString()));
     }
 
     public static void sendAskedForHelp(User user) {

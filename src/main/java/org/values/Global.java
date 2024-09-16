@@ -3,7 +3,7 @@ package org.values;
 import java.awt.*;
 
 public class Global {
-    public static final String version = "9.0.2";
+    public static final String version = "9.1.0";
     public static final String configFolder = "configs";
     public static final String configFileName = "config.conf";
     public static final String pfpsPath = "pfp";
@@ -27,7 +27,6 @@ public class Global {
     public static final String homeworkChannel = "hausaufgaben";
     public static final String tokenKey = "token";
     public static final String standardProfilePictureKey = "standardProfilePicture";
-    public static final String permissonsConfigKey = "permissions";
     public static final String homeworkConfigKey = "homework";
     public static final String usersConfigKey = "users";
     public static final String lukasIDKey = "LukasID";

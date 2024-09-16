@@ -76,7 +76,16 @@ public class JdaMain {
 
     private static void defineOptions() {
         subjOption = new OptionData(OptionType.STRING, OptionSubjName, OptionSubjDescription, true, true);
+        userOption = new OptionData(OptionType.USER, OptionUserName, OptionUserDescription, true);
+        setPermissionOption();
         updateDateOption();
+    }
+
+    private static void setPermissionOption() {
+        permissionOption = new OptionData(OptionType.STRING, OptionPermissionName, OptionPermissionDescription, true);
+        for (JdaPermission permission : JdaPermission.values()) {
+            permissionOption.addChoice(permission.toString(), permission.toString());
+        }
     }
 
     public static void updateDateOption() {
@@ -299,7 +308,7 @@ public class JdaMain {
     }
 
     public static JdaPermission getUserPermissions(User user) {
-        return permissionsConfig.getPermissionsById(user.getId());
+        return userConfig.getPermissions(user);
     }
 
     public static boolean hasRequiredPermissions(User user, JdaPermission requiredPermission) {

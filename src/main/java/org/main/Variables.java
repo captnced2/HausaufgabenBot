@@ -7,13 +7,14 @@ import org.values.Global;
 public class Variables {
     public static String mainConfPath;
     public static MainConfig mainConfig;
-    public static PermissionsConfig permissionsConfig;
     public static HomeworkConfig homeworkConfig;
     public static UserConfig userConfig;
     public static String logFile;
     public static String pfpsFolder;
     public static OptionData subjOption;
     public static OptionData dateOption;
+    public static OptionData permissionOption;
+    public static OptionData userOption;
     public static int commandsCount;
 
     public static void initVariables() {

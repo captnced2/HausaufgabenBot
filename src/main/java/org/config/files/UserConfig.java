@@ -61,6 +61,15 @@ public class UserConfig extends ConfigFile {
         reloadUsers();
     }
 
+    public void setUserPermissions(User user, JdaPermission perms) {
+        DiscordUser dcUser = getDiscordUserByUser(user);
+        if (dcUser == null) {
+            setUser(user.getIdLong(), perms, null);
+        } else {
+            setUser(dcUser.id(), perms, dcUser.subjects());
+        }
+    }
+
     public void setUserSubjects(User user, Subject[] available, Subject[] selected) {
         DiscordUser dcUser = getDiscordUserByUser(user);
         if (dcUser == null) {
@@ -109,6 +118,10 @@ public class UserConfig extends ConfigFile {
             }
         }
         return null;
+    }
+
+    public JdaPermission getPermissions(User user) {
+        return getDiscordUserByUser(user).permissions();
     }
 
     public WebhookMessageCreateAction<Message> addSubjectSelectMessage(SlashCommandInteractionEvent event) {

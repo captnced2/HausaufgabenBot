@@ -34,7 +34,6 @@ public class ConfigManager {
     public void initConfigs() {
         checkFiles();
         mainConfig = new MainConfig(configFileName);
-        permissionsConfig = new PermissionsConfig(mainConfig.getPermissionsFile());
         homeworkConfig = new HomeworkConfig(mainConfig.getHomeworkFile());
         userConfig = new UserConfig(mainConfig.getUsersFile());
     }

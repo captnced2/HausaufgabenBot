@@ -1,7 +1,7 @@
 package org.values.strings;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.*;
 import org.config.files.records.Subject;
 import org.jda.slashcommands.JdaPermission;
 import org.time.*;
@@ -43,6 +43,8 @@ public class Messages {
     public static final String savedChangesTitle = "Änderungen gespeichert :thumbsup:";
     public static final String notYourMessageTitle = "Nicht deine Nachricht!";
     public static final String notYourMessageText = "Finger weg :rage:";
+    public static final String permissionsSetTitle = "Rechte gesetzt";
+    public static final String permissionsSetText = " ist jetzt ein ";
     public static final String wrongChannelText = "Falscher Channel! Nur in dem hausaufgaben Channel verwendbar.";
     public static final String helpTitle = "Verfügbare Commands für Rechtelevel ";
     public static final String noSubjectsSelected = "Du hast noch nicht deine eigenen Fächer ausgewählt! Hier ist die Nachricht dazu:\n(Du kannst auch jederzeit /selectsubjects verwenden)";
@@ -102,6 +104,10 @@ public class Messages {
 
     public static MessageEmbed notYourMessage() {
         return errorEmbed(notYourMessageTitle, notYourMessageText);
+    }
+
+    public static MessageEmbed permissionsSet(User user, JdaPermission permissions) {
+        return successEmbed(permissionsSetTitle, user.getName() + permissionsSetText + permissions.toString());
     }
 
     public static MessageEmbed homeworkFromDay(String homework) {
