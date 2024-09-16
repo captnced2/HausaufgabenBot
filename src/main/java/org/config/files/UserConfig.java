@@ -96,6 +96,9 @@ public class UserConfig extends ConfigFile {
     }
 
     public Subject[] filterUserSubjects(Subject[] in, User user) {
+        if (getDiscordUserByUser(user) == null || getDiscordUserByUser(user).subjects() == null) {
+            return in;
+        }
         ArrayList<Subject> subjects = new ArrayList<>();
         for (Subject subject : in) {
             Arrays.stream(getDiscordUserByUser(user).subjects()).forEach(subject1 -> {
