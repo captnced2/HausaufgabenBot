@@ -22,7 +22,7 @@ public class Time {
             scheduler = schedFact.getScheduler();
             scheduler.start();
             JobDetail job = newJob(NewDay.class).withIdentity("newDayLoopJob", "dayLoop").build();
-            CronTrigger loopTrigger = newTrigger().withIdentity("newDayLoopTrigger", "dayLoop").withSchedule(cronSchedule("0 0 14 ? * *")).build();
+            CronTrigger loopTrigger = newTrigger().withIdentity("newDayLoopTrigger", "dayLoop").withSchedule(cronSchedule("0 15 15 ? * *")).build();
             scheduler.scheduleJob(job, loopTrigger);
             TimeUnit.SECONDS.sleep(1);
             NewDay.buffer = 1;
