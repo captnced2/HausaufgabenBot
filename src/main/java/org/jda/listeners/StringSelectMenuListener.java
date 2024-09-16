@@ -1,5 +1,6 @@
 package org.jda.listeners;
 
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.config.files.records.Subject;
@@ -17,14 +18,26 @@ public class StringSelectMenuListener extends ListenerAdapter {
     @Override
     public void onStringSelectInteraction(@NotNull StringSelectInteractionEvent event) {
         try {
-            if (event.getMessage().getInteraction() == null) {
-                return;
-            }
-            if (event.getMessage().getInteraction().getUser() != event.getUser()) {
-                replyEmbed(event, notYourMessage(), true);
-                return;
-            }
             if (event.getComponentId().contains(subjectSelectMenuIdPrefix)) {
+                Message.Interaction interaction = event.getMessage().getInteraction();
+                if (interaction == null) {
+                    MessageReference messageReference = event.getMessage().getMessageReference();
+                    if (messageReference == null) {
+                        return;
+                    }
+                    interaction = event.getMessage().getMessageReference().resolve().complete().getInteraction();
+                    if (interaction == null) {
+                        return;
+                    }
+                    if (interaction.getUser() != event.getUser()) {
+                        replyEmbed(event, notYourMessage(), true);
+                        return;
+                    }
+                }
+                if (interaction.getUser() != event.getUser()) {
+                    replyEmbed(event, notYourMessage(), true);
+                    return;
+                }
                 Subject[] available = event.getComponent().getOptions().stream().map(option -> getSubjectFromName(option.getValue())).toArray(Subject[]::new);
                 Subject[] selected = event.getValues().stream().map(WebUntisAPI::getSubjectFromName).toArray(Subject[]::new);
                 userConfig.setUserSubjects(event.getUser(), available, selected);
