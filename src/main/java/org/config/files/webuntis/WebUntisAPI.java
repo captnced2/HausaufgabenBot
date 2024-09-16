@@ -15,7 +15,7 @@ public class WebUntisAPI {
 
     static {
         CedWebUntis untis = new CedWebUntis();
-        allSubjects = untis.getSubjectsFromTimetable(untis.getTimetableForWeekTemp());
+        allSubjects = untis.getSubjectsFromTimetable(untis.getTimetableForWeekTemp(), true);
         untis.exit();
     }
 
@@ -23,7 +23,7 @@ public class WebUntisAPI {
         CedWebUntis untis = new CedWebUntis();
         Subject[] subjects;
         try {
-            subjects = untis.getSubjectsFromTimetable(untis.getTimetableFor(getWebUntisDateFromDate(date), 1, untis.getKlasse().getId()));
+            subjects = untis.getSubjectsFromTimetable(untis.getTimetableFor(getWebUntisDateFromDate(date), 1, untis.getKlasse().getId()), false);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
