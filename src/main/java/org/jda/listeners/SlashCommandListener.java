@@ -4,8 +4,10 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import org.config.files.records.DiscordUser;
 import org.jda.JdaMain;
 import org.jda.slashcommands.JdaSlashCommand;
+import org.jda.slashcommands.commands.SelectSubjectsCommand;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,18 +34,21 @@ public class SlashCommandListener extends ListenerAdapter {
                     replyEmbed(event, somethingWentWrongEmbed(), true);
                     sendError(e.getMessage());
                 }
-                checkUserInit(event);
+                checkUserInit(event, command);
             } else {
                 replyEmbed(event, noPermissionsEmbed(), true);
             }
         }
     }
 
-    private void checkUserInit(SlashCommandInteractionEvent event) {
-        if (userConfig.getDiscordUserByUser(event.getUser()) == null || userConfig.getDiscordUserByUser(event.getUser()).subjects() == null) {
-            event.getHook().sendMessage(noSubjectsSelected).queue();
-            Message m = replyCustom(event, userConfig.addSubjectSelectMessage(event));
-            m.editMessageComponents().queueAfter(5, TimeUnit.MINUTES);
+    private void checkUserInit(SlashCommandInteractionEvent event, JdaSlashCommand command) {
+        DiscordUser dcUser = userConfig.getDiscordUserByUser(event.getUser());
+        if (dcUser == null || dcUser.subjects() == null) {
+            if (!command.getName().equals(new SelectSubjectsCommand().getName())) {
+                event.getHook().sendMessage(noSubjectsSelected).queue();
+                Message m = replyCustom(event, userConfig.addSubjectSelectMessage(event));
+                m.editMessageComponents().queueAfter(5, TimeUnit.MINUTES);
+            }
         }
     }
 

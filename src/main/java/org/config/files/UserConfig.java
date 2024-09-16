@@ -119,7 +119,11 @@ public class UserConfig extends ConfigFile {
                 String subj = getAllSubjects()[j].name();
                 selectMenu.addOption(subj, subj);
             }
-            message.addActionRow(selectMenu.setDefaultValues(Arrays.stream(getDiscordUserByUser(event.getUser()).subjects()).map(Subject::name).toArray(String[]::new)).build());
+            if (getDiscordUserByUser(event.getUser()) != null && getDiscordUserByUser(event.getUser()).subjects() != null) {
+                message.addActionRow(selectMenu.setDefaultValues(Arrays.stream(getDiscordUserByUser(event.getUser()).subjects()).map(Subject::name).toArray(String[]::new)).build());
+            } else {
+                message.addActionRow(selectMenu.build());
+            }
         }
         return message;
     }

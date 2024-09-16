@@ -33,8 +33,6 @@ public class MainConfig extends ConfigFile {
                 
                 # Standard Profilbild Datei im pfp Ordner
                 # standardProfilePicture=
-                
-                # Ids
                 """;
     }
 
