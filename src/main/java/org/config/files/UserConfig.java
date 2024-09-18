@@ -124,7 +124,12 @@ public class UserConfig extends ConfigFile {
     }
 
     public JdaPermission getPermissions(User user) {
-        return getDiscordUserByUser(user).permissions();
+        DiscordUser dcUser = getDiscordUserByUser(user);
+        if (dcUser == null) {
+            return JdaPermission.USER;
+        } else {
+            return dcUser.permissions();
+        }
     }
 
     public WebhookMessageCreateAction<Message> addSubjectSelectMessage(SlashCommandInteractionEvent event) {
