@@ -56,8 +56,10 @@ public class HomeworkConfig extends ConfigFile {
 
     public void resetHomeworkIfOld(Subject subject) {
         Date date = getHomeworkDate(subject);
-        if (date.toInstant().isBefore(getDate().toInstant())) {
-            resetHomework(subject);
+        if (date != null) {
+            if (date.toInstant().isBefore(getDate().toInstant())) {
+                resetHomework(subject);
+            }
         }
     }
 
