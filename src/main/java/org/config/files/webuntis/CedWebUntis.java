@@ -41,16 +41,11 @@ public class CedWebUntis extends WebUntis {
         }
     }
 
-    public Timetable getTimetableForWeek() {
-        try {
-            return this.getTimetableForWeek(clazz);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public Timetable getTimetableForWeekTemp() {
-        int startDate = WebUntisDateOperations.getStartDateFromWeek(Calendar.getInstance(), 1);
+    public Timetable getTimetable() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(untisYear, Calendar.SEPTEMBER, 23);
+        cal.get(Calendar.WEEK_OF_MONTH);
+        int startDate = WebUntisDateOperations.getStartDateFromWeek(cal, 0);
         try {
             return this.getTimetableForRange(startDate, WebUntisDateOperations.addDaysToDate(startDate, 6), clazz);
         } catch (IOException e) {

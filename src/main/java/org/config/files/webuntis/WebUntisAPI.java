@@ -15,7 +15,7 @@ public class WebUntisAPI {
 
     static {
         CedWebUntis untis = new CedWebUntis();
-        allSubjects = untis.getSubjectsFromTimetable(untis.getTimetableForWeekTemp(), true);
+        allSubjects = untis.getSubjectsFromTimetable(untis.getTimetable(), true);
         untis.exit();
     }
 

@@ -3,7 +3,7 @@ package org.values;
 import java.awt.*;
 
 public class Global {
-    public static final String version = "9.1.4";
+    public static final String version = "9.1.5";
     public static final String configFolder = "configs";
     public static final String configFileName = "config.conf";
     public static final String pfpsPath = "pfp";
@@ -31,6 +31,7 @@ public class Global {
     public static final String usersConfigKey = "users";
     public static final String lukasIDKey = "LukasID";
     public static final String untisClassName = "12";
+    public static final int untisYear = 2024;
     public static final String untisSchool = "Gym_MT";
     public static final String untisServer = "nessa.webuntis.com";
     public static final String subjectSelectMenuIdPrefix = "subjectSelect";
