@@ -42,6 +42,6 @@ public class GettodayCommand implements JdaSlashCommand {
         } else {
             replyEmbed(event, homeworkToDate(day, date, getHomeworkToDayByUser(date, event.getUser())));
         }
-        sendRequestedTodayHomework(event.getUser());
+        sendRequestedTodayHomework(event);
     }
 }

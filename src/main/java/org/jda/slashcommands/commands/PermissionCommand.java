@@ -63,6 +63,6 @@ public class PermissionCommand implements JdaSlashCommand {
 
         userConfig.setUserPermissions(user, permission);
         replyEmbed(event, permissionsSet(user, permission), true);
-        sendSetPermissions(event.getUser(), user, permission);
+        sendSetPermissions(event, user, permission);
     }
 }

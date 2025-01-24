@@ -20,7 +20,7 @@ public class Messages {
     public static final String errorTitle = "Error";
     public static final String noPermissionTitle = "Keine Rechte";
     public static final String noPermissionText = "Du hast nicht die benötigten Rechte, um diesen Command auszuführen";
-    public static final String somethingWentWrongText = "Etwas ist schiefgelaufen";
+    public static final String somethingWentWrongText = "Etwas ist schiefgelaufen:\n";
     public static final String shutdownTitle = "Shutting down...";
     public static final String shutdownText = "Good night :D ...";
     public static final String triggeredDayLoopTitle = "Day loop ausgeführt";
@@ -77,8 +77,8 @@ public class Messages {
         return errorEmbed(noPermissionTitle, noPermissionText);
     }
 
-    public static MessageEmbed somethingWentWrongEmbed() {
-        return errorTitleEmbed(somethingWentWrongText);
+    public static MessageEmbed somethingWentWrongEmbed(String error) {
+        return errorTitleEmbed(somethingWentWrongText + error);
     }
 
     public static MessageEmbed shutdownEmbed() {

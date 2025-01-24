@@ -44,6 +44,6 @@ public class HelpCommand implements JdaSlashCommand {
             helpMessage.append(i).append(". ").append(commandHelpDescriptions.get(i)).append("\n");
         }
         replyEmbed(event, helpEmbed(getUserPermissions(event.getUser()), helpMessage.toString()), true);
-        sendAskedForHelp(event.getUser());
+        sendAskedForHelp(event);
     }
 }

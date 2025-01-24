@@ -45,7 +45,7 @@ public class StringSelectMenuListener extends ListenerAdapter {
                 sendChangedSubjects(event.getUser());
             }
         } catch (Exception e) {
-            replyEmbed(event, somethingWentWrongEmbed(), true);
+            replyEmbed(event, somethingWentWrongEmbed(e.getMessage()), true);
             sendError(e.getMessage());
         }
     }

@@ -50,6 +50,6 @@ public class SetHomeworkCommand implements JdaSlashCommand {
         }
         homeworkConfig.setHomework(subject, hw, event.getUser());
         replyEmbed(event, changedHomework(subject, hw));
-        sendSetHomework(event.getUser(), subject, hw);
+        sendSetHomework(event, subject, hw);
     }
 }

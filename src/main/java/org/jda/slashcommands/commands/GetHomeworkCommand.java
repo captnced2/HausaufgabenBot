@@ -46,7 +46,7 @@ public class GetHomeworkCommand implements JdaSlashCommand {
         Subject subject = getSubjectFromName(getOptionByName(event, OptionSubjName));
         HomeworkInstance instance = homeworkConfig.getHomework(subject);
         String hw = instance.value();
-        sendRequestedHomework(event.getUser(), subject);
+        sendRequestedHomework(event, subject);
         if (hw == null || hw.isEmpty()) {
             replyEmbed(event, noHomeworkFound(subject));
             return;

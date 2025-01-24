@@ -31,7 +31,7 @@ public class SlashCommandListener extends ListenerAdapter {
                 try {
                     command.execute(event);
                 } catch (RuntimeException e) {
-                    replyEmbed(event, somethingWentWrongEmbed(), true);
+                    replyEmbed(event, somethingWentWrongEmbed(e.getMessage()), true);
                     sendError(e.getMessage());
                 }
                 checkUserInit(event, command);

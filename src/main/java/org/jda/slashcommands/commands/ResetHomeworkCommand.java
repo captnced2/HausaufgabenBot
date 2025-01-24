@@ -45,6 +45,6 @@ public class ResetHomeworkCommand implements JdaSlashCommand {
         Subject subject = getSubjectFromName(getOptionByName(event, OptionSubjName));
         homeworkConfig.resetHomework(subject);
         replyEmbed(event, resetHomework(subject));
-        sendResetHomework(event.getUser(), subject);
+        sendResetHomework(event, subject);
     }
 }

@@ -1,6 +1,8 @@
 package org.values.strings;
 
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.channel.ChannelType;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.config.files.records.Subject;
 import org.jda.slashcommands.JdaPermission;
 import org.time.Time;
@@ -104,36 +106,36 @@ public class Console {
         outLog(postSuccessMessage);
     }
 
-    public static void sendSetHomework(User user, Subject subject, String homework) {
-        outLog(replaceHomework(replaceSubjCode(replaceUser(setHomeworkMessage, user), subject), homework));
+    public static void sendSetHomework(SlashCommandInteractionEvent event, Subject subject, String homework) {
+        outLog(replaceHomework(replaceSubjCode(replaceUserWithEvent(setHomeworkMessage, event), subject), homework));
     }
 
-    public static void sendResetHomework(User user, Subject subject) {
-        outLog(replaceUser(replaceSubjCode(resetHomeworkMessage, subject), user));
+    public static void sendResetHomework(SlashCommandInteractionEvent event, Subject subject) {
+        outLog(replaceUserWithEvent(replaceSubjCode(resetHomeworkMessage, subject), event));
     }
 
-    public static void sendRequestedHomework(User user, Subject subject) {
-        outLog(replaceSubjCode(replaceUser(requestHomeworkMessage, user), subject));
+    public static void sendRequestedHomework(SlashCommandInteractionEvent event, Subject subject) {
+        outLog(replaceSubjCode(replaceUserWithEvent(requestHomeworkMessage, event), subject));
     }
 
-    public static void sendRequestedTomorrowHomework(User user) {
-        outLog(replaceUser(requestHomeworkTomorrowMessage, user));
+    public static void sendRequestedTomorrowHomework(SlashCommandInteractionEvent event) {
+        outLog(replaceUserWithEvent(requestHomeworkTomorrowMessage, event));
     }
 
     public static void sendChangedSubjects(User user) {
         outLog(replaceUser(changedPersonalSubjectsMessage, user));
     }
 
-    public static void sendSetPermissions(User user, User permsUser, JdaPermission perms) {
-        outLog(replaceIn(replaceUser(replaceUser(setPermissionsMessage, user), permsUser), "%p", perms.toString()));
+    public static void sendSetPermissions(SlashCommandInteractionEvent event, User permsUser, JdaPermission perms) {
+        outLog(replaceIn(replaceUser(replaceUserWithEvent(setPermissionsMessage, event), permsUser), "%p", perms.toString()));
     }
 
-    public static void sendAskedForHelp(User user) {
-        outLog(replaceUser(askedForHelp, user));
+    public static void sendAskedForHelp(SlashCommandInteractionEvent event) {
+        outLog(replaceUserWithEvent(askedForHelp, event));
     }
 
-    public static void sendRequestedTodayHomework(User user) {
-        outLog(replaceUser(requestHomeworkTodayMessage, user));
+    public static void sendRequestedTodayHomework(SlashCommandInteractionEvent event) {
+        outLog(replaceUserWithEvent(requestHomeworkTodayMessage, event));
     }
 
     public static void sendPostSuccess(User user) {
@@ -162,6 +164,14 @@ public class Console {
 
     private static String replaceIn(String string, String regex, int with) {
         return replaceIn(string, regex, String.valueOf(with));
+    }
+
+    private static String replaceUserWithEvent(String string, SlashCommandInteractionEvent event) {
+        String replaceString = event.getUser().getEffectiveName() + " (@" + event.getUser().getName() + ") in " + event.getChannelType();
+        if (event.getChannelType() == ChannelType.TEXT) {
+            replaceString += " \"" + event.getChannel().getName() + "\" - Server \"" + event.getGuildChannel().getGuild().getName() + "\"";
+        }
+        return replaceIn(string, "%u", replaceString);
     }
 
     private static String replaceUser(String string, User user) {

@@ -50,6 +50,6 @@ public class GettomorrowCommand implements JdaSlashCommand {
         }
         MessageEmbed embed = homeworkToDate(day, date, getHomeworkToDayByUser(date, event.getUser()));
         replyEmbed(event, embed);
-        sendRequestedTomorrowHomework(event.getUser());
+        sendRequestedTomorrowHomework(event);
     }
 }
