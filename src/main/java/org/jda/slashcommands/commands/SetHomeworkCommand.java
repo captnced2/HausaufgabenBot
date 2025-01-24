@@ -13,8 +13,8 @@ import static org.config.files.webuntis.WebUntisAPI.getSubjectFromName;
 import static org.jda.JdaMain.replyEmbed;
 import static org.jda.slashcommands.SlashCommandGeneral.*;
 import static org.main.Variables.*;
-import static org.values.strings.Console.*;
-import static org.values.strings.Messages.*;
+import static org.values.strings.Console.sendSetHomework;
+import static org.values.strings.Messages.changedHomework;
 
 @SuppressWarnings("unused")
 public class SetHomeworkCommand implements JdaSlashCommand {
@@ -44,17 +44,12 @@ public class SetHomeworkCommand implements JdaSlashCommand {
     @Override
     public void execute(SlashCommandInteractionEvent event) {
         Subject subject = getSubjectFromName(getOptionByName(event, OptionSubjName));
-        String ha = getOptionByName(event, OptionHomeworkName);
-        if (ha.equals("null")) {
-            ha = "";
+        String hw = getOptionByName(event, OptionHomeworkName);
+        if (hw.equals("null")) {
+            hw = "";
         }
-        boolean New = homeworkConfig.setHomework(subject, ha);
-        if (New) {
-            replyEmbed(event, addedHomework(subject, ha));
-            sendAddedHomework(event.getUser(), subject, ha);
-        } else {
-            replyEmbed(event, changedHomework(subject, ha));
-            sendSetHomework(event.getUser(), subject, ha);
-        }
+        homeworkConfig.setHomework(subject, hw, event.getUser());
+        replyEmbed(event, changedHomework(subject, hw));
+        sendSetHomework(event.getUser(), subject, hw);
     }
 }

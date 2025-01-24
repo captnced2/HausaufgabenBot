@@ -1,81 +1,89 @@
 package org.config.files;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.dv8tion.jda.api.entities.User;
 import org.config.ConfigFile;
-import org.config.files.records.Subject;
+import org.config.files.records.*;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Date;
+import java.io.*;
+import java.util.*;
 
-import static org.time.Time.*;
-import static org.values.Global.*;
+import static org.time.Time.getDate;
 
 public class HomeworkConfig extends ConfigFile {
+
+    final ObjectMapper mapper;
+    final File file;
+
     public HomeworkConfig(String fileName) {
         super(fileName);
+        mapper = new ObjectMapper();
+        file = new File(getConfigFilePath());
     }
 
     @Override
     protected String getTemplate() {
-        return """
-                # Hausaufgaben automatisch generiert, nichts anfassen!
-                """;
+        return "[]";
     }
 
-    private String getHwCode(String line) {
-        return line.split(dateSeperator)[0];
-    }
-
-    private String getHwDate(String line) {
-        return line.split(dateSeperator)[1].split(keySeperator)[0];
-    }
-
-    private String getHwValue(String line) {
-        String[] split = line.split(keySeperator);
-        if (split.length < 2) {
-            return null;
+    private ArrayList<HomeworkInstance> getAllHomework() {
+        try {
+            return mapper.readValue(file, new TypeReference<>() {
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return line.split(keySeperator)[1];
     }
 
-    private String getHwLineFromSubject(Subject subject) {
-        for (String line : getLines()) {
-            if (getHwCode(line).equals(subject.name())) {
-                return line;
+    public HomeworkInstance getHomework(Subject subject) {
+        for (HomeworkInstance h : getAllHomework()) {
+            if (subject.id() == h.subjectId()) {
+                return h;
             }
         }
-        return null;
-    }
-
-    public boolean setHomework(Subject subject, String hw) {
-        if (hw == null) hw = "";
-        return setKeyWithSeperator(subject.name(), getDateString() + keySeperator + hw, dateSeperator, true);
+        return new HomeworkInstance(subject.id(), null, null, 0);
     }
 
     public void resetHomework(Subject subject) {
-        setHomework(subject, null);
+        setHomework(subject, null, null, null);
     }
 
     public void resetHomeworkIfOld(Subject subject) {
-        Date date = getHomeworkDate(subject);
-        if (date != null) {
-            if (date.toInstant().isBefore(getDate().toInstant())) {
+        HomeworkInstance h = getHomework(subject);
+        if (h.date() != null) {
+            if (h.date().before(getDate())) {
                 resetHomework(subject);
             }
         }
     }
 
-    public String getHomework(Subject subject) {
-        String hwLine = getHwLineFromSubject(subject);
-        if (hwLine == null) {
-            return null;
-        }
-        return getHwValue(hwLine);
+    public void setHomework(Subject subject, String value, User user) {
+        setHomework(subject, getDate(), value, user);
     }
 
-    public Date getHomeworkDate(Subject subject) {
-        String hwLine = getHwLineFromSubject(subject);
-        if (hwLine == null) {
-            return null;
+    public void setHomework(Subject subject, Date date, String value, @Nullable User user) {
+        ArrayList<HomeworkInstance> homework = getAllHomework();
+        long id = 0;
+        if (user != null) {
+            id = user.getIdLong();
         }
-        return getDateFromString(getHwDate(hwLine));
+        HomeworkInstance hw = new HomeworkInstance(subject.id(), date, value, id);
+        boolean newHw = true;
+        for (HomeworkInstance h : homework) {
+            if (subject.id() == h.subjectId()) {
+                homework.set(homework.indexOf(h), hw);
+                newHw = false;
+            }
+        }
+        if (newHw) {
+            homework.add(hw);
+        }
+        try {
+            mapper.writeValue(file, homework);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

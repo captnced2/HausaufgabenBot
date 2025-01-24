@@ -3,7 +3,7 @@ package org.values;
 import java.awt.*;
 
 public class Global {
-    public static final String version = "9.1.5";
+    public static final String version = "9.2.0";
     public static final String configFolder = "configs";
     public static final String configFileName = "config.conf";
     public static final String pfpsPath = "pfp";
@@ -12,7 +12,6 @@ public class Global {
     public static final String commaRegex = ", ";
     public static final String commentSymbol = "#";
     public static final String keySeperator = "=";
-    public static final String dateSeperator = "-";
     public static final Color homeworkEmbedColor = Color.YELLOW;
     public static final Color errorEmbedColor = Color.RED;
     public static final Color successEmbedColor = Color.GREEN;

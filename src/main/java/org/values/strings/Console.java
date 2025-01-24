@@ -26,7 +26,6 @@ public class Console {
     private static final String calledDayLoopMessage = "Called Day Loop Function";
     private static final String doneDayLoopMessage = "Finished Day Loop";
     private static final String postSuccessMessage = "Posted Homework Successfully";
-    private static final String addedHomeworkMessage = "%u added in %s the homework: %h";
     private static final String setHomeworkMessage = "%u set %s homework to: %h";
     private static final String resetHomeworkMessage = "%u reset %s homework";
     private static final String requestHomeworkMessage = "%u requested homework for %s";
@@ -103,10 +102,6 @@ public class Console {
 
     public static void sendPostSuccess() {
         outLog(postSuccessMessage);
-    }
-
-    public static void sendAddedHomework(User user, Subject subject, String homework) {
-        outLog(replaceHomework(replaceSubjCode(replaceUser(addedHomeworkMessage, user), subject), homework));
     }
 
     public static void sendSetHomework(User user, Subject subject, String homework) {

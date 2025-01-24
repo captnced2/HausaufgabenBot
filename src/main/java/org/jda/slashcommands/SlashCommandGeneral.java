@@ -2,7 +2,8 @@ package org.jda.slashcommands;
 
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import org.config.files.records.Subject;
+import org.config.files.records.*;
+import org.jda.JdaMain;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -44,15 +45,22 @@ public class SlashCommandGeneral {
         }
         StringBuilder txt = new StringBuilder();
         for (Subject subj : subjects) {
-            String hw = homeworkConfig.getHomework(subj);
-            Date date = homeworkConfig.getHomeworkDate(subj);
+            HomeworkInstance instance = homeworkConfig.getHomework(subj);
+            String hw = instance.value();
+            Date date = instance.date();
+            User user = JdaMain.getUserFromId(instance.userId());
             if (hw != null && !hw.isEmpty() && date != null) {
                 if (onDate == null) {
-                    txt.append(subj.name()).append(subjsRegex).append(hw).append(newLine);
-                } else {
-                    if (date.equals(onDate)) {
-                        txt.append(subj.name()).append(subjsRegex).append(hw).append(newLine);
+                    if (user != null) {
+                        txt.append("(").append(JdaMain.getUserFromId(instance.userId()).getEffectiveName()).append(") ");
                     }
+                    txt.append(subj.name()).append(subjsRegex).append(hw).append(newLine);
+                } else if (date.equals(onDate)) {
+                    txt.append(subj.name());
+                    if (user != null) {
+                        txt.append("(").append(JdaMain.getUserFromId(instance.userId()).getEffectiveName()).append(") ");
+                    }
+                    txt.append(subj.name()).append(subjsRegex).append(hw).append(newLine);
                 }
             }
         }

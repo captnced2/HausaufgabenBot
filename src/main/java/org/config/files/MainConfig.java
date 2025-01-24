@@ -17,19 +17,13 @@ public class MainConfig extends ConfigFile {
     protected String getTemplate() {
         return """
                 # Discord Bot Token
-                # token=
-                
-                # Rechte Datei
-                # permissions=
+                # token=s
                 
                 # Users Datei
                 # users=
                 
                 # Hausaufgaben Datei
                 # homework=
-                
-                # Entfallene Fächer Datei
-                # cancelledSubjects=
                 
                 # Standard Profilbild Datei im pfp Ordner
                 # standardProfilePicture=

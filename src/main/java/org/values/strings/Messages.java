@@ -31,7 +31,6 @@ public class Messages {
     public static final String homeworkFromDayTitle = "Hausaufgaben vom ";
     public static final String homeworkFromDateTitle = " Hausaufgabe vom ";
     public static final String homeworkToDateTitle = "Hausaufgaben auf ";
-    public static final String addedHomeworkTitle = "Hausaufgabe hinzugefügt";
     public static final String resetHomeworkTitle = "Hausaufgabe zurückgesetzt";
     public static final String changedHomeworkTitle = "Hausaufgabe geändert";
     public static final String noHomeworkFoundTitle = " Hausaufgabe";
@@ -122,10 +121,6 @@ public class Messages {
         return homeworkEmbed(homeworkToDateTitle + day.getAsString() + " " + getDateAsString(date), homework);
     }
 
-    public static MessageEmbed addedHomework(Subject subject, String homework) {
-        return successEmbed(addedHomeworkTitle, subject.name() + subjsRegex + homework);
-    }
-
     public static MessageEmbed helpEmbed(JdaPermission permissions, String helpDescriptions) {
         return successEmbed(helpTitle + permissions.getAsInt() + " (" + permissions + ")", helpDescriptions);
     }
@@ -146,8 +141,8 @@ public class Messages {
         return errorEmbed(noSubjectFoundTitle, "\"" + subject + noSubjectFoundText);
     }
 
-    public static MessageEmbed homeworkFromDate(Subject subject, Date date, String homework) {
-        return homeworkEmbed(subject.name() + homeworkFromDateTitle + getDateAsString(date), homework);
+    public static MessageEmbed homeworkFromDate(Subject subject, Date date, User user, String homework) {
+        return homeworkEmbed("(" + user.getEffectiveName() + ") " + subject.name() + homeworkFromDateTitle + getDateAsString(date), homework);
     }
 
     public static MessageEmbed wrongChannel() {

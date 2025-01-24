@@ -315,6 +315,10 @@ public class JdaMain {
         return getUserPermissions(user).getAsInt() >= requiredPermission.getAsInt();
     }
 
+    public static User getUserFromId(long id) {
+        return Jda.getUserById(id);
+    }
+
     public static void awaitInit() {
         try {
             Jda.awaitReady();
