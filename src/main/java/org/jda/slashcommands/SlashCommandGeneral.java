@@ -56,7 +56,6 @@ public class SlashCommandGeneral {
                     }
                     txt.append(subj.name()).append(subjsRegex).append(hw).append(newLine);
                 } else if (date.equals(onDate)) {
-                    txt.append(subj.name());
                     if (user != null) {
                         txt.append("(").append(JdaMain.getUserFromId(instance.userId()).getEffectiveName()).append(") ");
                     }
