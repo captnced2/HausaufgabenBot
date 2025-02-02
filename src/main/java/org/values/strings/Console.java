@@ -15,7 +15,7 @@ public class Console {
     private static final String startingMessage = "Starting Version %v...";
     private static final String shutdownMessage = "Shutting down...";
     private static final String jdaForceShutdownMessage = "Jda not shutting down. Forcing shutdown";
-    private static final String retryingInternetConnection = "No internet connection! Retrying to connect in 5 second. Retries left: ";
+    private static final String noInternetConnection = "No internet connection!";
     private static final String jdaStartupMessage = "Starting Jda...";
     private static final String jdaStartupCompleteMessage = "Jda startup complete";
     private static final String mainConfigCreateEnterValuesMessage = "Created main config file, please enter required values to proceed";
@@ -54,8 +54,8 @@ public class Console {
         outLog(jdaForceShutdownMessage);
     }
 
-    public static void sendRetryingInternetConnection(int leftRetries) {
-        outLog(retryingInternetConnection + leftRetries);
+    public static void sendNoInternetConnection() {
+        outLog(noInternetConnection);
     }
 
     public static void sendCantChangeAvatar() {
